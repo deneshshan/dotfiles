@@ -1,0 +1,134 @@
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+ 
+!Xft.dpi: 200
+Xft.dpi: 172 
+!Xft.dpi: 120
+ Xft.antialias: true
+ Xft.rgba: rgb
+ Xft.hinting: true
+ Xft.hintstyle: hintslight
+  
+URxvt.depth: 32
+URxvt.geometry: 90x30
+URxvt.transparent: false
+URxvt.fading: 0
+! URxvt.urgentOnBell: true
+! URxvt.visualBell: true
+URxvt.loginShell: true
+URxvt.saveLines: 1000
+URxvt.internalBorder: 11
+!URxvt.internalBorder: 0
+URxvt.lineSpace: 0
+ 
+! Fonts
+URxvt*font: xft:Deja Vu Sans Mono:pixelsize=21:Bold
+!URxvt*font: xft:Ubuntu Mono:pixelsize=24:Bold
+!URxvt*font: xft:Terminus:pixelsize=27:Bold
+URxvt*boldFont: xft:Monospace:pixelsize=21:Bold
+!URxvt*boldFont: xft:Terminus:pixelsize=28:Bold
+ 
+! Fix font space
+URxvt.letterSpace: -1
+ 
+! Scrollbar
+URxvt.scrollStyle: rxvt
+URxvt.scrollBar: false
+ 
+! Perl extensions
+URxvt.perl-ext:      default,url-select
+URxvt.keysym.M-u:    perl:url-select:select_next
+URxvt.url-select.launcher:   /usr/bin/firefox -new-tab
+URxvt.url-select.underline: true
+!URxvt.matcher.button: 1
+ 
+! Cursor
+URxvt.cursorBlink: true
+!URxvt.cursorColor: #74f476
+URxvt.cursorUnderline: false
+ 
+! Pointer
+URxvt.pointerBlank: true
+
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+
+#define S_yellow     #b58900
+#define S_l_yellow   #CCE08B
+#define S_orange     #cb4b16
+#define S_red        #987184
+#define S_magenta    #d33682
+#define S_violet     #6c71c4
+#define S_d_blue     #4040BE
+#define S_blue       #268bd2
+#define S_cyan       #2aa198
+#define S_d_green    #94D495
+#define S_green      #87FFAF
+#define S_java       #259392
+
+
+! Dark
+
+#define black_tran   [80]#000000
+#define black        #000000
+#define S_base03     #002b36
+#define S_base03_trans     [80]#002b36
+#define S_base02     #073642
+#define S_base01     #586e75
+#define S_base00     #657b83
+#define S_base0      #839496
+#define S_base1      #93a1a1
+#define S_base2      #eee8d5
+#define S_base3      #fdf6e3
+
+
+! Light
+
+! #define S_base03 #fdf6e3
+! #define S_base02 #eee8d5
+! #define S_base01 #93a1a1
+! #define S_base00 #839496
+! #define S_base0 #657b83
+! #define S_base1 #586e75
+! #define S_base2 #073642
+! #define S_base3 #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background: S_base03
+
+URxvt*background: black_tran 
+URxvt*foreground: S_blue
+URxvt*fading: 40
+URxvt*fadeColor: S_base03
+URxvt*cursorColor: S_java
+URxvt*pointerColorBackground: S_base01
+URxvt*pointerColorForeground: S_base1
+
+URxvt.color0: S_base02
+URxvt.color1: S_magenta
+URxvt.color2: S_green
+URxvt.color3: S_yellow
+URxvt.color4: S_d_blue
+URxvt.color5: S_magenta
+URxvt.color6: S_cyan
+URxvt.color7: S_base0
+URxvt.color8: S_base03
+URxvt.color9: S_red
+URxvt.color10: S_d_green
+URxvt.color11: S_l_yellow
+URxvt.color12: S_blue
+URxvt.color13: S_violet
+URxvt.color14: S_base00
+URxvt.color15: S_base3
+
+xterm*.background: #000000
+xterm*font: xft:Monospace:pixelsize=23:style=bold
+xterm*boldFont: xft:Monospace:pixelsize=23

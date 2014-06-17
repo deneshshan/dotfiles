@@ -1,0 +1,45 @@
+"/usr/bin/trackpad-toggle.sh"
+    m:0x5 + c:65
+    Control+Shift+Space
+"/home/denesh/scripts/trackpad.sh"
+    m:0x8 + c:58
+    Alt + m
+"sudo /home/denesh/scripts/kbd_up.sh"
+    m:0x0 + c:238
+    XF86KbdBrightnessUp
+"sudo /home/denesh/scripts/mon_up.sh"
+    m:0x0 + c:233
+    XF86MonBrightnessUp
+"sudo /home/denesh/scripts/mon_down.sh"
+    m:0x0 + c:232
+    XF86MonBrightnessUp
+"sudo /home/denesh/scripts/kbd_down.sh"
+    m:0x0 + c:237
+    XF86KbdBrightnessDown
+"amixer set Master playback 8%+"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
+"amixer set Master playback 8%-"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+"amixer sset Master 0%"
+    m:0x0 + c:121
+    XF86AudioMute
+"amixer sset Master 80%"
+    m:0x4 + c:123
+    Control + XF86AudioMute
+"urxvtc -e sh -c 'sudo wifi-menu'"
+    m:0x8 + c:25
+    Alt + w
+"urxvtc -e sh -c 'echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode'"
+    m:0xc + c:41
+    Control+Alt + f
+"urxvtc -e sh -c 'echo 1 | sudo tee /sys/module/hid_apple/parameters/fnmode'"
+    m:0xd + c:41
+    Control+Shift+Alt + f
+"firefox -private-window"
+  m:0x8 + c:33
+  Alt + p
+"firefox"
+  m:0x8 + c:41
+  Alt + f
