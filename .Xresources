@@ -3,7 +3,7 @@
 !-------------------------------------------------------------------------------
  
 !Xft.dpi: 200
-Xft.dpi: 172 
+Xft.dpi: 220
 !Xft.dpi: 120
  Xft.antialias: true
  Xft.rgba: rgb
@@ -23,7 +23,8 @@ URxvt.internalBorder: 11
 URxvt.lineSpace: 0
  
 ! Fonts
-URxvt*font: xft:Deja Vu Sans Mono:pixelsize=21:Bold
+URxvt*font: xft:Deja Vu Sans Mono:pixelsize=22:Bold
+!URxvt*font: xft:PT Mono:style=Bold:pixelsize=23:minspace=true
 !URxvt*font: xft:Ubuntu Mono:pixelsize=24:Bold
 !URxvt*font: xft:Terminus:pixelsize=27:Bold
 URxvt*boldFont: xft:Monospace:pixelsize=21:Bold
@@ -38,25 +39,38 @@ URxvt.scrollBar: false
  
 ! Perl extensions
 URxvt.perl-ext:      default,url-select
+URxvt.perl-ext-common: tabbedex,font-size
+
+! URL selections
 URxvt.keysym.M-u:    perl:url-select:select_next
 URxvt.url-select.launcher:   /usr/bin/firefox -new-tab
 URxvt.url-select.underline: true
-!URxvt.matcher.button: 1
+
+! Tabbing
+URxvt.tabbed.autohide: true
+URxvt.tabbed.tabbar-fg: 1
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 0
+URxvt.tabbed.tab-bg: 1
+
+! Change font size
+URxvt.keysym.C-1:     perl:font-size:increase
+URxvt.keysym.C-2:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
  
 ! Cursor
 URxvt.cursorBlink: true
-!URxvt.cursorColor: #74f476
 URxvt.cursorUnderline: false
  
 ! Pointer
 URxvt.pointerBlank: true
 
-! Solarized color scheme for the X Window System
+! Colour scheme
 !
-! http://ethanschoonover.com/solarized
-
-
-! Common
 
 #define S_yellow     #b58900
 #define S_l_yellow   #CCE08B
@@ -104,11 +118,11 @@ URxvt.pointerBlank: true
 !
 ! URxvt*background: S_base03
 
-URxvt*background: black_tran 
+URxvt*background: black_tran
 URxvt*foreground: S_blue
 URxvt*fading: 40
 URxvt*fadeColor: S_base03
-URxvt*cursorColor: S_java
+URxvt*cursorColor: S_blue
 URxvt*pointerColorBackground: S_base01
 URxvt*pointerColorForeground: S_base1
 
