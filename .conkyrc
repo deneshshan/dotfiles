@@ -25,7 +25,7 @@ xftfont Bitstream Vera Sans Mono:size=8
 #own_window yes
 #own_window_transparent yes
 
-background no
+background yes
 own_window yes
 #own_window_type normal
 own_window_argb_visual true
@@ -82,9 +82,9 @@ border_margin 4
 border_width 1
 
 # Default colors and also border colors
-default_color black
-default_shade_color white
-default_outline_color white
+default_color 268bd2
+default_shade_color 268bd2
+default_outline_color 268bd2
 
 # Text alignment, other possible values are commented
 #alignment top_left
@@ -221,51 +221,52 @@ uppercase no
 TEXT
 ${font Dungeon:style=Bold:pixelsize=22}
 $nodename - $sysname $kernel on $machine
-$stippled_hr
+${hr 3}
 Uptime: $uptime - Load:$loadavg
-$stippled_hr
-CPU Usage: ${cpu cpu0}%${goto 220}${cpubar cpu0}
-CPU Usage: ${cpu cpu1}%${goto 220}${cpubar cpu1}
-CPU Usage: ${cpu cpu2}%${goto 220}${cpubar cpu2}
-CPU Usage: ${cpu cpu3}%${goto 220}${cpubar cpu3}
-CPU Usage: ${cpu cpu4}%${goto 220}${cpubar cpu4}
-CPU Usage: ${cpu cpu5}%${goto 220}${cpubar cpu5}
-CPU Usage: ${cpu cpu6}%${goto 220}${cpubar cpu6}
-CPU Usage: ${cpu cpu7}%${goto 220}${cpubar cpu7}
-${cpugraph cpu0 50,575 020015 268bd2 -l}
-${cpugraph cpu1 50,575 020015 268bd2 -l}
-${cpugraph cpu2 50,575 020015 268bd2 -l}
-${cpugraph cpu3 50,575 020015 268bd2 -l}
-${cpugraph cpu4 50,575 020015 268bd2 -l}
-${cpugraph cpu5 50,575 020015 268bd2 -l}
-${cpugraph cpu6 50,575 020015 268bd2 -l}
-${cpugraph cpu7 50,575 020015 268bd2 -l}
-RAM Usage: $mem/$memmax - $memperc% $membar
-Swap Usage: $swap/$swapmax - $swapperc% ${swapbar}
+${hr 3}
+CPU0 Usage: ${cpu cpu0}%${goto 220}${cpubar cpu0 15,360}
+CPU1 Usage: ${cpu cpu1}%${goto 220}${cpubar cpu1 15,360}
+CPU2 Usage: ${cpu cpu2}%${goto 220}${cpubar cpu2 15,360}
+CPU3 Usage: ${cpu cpu3}%${goto 220}${cpubar cpu3 15,360}
+CPU4 Usage: ${cpu cpu4}%${goto 220}${cpubar cpu4 15,360}
+CPU5 Usage: ${cpu cpu5}%${goto 220}${cpubar cpu5 15,360}
+CPU6 Usage: ${cpu cpu6}%${goto 220}${cpubar cpu6 15,360}
+CPU7 Usage: ${cpu cpu7}%${goto 220}${cpubar cpu7 15,360}
+${cpugraph cpu0 50,575 000005 268bd2 -l}
+${cpugraph cpu1 50,575 000005 268bd2 -l}
+${cpugraph cpu2 50,575 000005 268bd2 -l}
+${cpugraph cpu3 50,575 000005 268bd2 -l}
+${cpugraph cpu4 50,575 000005 268bd2 -l}
+${cpugraph cpu5 50,575 000005 268bd2 -l}
+${cpugraph cpu6 50,575 000005 268bd2 -l}
+${cpugraph cpu7 50,575 000005 268bd2 -l}
+${hr 3}
+RAM Usage: $mem/$memmax - $memperc% 
+${membar 15}
 Processes: $processes  Running: $running_processes
-$stippled_hr
+${hr 3}
 Battery:
 ${battery} | Time:  ${battery_time}
-${battery_bar}
-$stippled_hr
+${battery_bar 15}
+${hr 3}
 Networking:
  Down: ${downspeed wlp4s0} k/s ${offset 70}Up: ${upspeed wlp4s0} k/s
-${downspeedgraph wlp4s0 50,260 0200115 268bd2} $alignr${upspeedgraph wlp4s0 50,260 020015 268bd2}
+${downspeedgraph wlp4s0 50,260 000005 268bd2} $alignr${upspeedgraph wlp4s0 50,260 000005 268bd2}
 File systems:
- / ${fs_used /}/${fs_size /}${goto 350}${fs_bar /}
- /home ${fs_used /home}/${fs_size /home}${goto 350}${fs_bar /home}
-$stippled_hr
+ / ${goto 120}${fs_used /}/${fs_size /}${goto 350}${fs_bar 15 /}
+ /home ${goto 120}${fs_used /home}/${fs_size /home}${goto 350}${fs_bar 15 /home}
+${hr 3}
 ${if_mpd_playing}MPD: => ${scroll 35 $mpd_file}
-$mpd_bar
+${color 268bd2}${mpd_bar}
 ${alignc}$mpd_status
-$stippled_hr${endif}
-Name${goto 300}  PID${goto 380}  CPU%${goto 460}  MEM%
- ${top name 1}${goto 300}${top pid 1}${goto 380}${top cpu 1}${goto 460}${top mem 1}
- ${top name 2}${goto 300}${top pid 2}${goto 380}${top cpu 2}${goto 460}${top mem 2}
- ${top name 3}${goto 300}${top pid 3}${goto 380}${top cpu 3}${goto 460}${top mem 3}
+${hr 3}${endif}
+CPU${goto 300}  PID${goto 380}  CPU%${goto 460}  MEM%
+${goto 50}${top name 1}${goto 300}${top pid 1}${goto 380}${top cpu 1}${goto 460}${top mem 1}
+${goto 50}${top name 2}${goto 300}${top pid 2}${goto 380}${top cpu 2}${goto 460}${top mem 2}
+${goto 50}${top name 3}${goto 300}${top pid 3}${goto 380}${top cpu 3}${goto 460}${top mem 3}
 Mem usage
- ${top_mem name 1}${goto 300}${top_mem pid 1}${goto 380}${top_mem cpu 1}${goto 460}${top_mem mem 1}
- ${top_mem name 2}${goto 300}${top_mem pid 2}${goto 380}${top_mem cpu 2}${goto 460}${top_mem mem 2}
- ${top_mem name 3}${goto 300}${top_mem pid 3}${goto 380}${top_mem cpu 3}${goto 460}${top_mem mem 3}
-
+${goto 50}${top_mem name 1}${goto 300}${top_mem pid 1}${goto 380}${top_mem cpu 1}${goto 460}${top_mem mem 1}
+${goto 50}${top_mem name 2}${goto 300}${top_mem pid 2}${goto 380}${top_mem cpu 2}${goto 460}${top_mem mem 2}
+${goto 50}${top_mem name 3}${goto 300}${top_mem pid 3}${goto 380}${top_mem cpu 3}${goto 460}${top_mem mem 3}
+${hr 3}
 
