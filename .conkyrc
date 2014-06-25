@@ -224,14 +224,14 @@ $nodename - $sysname $kernel on $machine
 ${hr 3}
 Uptime: $uptime - Load:$loadavg
 ${hr 3}
-CPU0 Usage: ${cpu cpu0}%${goto 220}${cpubar cpu0 15,360}
-CPU1 Usage: ${cpu cpu1}%${goto 220}${cpubar cpu1 15,360}
-CPU2 Usage: ${cpu cpu2}%${goto 220}${cpubar cpu2 15,360}
-CPU3 Usage: ${cpu cpu3}%${goto 220}${cpubar cpu3 15,360}
-CPU4 Usage: ${cpu cpu4}%${goto 220}${cpubar cpu4 15,360}
-CPU5 Usage: ${cpu cpu5}%${goto 220}${cpubar cpu5 15,360}
-CPU6 Usage: ${cpu cpu6}%${goto 220}${cpubar cpu6 15,360}
-CPU7 Usage: ${cpu cpu7}%${goto 220}${cpubar cpu7 15,360}
+CPU0 Usage: ${cpu cpu0}%${goto 230}${cpubar cpu0 15}
+CPU1 Usage: ${cpu cpu1}%${goto 230}${cpubar cpu1 15}
+CPU2 Usage: ${cpu cpu2}%${goto 230}${cpubar cpu2 15}
+CPU3 Usage: ${cpu cpu3}%${goto 230}${cpubar cpu3 15}
+CPU4 Usage: ${cpu cpu4}%${goto 230}${cpubar cpu4 15}
+CPU5 Usage: ${cpu cpu5}%${goto 230}${cpubar cpu5 15}
+CPU6 Usage: ${cpu cpu6}%${goto 230}${cpubar cpu6 15}
+CPU7 Usage: ${cpu cpu7}%${goto 230}${cpubar cpu7 15}
 ${cpugraph cpu0 50,575 000005 268bd2 -l}
 ${cpugraph cpu1 50,575 000005 268bd2 -l}
 ${cpugraph cpu2 50,575 000005 268bd2 -l}
