@@ -34,15 +34,15 @@ function run_once(cmd)
  end 
 
 run_once("unclutter -idle 10")
+--run_once("compton")
 run_once("xcompmgr")
---run_once("conky")
+run_once("conky")
 --run_once("mpd")
 run_once("syndaemon -t -k -i 2 -d")
 run_once("urxvtd -q -o -f")
 run_once("xrdb -merge .Xresources")
 run_once("xbindkeys")
-run_once("echo 2 > /sys/modules/hid_apple/paramenters/fnmode")
---run_once("dropbox")
+--run_once("trackpad-toggle.sh")
 
 -- }}}
 
@@ -115,10 +115,10 @@ layouts =
     awful.layout.suit.tile.left,            -- 2
     awful.layout.suit.tile.bottom,          -- 3
     awful.layout.suit.tile.top,             -- 4
-    layouts.tilegaps,                       -- 5
-    layouts.tilegaps.left,                  -- 6
-    layouts.tilegaps.bottom,                -- 7
-    layouts.tilegaps.top,                   -- 8
+    --layouts.tilegaps,                       -- 5
+    --layouts.tilegaps.left,                  -- 6
+    --layouts.tilegaps.bottom,                -- 7
+    --layouts.tilegaps.top,                   -- 8
     awful.layout.suit.spiral,               -- 9
     awful.layout.suit.spiral.dwindle,       -- 10
     awful.layout.suit.floating,             -- 11
@@ -143,7 +143,8 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
        names = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" },       
-       layout = { layouts[3], layouts[9], layouts[9], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] } 
+       layout = { layouts[3], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] } 
+
        }
 for s = 1, screen.count() do
 -- Each screen has its own tag table.
@@ -737,11 +738,12 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
+    --awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Show/Hide Wibox
     awful.key({ modkey }, "b", function ()
     mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
+    mybottomwibox[mouse.screen].visible = not mybottomwibox[mouse.screen].visible
     end),
 
     -- Layout manipulation
@@ -1017,3 +1019,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 -- }}}
+
