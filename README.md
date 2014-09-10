@@ -1,4 +1,4 @@
 archconfig
 ==========
 
-My Arch linux configuration files
+dotfiles for OS X and Arch
