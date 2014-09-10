@@ -162,7 +162,12 @@ nmap <end> <Esc>:grep -r
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
-" ========== Specs =========
+" =========== Ruby ==========
+
+inoremap <leader>f <Esc>^idef<Space><C-o>oend<Esc>
+nmap <leader>f ^idef<Space><C-o>oend<Esc>
+
+" ========== Specs ==========
 
 inoremap <leader>sc <Esc>^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
 nmap <leader>sc ^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
