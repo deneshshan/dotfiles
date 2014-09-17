@@ -81,11 +81,47 @@ set number
 
 " ==================== Folding ======================
 set foldenable
-set foldmethod=syntax
-set foldlevel=1
-set foldnestmax=2
-highlight folded ctermbg=007
-highlight folded ctermfg=004 
+"set foldmethod=exprt
+"set foldlevel=1
+"set foldnestmax=2
+
+" Folding for Ruby
+"
+" ,z  -- Show only last search
+" ,zz -- Show only "describe ..." and "it ..." lines in specs
+" ,zd -- Show only "class ..." and "def ..." lines in Ruby files
+" zR  -- Remove all folds
+"
+" From http://vim.wikia.com/wiki/Folding_with_Regular_Expression
+nnoremap ,z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
+
+" Then variations on that, with different searches ...
+"
+" Fold spec files, displaying "describe ..." and "it ..." lines
+function! FoldSpec()
+  let @/='\(describe.*do$\|it.*do$\)'
+  setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
+endfunction
+map ,zz :call FoldSpec()<CR>
+
+" Fold Ruby, showing class and method definitions
+function! FoldDefs()
+  let @/='\(module\ \|class\ \|has_many\ \|belongs_to\ \|_filter\ \|helper\ \|belongs_to\ \|def\ \|private\|protected\)'
+  setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
+endfunction
+map ,zd :call FoldDefs()<CR>
+
+" Set the text that represents folded lines to a simple dash, showing no
+" information.
+" This way, when viewing folded specs and classes, there is minimal cruft on
+" the screen to distract from the unfolded content.
+set foldtext=MyFoldText()
+function! MyFoldText()
+  return "-"
+endfunction
+
+"highlight folded ctermbg=007
+"highlight folded ctermfg=004 
 highlight Search ctermbg=002
 highlight Visual ctermbg=002
 highlight Visual ctermbg=004
@@ -95,12 +131,6 @@ highlight Visual ctermbg=004
 set noswapfile
 set nobackup
 set nowb
-
-" ================ Folds ============================
-
-" set foldmethod=indent "fold based on indent
-" set foldnestmax=3 "deepest fold is 3 levels
-" set nofoldenable "dont fold by default
 
 " ==================== Splits =======================
 "
@@ -180,3 +210,13 @@ nmap <leader>si ^iit '<Esc>A' do<Esc>oend<Esc>kopending
 
 inoremap <leader>sb before(:each)<Space>do<CR>end<Esc>ko
 nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
+
+" ======= vim-rspec ========
+"
+map <Leader>c :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+let g:rspec_runner = "os_x_iterm"
