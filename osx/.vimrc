@@ -126,6 +126,11 @@ highlight Search ctermbg=002
 highlight Visual ctermbg=002
 highlight Visual ctermbg=004
 
+" ================== Long Lines =====================
+"
+
+match ErrorMsg '\%>100v.\+'
+
 " ================ Turn Off Swap Files ==============
 
 set noswapfile
