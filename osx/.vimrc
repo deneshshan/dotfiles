@@ -75,7 +75,10 @@ set backspace=indent,eol,start
 
 " =============== Set basic settings ================
 syntax enable
-colorscheme ron 
+"colorscheme zellner
+"colorscheme ron
+colorscheme elflord
+"colorscheme slate 
 set nowrap 
 set number
 
@@ -120,11 +123,17 @@ function! MyFoldText()
   return "-"
 endfunction
 
-"highlight folded ctermbg=007
-"highlight folded ctermfg=004 
+highlight Folded ctermbg=000
+highlight Folded ctermfg=007
+highlight FoldColumn ctermbg=000
+highlight FoldColumn ctermfg=007
 highlight Search ctermbg=002
 highlight Visual ctermbg=002
 highlight Visual ctermbg=004
+highlight StatusLine ctermbg=004
+highlight StatusLine ctermfg=007
+highlight StatusLineNC ctermbg=007
+highlight StatusLineNC ctermfg=004
 
 " ================== Long Lines =====================
 "
@@ -210,8 +219,8 @@ nmap <leader>sc ^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
 inoremap <leader>sd <Esc>^idescribe<Space>'<Esc>A'<Space>do<C-o>oend<Esc>
 nmap <leader>sd ^idescribe<Space>'<Esc>A'<Space>do<C-o>oend<Esc>
 
-inoremap <leader>si <Esc>^iit '<Esc>A' do<Esc>oend<Esc>kopending
-nmap <leader>si ^iit '<Esc>A' do<Esc>oend<Esc>kopending
+inoremap <leader>si <Esc>^iit '<C-o>A'<Esc>
+nmap <leader>si ^iit '<C-o>A'<Esc>
 
 inoremap <leader>sb before(:each)<Space>do<CR>end<Esc>ko
 nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
@@ -223,5 +232,5 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+let g:rspec_command = '!rspec {spec}'
 let g:rspec_runner = "os_x_iterm"
