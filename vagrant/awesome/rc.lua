@@ -25,6 +25,8 @@ function run_once(cmd)
 --run_once("unclutter -idle 10")
 --run_once("mpd")
 run_once("urxvtd -q -o -f")
+run_once("xcompmgr")
+run_once("conky")
 run_once("xrdb -merge .Xresources")
 --run_once("trackpad-toggle.sh")
 
@@ -56,7 +58,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/vagrant/.config/awesome/myzenburn/theme.lua")
+beautiful.init("~/.config/awesome/myzenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtc"
