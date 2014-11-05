@@ -1,4 +1,4 @@
 dotfiles
 ==========
 
-dotfiles for OS X and Arch
+My cool dotfiles
