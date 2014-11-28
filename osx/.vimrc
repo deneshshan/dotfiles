@@ -75,9 +75,9 @@ set backspace=indent,eol,start
 
 " =============== Set basic settings ================
 syntax enable
-"colorscheme zellner
+colorscheme zellner
 "colorscheme ron
-colorscheme elflord
+"colorscheme elflord
 "colorscheme slate 
 set nowrap 
 set number
@@ -123,22 +123,19 @@ function! MyFoldText()
   return "-"
 endfunction
 
-highlight Folded ctermbg=000
-highlight Folded ctermfg=007
-highlight FoldColumn ctermbg=000
-highlight FoldColumn ctermfg=007
+highlight Folded ctermbg=000 ctermfg=007
+highlight FoldColumn ctermbg=000 ctermfg=007
 highlight Search ctermbg=002
-highlight Visual ctermbg=002
-highlight Visual ctermbg=004
-highlight StatusLine ctermbg=004
-highlight StatusLine ctermfg=007
-highlight StatusLineNC ctermbg=007
-highlight StatusLineNC ctermfg=004
+highlight Visual ctermbg=002 ctermbg=004
+highlight StatusLine ctermbg=007 ctermfg=000
+highlight StatusLineNC ctermbg=000 ctermfg=007
+highlight Pmenu ctermbg=000
+highlight PmenuSel ctermbg=002 ctermfg=000
 
 " ================== Long Lines =====================
 "
 
-match ErrorMsg '\%>100v.\+'
+"match ErrorMsg '\%>100v.\+'
 
 " ================ Turn Off Swap Files ==============
 
@@ -152,10 +149,16 @@ set splitright
 set splitbelow
 
 " Easier split navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 " ==== Easier non-interactive command insertion =====
 nnoremap <Space> :
@@ -195,8 +198,8 @@ vmap <F12> <Esc><Esc><C-w>w
 
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
-nmap <up> <C-o>
-nmap <down> <C-i>
+"nmap <up> <C-o>
+nmap <C-down> <C-i>
 
 nmap <leader>ss <Esc>1G:%s/
 nmap <end> <Esc>:grep -r 
@@ -227,10 +230,12 @@ nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
 
 " ======= vim-rspec ========
 "
+
+
 map <Leader>c :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = '!rspec {spec}'
+let g:rspec_command = 'call Send_to_Tmux("zeus test --format documentation {spec}\n")'
 let g:rspec_runner = "os_x_iterm"
