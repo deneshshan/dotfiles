@@ -162,14 +162,9 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 " ==== Easier non-interactive command insertion =====
 nnoremap <Space> :
+nnoremap <Tab> /
 
 " ============== Other shortcuts ====================
-
-" Set up tabs to work like other editors
-nmap <S-Tab> <<
-imap <S-Tab> <Esc><<i
-vmap <S-Tab> <gv
-vmap <Tab> >gv
 
 " shift + CR puts end 
 imap <C-S>    <CR><CR>end<Esc>-@cc
