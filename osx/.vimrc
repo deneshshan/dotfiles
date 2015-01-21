@@ -53,8 +53,31 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-" =============== Set up pathogen ===================
-execute pathogen#infect()
+" =============== Set up vundle ===================
+" set the runtime path to include Vundle and initialize
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" ================== PLUGINS  ========================
+
+Plugin 'wincent/command-t'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ervandew/supertab'
+Plugin 'kikijump/tslime.vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'vimwiki/vimwiki'
+
+call vundle#end()
+filetype plugin indent on
 
 " ================== NERDTREE ========================
 map <C-n> :NERDTreeToggle<CR>
@@ -102,7 +125,7 @@ nnoremap ,z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\
 "
 " Fold spec files, displaying "describe ..." and "it ..." lines
 function! FoldSpec()
-  let @/='\(describe.*do$\|it.*do$\)'
+  let @/='\(describe.*do$\|it.*do$\|context.*do$\)'
   setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zz :call FoldSpec()<CR>
@@ -232,5 +255,5 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("zeus test --format documentation {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm"
