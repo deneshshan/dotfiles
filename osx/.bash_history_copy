@@ -1,0 +1,500 @@
+make
+echo $PATH
+echo $PATH | grep lib
+vim ~/.bashrc 
+vim ~/.bashrc 
+~/.bashrc
+source ~/.bashrc
+$PAtH
+$PATH
+vim ~/.bashrc 
+source ~/.bashrc
+$PATH
+ls -al /usr/local/lib/
+libintl
+ls -al /usr/local/lib/ | grep libi
+mpd
+ncmpc 
+mpd
+ncmpc 
+exit
+cd Documents/jobs/
+cd tests/
+ls -al
+cd notonthehighstreet-complete
+ruby lib/notonthehighstreet.rb 
+rvm gemset use noths
+rspec
+rake 
+rspec --format documentation
+cd 
+cd Documents/work/new-ultra/
+git branch
+git pull
+vim
+ssh deployer@92.222.26.112
+cd Documents/work/new-ultra/
+rvm gemset use newultra
+cap -T
+cap -T
+cap deploy:seed
+cap staging deploy:seed
+cap staging deploy:seed
+cap staging deploy:seed
+git status
+git add .
+git commit -am "adding seeding task"
+git push
+ q
+exit
+kjexit
+exit
+cd Documents/work/new-ultra/
+vim
+exit
+mpd
+ncmpc 
+ls -al
+lsblk
+diskutil list
+hdiutil convert -format UDRW -o ~/Downloads/Linux\ Distros/crunchbang-11-20130506-i486.img ~/Downloads/Linux\ Distros/crunchbang-11-20130506-i486.iso 
+cd Downloads/Linux\ Distros/
+mv crunchbang-11-20130506-i486.img.dmg crunchbang-11-20130506-i486.img
+diskutil
+diskutil list
+diskutil unmountDisk /dev/disk1
+diskutil list
+diskutil unmountDisk /dev/disk1
+sudo dd if=~/Downloads/Linux\ Distros/crunchbang-11-20130506-i486.img of=/dev/rdisk1 bs=1M
+sudo dd if=~/Downloads/Linux\ Distros/crunchbang-11-20130506-i486.img of=/dev/rdiskN bs=1M
+sudo dd if=/Users/denesh/Downloads/Linux\ Distros/crunchbang-11-20130506-i486.img  of=/dev/rdisk1 bs=1m
+diskutil eject /dev/disk1
+exit
+cd Documents/jobs/tests/notonthehighstreet-complete
+vim
+irb
+cd Documents/ra
+irb
+ll
+ll
+ls -al
+ls -al
+cd Documents/github/
+ll
+vim .bashrc 
+ls -al
+ls -al .bash
+ls -al .bash_profile
+vim .bash_profile
+vim .bashrc 
+rese
+reset
+source .bashrc 
+ll
+cd Documents/work/new-ultra/
+vim
+cd
+ll .vim/
+ll .vim/colors
+cd .vim
+cd bundle/
+ll
+cd
+vim .vimrc
+ll
+vim .bashrc 
+source .bashrc 
+ll
+vim .bash
+vim .bashrc 
+cd Documents/work/new-ultra/
+vim
+ll
+ping www.deneshshan.co.uk
+exit
+ping deneshshan.co.uk
+exit
+cd Documents/work/new-ultra/
+git pull
+cap -T
+rvm gemset use newultra
+cap -T
+cap staging deploy
+ssh deployer@92.222.26.112
+mpd
+ncmpc 
+mpd
+ncmpc 
+mpd
+ncmpc 
+exit
+exit
+mpd
+ncmpc 
+brew install terminus
+brew search terminus
+brew search font
+brew search fonts
+ncmpc 
+fortune | cowthink -f elephant
+exit
+fortune | cowthink -f elephant
+ls -al
+ll
+vim .bashrc 
+source .bashrc 
+ll
+cd Documents/work/new-ultra/
+vim
+exit
+mpd
+ncmpc 
+exit
+ioreg -l -p IODeviceTree | grep firmware-abi
+sudo find / -name "refit.conf"
+sudo find / -name "*.plist"
+sudo find / -name "SystemVersion.plist"
+sudo find / -name "refit.conf"
+sudo vim /efi/refit/refit.conf 
+cd /efi/refit/
+sudo vim refit.conf 
+ioreg -l
+exit
+ll
+ll
+ls -al
+vim .bashrc 
+ll
+source .bashrc 
+ll
+exit
+cd Documents/github/
+git clone https://github.com/trochette/Angular-Design-Patterns-Best-Practices.git
+cd Angular-Design-Patterns-Best-Practices/
+FireFox.app index.html 
+exit
+mpd
+ncmpc 
+[A
+ncmpc 
+ll
+ls -al
+cd Documents/work/new-ultra/
+vim
+mpd
+ncmpc 
+brew
+vim .bashrc 
+vim .vimrc
+cd Documents/work/
+ll
+ll
+source ~/.bashrc 
+ll
+cd audioboo-web/
+ll
+cd doc/
+vim install.sh 
+pwd
+ll
+mysql
+ls /Library/LaunchAgents/
+ls /Library/LaunchDaemons/
+ls ~/Library/LaunchDaemons/
+ls ~/Library/LaunchAgents/
+ls ~/Library/LaunchAgents/ | grep mys
+which mysql
+brew list | grep mysql
+brew info mysql
+ssh-keygen -h
+cd .ssh/
+ll
+ls -al
+vim id_rsa
+vim .bashrc
+cd ..
+vim .bashrc 
+source .bashrc 
+cd Documents/
+cd Wo
+cd work/
+git clone git@git.audioboo.fm:audioboo-web.git
+ll
+cd audioboo-web/
+rvm
+ll
+rvm gemset create audioboo
+rvm gemset use audioboo
+cd doc/
+ll
+./install.sh 
+vim gemset list
+rvm gemset list
+cd ..
+bundle install
+ruby -v
+rvm gemset list
+brew install sphinx --mysql
+rvm install ruby-1.9.3-p194
+brew install tmux
+brew install reattach-to-user-namespace
+exit
+cd Documents/work/audioboo-web/
+cd doc/
+vim install.sh 
+cd
+cd Downloads/
+vim tmux.conf 
+exit
+exit
+exit
+exit
+cd Downloads/
+vim tmux.conf 
+tmux
+vim ~/.tmux.conf 
+exit
+brew info mysql
+ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+mysql
+mysql 
+mysql 
+mysql -uroot
+mysql -udenesh
+mysql -udeneshasd
+mysql -uroot
+cd Documents/work/
+ls
+cd audioboo-web/
+vim config/database.yml 
+ls config/environments
+vim config/environments/_local_config.sample.rb 
+cp config/environments/_local_config.sample.rb config/environments/_local_config.rb
+man brew
+mysql
+mysql -uroot
+mysql -uroot
+gunzip /Users/denesh/Documents/work/audioboo-data/audioboo_mysql_dump_21-03-2014.sql.gz | mysql -uroot audioboo_development
+msql
+mysql -uroot
+mysql -uroot
+cd /var/lib/mysql
+cd /var/lib/
+ls -al
+< gunzip /Users/denesh/Documents/work/audioboo-data/audioboo_mysql_dump_21-03-2014.sql.gz | mysql -uroot audioboo_development
+gunzip
+gunzip < /Users/denesh/Documents/work/audioboo-data/audioboo_mysql_dump_21-03-2014.sql.gz | mysql -uroot audioboo_development
+cat /etc/hostname
+rvm list
+pwd
+cd
+cd Documents/work/audioboo-web/
+vim doc/install.sh 
+exit
+gunzip < /Users/denesh/Documents/work/audioboo-data/audioboo_mysql_dump_21-03-2014.sql | mysql -u root audioboo_devepment
+mysql -r root audioboo_development < /Users/denesh/Documents/work/audioboo-data/audioboo_mysql_dump_21-03-2014.sql 
+mysql -u root audioboo_development < /Users/denesh/Documents/work/audioboo-data/audioboo_mysql_dump_21-03-2014.sql 
+ssh-keygen -h
+cd .ssh/
+ll
+ls -al
+vim id_rsa
+vim .bashrc
+cd ..
+vim .bashrc 
+source .bashrc 
+cd Documents/
+cd Wo
+cd work/
+git clone git@git.audioboo.fm:audioboo-web.git
+ll
+cd audioboo-web/
+rvm
+ll
+rvm gemset create audioboo
+rvm gemset use audioboo
+cd doc/
+ll
+./install.sh 
+vim gemset list
+rvm gemset list
+cd ..
+bundle install
+ruby -v
+rvm gemset list
+brew install sphinx --mysql
+rvm install ruby-1.9.3-p194
+rvm install ruby-1.9.3-p194
+rvm get stable
+rvm cleanup all
+rvm install ruby-1.9.3-p194
+rvm gemset list
+rvm gemset use abweb
+bundle install
+gem install bundler
+bundle install
+gem install rmagick -v '2.13.2'
+libtool
+brew install libtool
+brew reinstall qt
+gem install rmagick -v '2.13.2'
+pwd
+tmux attach
+cd lib/
+ls -al
+brew install libtool
+find /usr -name "/usr/local/lib/libpng15.15.dylib"
+sudo find /usr -name "/usr/local/lib/libpng15.15.dylib"
+sudo find / -name "/usr/local/lib/libpng15.15.dylib"
+find /usr -name "/ubpng15.15.dylib"
+sudo find /usr -name "libpng15.15.dylib"
+sudo ln -s /usr/local/Cellar/libpng/1.5.14/lib/libpng15.15.dylib /usr/local/lib
+gem install rmagick -v '2.13.2'
+bundle isntall
+bundle install
+ls -al
+pwd
+cd ..
+bundle install
+tmux
+tmux
+exit
+tmux attach
+tmux 
+pwd
+cp Downloads/tmux.conf ~/.tmux.conf
+tmux attach
+tmux
+tmux
+tmux
+exit
+fortune | cowthink -f elephant
+tmux
+exit
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+cd Documents/github/iTerm2-Color-Schemes/
+./tools/screenshotTable.sh 
+exit
+tmux
+cd
+vim .tmux.conf 
+exit
+cd Documents/github/iTerm2-Color-Schemes/
+./tools/screenshotTable.sh 
+cd
+cd Documents/work/audioboo-web/
+bin/rspec 
+vim
+exit
+exit
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+man tmux
+tmux -f .tmux.conf 
+tmux -f .tmux.conf 
+tmux
+tmux
+tmux
+tmux
+tmux -f .tmux.conf 
+tmux -f .tmux.conf 
+tmux -f .tmux.conf 
+exit
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+tmux
+exit
+vim .tmux.conf 
+exit
+tmux
+exit
+for i in {0..255} ; do     printf "\x1b[38;5;${i}mcolour${i}\n"; done
+cd Documents/work/audioboo-web/
+vim
+cd 
+vim .vimrc
+cd Documents/work/audioboo-web/
+vim
+exit
+mpd
+ncmpc 
+cd
+cd scripts/
+ll
+ls -al
+vi colours
+ls -al
+sudo chmods u+x colours.sh 
+sudo chmod u+x colours.sh 
+ls -al
+./colours.sh 
+cat colours.sh 
+chmod +x colours.sh 
+./colours.sh 
+cd
+cd Documents/github/
+ls -al
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git
+cd iTerm2-Color-Schemes/
+ls -al
+cd tools/
+ls -al
+cd ..
+git status
+git pull
+cd tools/
+ls -al
+./screenshotTable.sh 
+for i in {0..255} ; do     printf "\x1b[38;5;${i}mcolour${i}\n"; done
+exit
+tmux
+exit
+ll
+cd Documents/work/audioboo-web/
+vim
+exit
+tmux 
+exit
+tmux
+exit
+tmux
+exit
+cd Documents/work/audioboo-web/
+vim
+vim
+ q
+vim
+ q
+chsh -s /bin/zsh
+exit
+tmux
+exit
