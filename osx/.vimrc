@@ -67,14 +67,16 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'kikijump/tslime.vim'
-Plugin 'elixir-lang/vim-elixir'
+"Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
+Plugin 'fatih/vim-go'    
+"Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'vimwiki/vimwiki'
+Plugin 'sbl/scvim'
+"Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 filetype plugin indent on
@@ -208,7 +210,7 @@ nmap <S-CR> o<Esc>
 "nmap  <F4> :SClangRecompile<CR>
 "vmap  <F4> <Esc><Esc>:SClangRecompile<CR>
 
-let g:sclangTerm = "open -a iTerm.app"
+let g:sclangTerm = "tmux split-window -h"
 
 imap <F12> <C-w>w
 nmap <F12> <Esc><C-w>w
@@ -250,10 +252,14 @@ nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
 "
 
 
-map <Leader>c :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+"map <Leader>c :call RunCurrentSpecFile()<CR>
+"map <Leader>s :call RunNearestSpec()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-let g:rspec_runner = "os_x_iterm"
+"let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+"let g:rspec_runner = "os_x_iterm"
+
+" ======= easier SC run ====
+
+nmap <leader>h vip
