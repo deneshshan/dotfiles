@@ -67,16 +67,17 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'ervandew/supertab'
-Plugin 'kikijump/tslime.vim'
+Plugin 'ervandew/supertab'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'jgdavey/tslime.vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-Plugin 'fatih/vim-go'    
+"Plugin 'fatih/vim-go'    
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'sbl/scvim'
-"Plugin 'vimwiki/vimwiki'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 filetype plugin indent on
@@ -156,6 +157,7 @@ highlight StatusLine ctermbg=007 ctermfg=000
 highlight StatusLineNC ctermbg=000 ctermfg=007
 highlight Pmenu ctermbg=000
 highlight PmenuSel ctermbg=002 ctermfg=000
+highlight Directory guifg=#FF0000 ctermfg=red
 
 " ================== Long Lines =====================
 "
@@ -173,11 +175,6 @@ set nowb
 set splitright
 set splitbelow
 
-" Easier split navigation
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
@@ -252,13 +249,13 @@ nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
 "
 
 
-"map <Leader>c :call RunCurrentSpecFile()<CR>
-"map <Leader>s :call RunNearestSpec()<CR>
-"map <Leader>l :call RunLastSpec()<CR>
-"map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>c :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
-"let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-"let g:rspec_runner = "os_x_iterm"
+let g:rspec_command = 'call Send_to_Tmux("rspec --format documentation {spec}\n")'
+let g:rspec_runner = "os_x_iterm"
 
 " ======= easier SC run ====
 
