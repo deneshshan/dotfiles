@@ -105,7 +105,7 @@ colorscheme zellner
 "colorscheme ron
 "colorscheme elflord
 "colorscheme slate 
-set nowrap 
+set wrap 
 set number
 
 " ==================== Folding ======================
