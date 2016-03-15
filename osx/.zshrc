@@ -84,5 +84,11 @@ alias zshconfig="vim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
+alias zs="cd /Users/deneshshan/Documents/work/zappistore.app"
+alias dc="cd /Users/deneshshan/Documents/work/data-collector.app"
+
 eval "$(rbenv init -)"
 
+# control s not working in terminal. this makes it work. useful for command t
+# in vim to open a split pane.
+stty start undef stop undef
