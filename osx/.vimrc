@@ -76,8 +76,10 @@ Plugin 'tpope/vim-rails'
 "Plugin 'fatih/vim-go'    
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'sbl/scvim'
+"Plugin 'sbl/scvim'
 Plugin 'vimwiki/vimwiki'
+Plugin 'rust-lang/rust.vim'
+Plugin 'qualiabyte/vim-colorstepper'
 
 call vundle#end()
 filetype plugin indent on
@@ -158,6 +160,10 @@ highlight StatusLineNC ctermbg=000 ctermfg=007
 highlight Pmenu ctermbg=000
 highlight PmenuSel ctermbg=002 ctermfg=000
 highlight Directory guifg=#FF0000 ctermfg=red
+hi DiffAdd	ctermbg=4 ctermfg=007
+hi DiffChange	ctermbg=002 ctermfg=000
+hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
+hi DiffText	cterm=bold ctermbg=1 ctermfg=20
 
 " ================== Long Lines =====================
 "
@@ -215,8 +221,8 @@ vmap <F12> <Esc><Esc><C-w>w
 
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
-"nmap <up> <C-o>
-nmap <C-down> <C-i>
+nmap <up> :tabe .<CR>:Ggrep 
+nmap <down> :tabe .<CR><leader>t
 
 nmap <leader>ss <Esc>1G:%s/
 nmap <end> <Esc>:grep -r 
@@ -254,9 +260,14 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("rspec --format documentation {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("reset && rspec --format documentation {spec}\n")'
 let g:rspec_runner = "os_x_iterm"
 
 " ======= easier SC run ====
 
 nmap <leader>h vip
+
+" ColorStepper Keys
+nmap <F6> <Plug>ColorstepPrev
+nmap <F7> <Plug>ColorstepNext
+nmap <S-F7> <Plug>ColorstepReload
