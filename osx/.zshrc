@@ -89,10 +89,10 @@ alias store="cd /Users/deneshshan/Documents/work/zappistore.app"
 alias dc="cd /Users/deneshshan/Documents/work/data-collector.app"
 
 # rails testing with zeus
-alias zt="zeus test"
-alias zs="zeus server"
-alias zc="zeus console"
-alias zr="zeus rake"
+alias test="zeus test"
+alias server="zeus server"
+alias console="zeus console"
+alias zrake="zeus rake"
 alias zst="reset && zeus start"
 
 # taskwarrior
