@@ -240,7 +240,15 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 nmap <leader>h vip
 
-" ColorStepper Keys
-"nmap <F6> <Plug>ColorstepPrev
-"nmap <F7> <Plug>ColorstepNext
-"nmap <S-F7> <Plug>ColorstepReload
+" =========== whitespace ===========
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+function! TrimWhiteSpace()
+    %s/\s\+$//e
+  endfunction
+  autocmd BufWritePre     *.rb :call TrimWhiteSpace()
