@@ -74,12 +74,15 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 "Plugin 'fatih/vim-go'    
-Plugin 'vim-ruby/vim-ruby'
+"Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'sbl/scvim'
 Plugin 'vimwiki/vimwiki'
-Plugin 'rust-lang/rust.vim'
-Plugin 'qualiabyte/vim-colorstepper'
+Plugin 'burnettk/vim-angular'
+"Plugin 'rust-lang/rust.vim'
+Plugin 'craigemery/vim-autotag'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'christoomey/vim-system-copy'
 
 call vundle#end()
 filetype plugin indent on
@@ -151,6 +154,8 @@ function! MyFoldText()
   return "-"
 endfunction
 
+" ============== Custom Colour Schemes ==============
+
 highlight Folded ctermbg=000 ctermfg=007
 highlight FoldColumn ctermbg=000 ctermfg=007
 highlight Search ctermbg=002
@@ -221,8 +226,8 @@ vmap <F12> <Esc><Esc><C-w>w
 
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
-nmap <up> :tabe .<CR>:Ggrep 
-nmap <down> :tabe .<CR><leader>t
+nmap <up> :cp<CR><Esc><Esc>
+nmap <down> :cn<CR><Esc>
 
 nmap <leader>ss <Esc>1G:%s/
 nmap <end> <Esc>:grep -r 
@@ -260,14 +265,21 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("reset && rspec --format documentation {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("zeus test --format documentation {spec}\n")'
 let g:rspec_runner = "os_x_iterm"
 
 " ======= easier SC run ====
 
+" ===== clipboard options ==
+
+set clipboard=unnamed
+
+" ========= ctrlp ===========
+nnoremap <leader>. :CtrlPTag<cr>
+
 nmap <leader>h vip
 
 " ColorStepper Keys
-nmap <F6> <Plug>ColorstepPrev
-nmap <F7> <Plug>ColorstepNext
-nmap <S-F7> <Plug>ColorstepReload
+"nmap <F6> <Plug>ColorstepPrev
+"nmap <F7> <Plug>ColorstepNext
+"nmap <S-F7> <Plug>ColorstepReload

@@ -84,8 +84,22 @@ alias zshconfig="vim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-alias zs="cd /Users/deneshshan/Documents/work/zappistore.app"
+# directory navigation
+alias store="cd /Users/deneshshan/Documents/work/zappistore.app"
 alias dc="cd /Users/deneshshan/Documents/work/data-collector.app"
+
+# rails testing with zeus
+alias zt="zeus test"
+alias zs="zeus server"
+alias zc="zeus console"
+alias zr="zeus rake"
+alias zst="reset && zeus start"
+
+# taskwarrior
+alias all="reset && task all"
+alias next="reset && task next"
+alias add="task add"
+alias burn="reset && task burndown.daily"
 
 eval "$(rbenv init -)"
 
