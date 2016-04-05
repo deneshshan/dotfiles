@@ -14,7 +14,10 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-" =============== Set up vundle ===================
+" ===================================================
+" =  VUNDLE SETUP 
+" ===================================================
+
 " set the runtime path to include Vundle and initialize
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -23,7 +26,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" ================== PLUGINS  ========================
+" ===================================================
+" =  PLUGINS
+" ===================================================
 
 Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
@@ -48,12 +53,18 @@ Plugin 'christoomey/vim-system-copy'
 call vundle#end()
 filetype plugin indent on
 
-" ================== NERDTREE ========================
+" ===================================================
+" =  NERDTREE
+" ===================================================
+
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 45
 let g:NERDTreeMouseMode = 3
 
-" =================== vim ruby ======================
+" ===================================================
+" =  VIM RUBY
+" ===================================================
+
 set nocompatible
 syntax on
 filetype on
@@ -66,7 +77,10 @@ set autoindent
 
 set backspace=indent,eol,start
 
-" =============== Set basic settings ================
+" ===================================================
+" =  BASIC SETTINGS
+" ===================================================
+
 syntax enable
 colorscheme zellner
 "colorscheme ron
@@ -75,7 +89,10 @@ colorscheme zellner
 set wrap 
 set number
 
-" ==================== Folding ======================
+" ===================================================
+" =  FOLDING
+" ===================================================
+
 set foldenable
 "set foldmethod=exprt
 "set foldlevel=1
@@ -116,7 +133,9 @@ function! MyFoldText()
   return "-"
 endfunction
 
-" ============== Custom Colour Schemes ==============
+" ===================================================
+" =  COLOURS
+" ===================================================
 
 highlight Folded ctermbg=000 ctermfg=007
 highlight FoldColumn ctermbg=000 ctermfg=007
@@ -235,12 +254,16 @@ let g:rspec_runner = "os_x_iterm"
 
 set clipboard=unnamed
 
-" ========= ctrlp ===========
+"==================================================
+"=  CTRLP
+"==================================================
 nnoremap <leader>. :CtrlPTag<cr>
 
 nmap <leader>h vip
 
-" =========== whitespace ===========
+"==================================================
+"=  WHITESPACE
+"==================================================
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
