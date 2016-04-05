@@ -39,7 +39,7 @@ Plugin 'jgdavey/tslime.vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-"Plugin 'fatih/vim-go'    
+"Plugin 'fatih/vim-go'
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'sbl/scvim'
@@ -51,6 +51,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'mattn/emmet-vim'
 
 call vundle#end()
 filetype plugin indent on
