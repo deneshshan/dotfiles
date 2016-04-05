@@ -49,6 +49,8 @@ Plugin 'burnettk/vim-angular'
 Plugin 'craigemery/vim-autotag'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-system-copy'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()
 filetype plugin indent on
@@ -274,3 +276,17 @@ function! TrimWhiteSpace()
     %s/\s\+$//e
   endfunction
   autocmd BufWritePre     *.rb :call TrimWhiteSpace()
+"==================================================
+"=  AIRLINE
+"==================================================
+
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+let g:airline_theme='bubblegum'
+
+let g:airline_powerline_fonts=1
+set t_Co=256
