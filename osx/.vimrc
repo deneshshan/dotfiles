@@ -87,8 +87,8 @@ syntax enable
 colorscheme zellner
 "colorscheme ron
 "colorscheme elflord
-"colorscheme slate 
-set wrap 
+"colorscheme slate
+set wrap
 set number
 
 " ===================================================
@@ -177,13 +177,11 @@ nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 " ==== Easier non-interactive command insertion =====
-nnoremap <Space> :
-nnoremap <Tab> /
+nnoremap <space> :
+nnoremap <tab> /
+"nnoremap <c-space>?
 
 " ============== Other shortcuts ====================
-
-" shift + CR puts end 
-imap <C-S>    <CR><CR>end<Esc>-@cc
 
 " remap insert new line
 
@@ -209,21 +207,20 @@ vmap <F12> <Esc><Esc><C-w>w
 
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
-nmap <up> :cp<CR><Esc><Esc>
-nmap <down> :cn<CR><Esc>
 
-nmap <leader>ss <Esc>1G:%s/
-nmap <end> <Esc>:grep -r 
+"===================================================
+"=  BUFFERS
+"===================================================
+
+nmap <up> :bp<CR><Esc><Esc>
+nmap <down> :bn<CR><Esc>
+nmap <leader>bq :bp <BAR> bd #<CR>
+
 
 " =========== Wiki ==========
 "
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
-
-" =========== Ruby ==========
-
-inoremap <leader>f <Esc>^idef<Space><C-o>oend<Esc>
-nmap <leader>f ^idef<Space><C-o>oend<Esc>
 
 " ========== Specs ==========
 
@@ -250,8 +247,6 @@ map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = 'call Send_to_Tmux("zeus test --format documentation {spec}\n")'
 let g:rspec_runner = "os_x_iterm"
 
-" ======= easier SC run ====
-
 " ===== clipboard options ==
 
 set clipboard=unnamed
@@ -260,8 +255,6 @@ set clipboard=unnamed
 "=  CTRLP
 "==================================================
 nnoremap <leader>. :CtrlPTag<cr>
-
-nmap <leader>h vip
 
 "==================================================
 "=  WHITESPACE
@@ -277,6 +270,11 @@ function! TrimWhiteSpace()
     %s/\s\+$//e
   endfunction
   autocmd BufWritePre     *.rb :call TrimWhiteSpace()
+
+" ======== grep ====================
+
+map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-dir=logs --exclude=tags . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+
 "==================================================
 "=  AIRLINE
 "==================================================
