@@ -15,7 +15,7 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 " ===================================================
-" =  VUNDLE SETUP 
+" =  VUNDLE SETUP
 " ===================================================
 
 " set the runtime path to include Vundle and initialize
@@ -45,13 +45,14 @@ Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'sbl/scvim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'burnettk/vim-angular'
-"Plugin 'rust-lang/rust.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'craigemery/vim-autotag'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -139,19 +140,22 @@ endfunction
 " =  COLOURS
 " ===================================================
 
-highlight Folded ctermbg=000 ctermfg=007
-highlight FoldColumn ctermbg=000 ctermfg=007
-highlight Search ctermbg=002
-highlight Visual ctermbg=002 ctermbg=004
-highlight StatusLine ctermbg=007 ctermfg=000
-highlight StatusLineNC ctermbg=000 ctermfg=007
-highlight Pmenu ctermbg=000
-highlight PmenuSel ctermbg=002 ctermfg=000
-highlight Directory guifg=#FF0000 ctermfg=red
-hi DiffAdd	ctermbg=4 ctermfg=007
-hi DiffChange	ctermbg=002 ctermfg=000
-hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
-hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+"highlight Folded ctermbg=000 ctermfg=007
+"highlight FoldColumn ctermbg=000 ctermfg=007
+"highlight Search ctermbg=002
+"highlight Visual ctermbg=002 ctermbg=004
+"highlight StatusLine ctermbg=007 ctermfg=000
+"highlight StatusLineNC ctermbg=000 ctermfg=007
+"highlight Pmenu ctermbg=000
+"highlight PmenuSel ctermbg=002 ctermfg=000
+"highlight Directory guifg=#FF0000 ctermfg=red
+"hi DiffAdd	ctermbg=4 ctermfg=007
+"hi DiffChange	ctermbg=002 ctermfg=000
+"hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
+"hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+
+set background=dark
+colorscheme base16-ocean
 
 " ================== Long Lines =====================
 "
@@ -273,7 +277,7 @@ function! TrimWhiteSpace()
 
 " ======== grep ====================
 
-map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-dir=logs --exclude=tags . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-dir=.logs  --exclude-dir=logs --exclude=tags . -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
 "==================================================
 "=  AIRLINE
@@ -285,7 +289,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline_theme='bubblegum'
+let g:airline_theme='base16_ocean'
 
 let g:airline_powerline_fonts=1
 set t_Co=256

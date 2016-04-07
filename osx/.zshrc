@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="rkj-repos"
+ZSH_THEME="random"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -62,10 +62,10 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export EDITOR='vim'
 
 # clint slack env variables
-export ENABLE_SLACK="true"
-export SLACKUSER="denesh"
-export SLACK_CHANNEL="#zappistore-core"
-export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+#export ENABLE_SLACK="true"
+#export SLACKUSER="denesh"
+#export SLACK_CHANNEL="#zappistore-core"
+#export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -85,15 +85,15 @@ alias zshreload="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # directory navigation
-alias store="cd /Users/deneshshan/Documents/work/zappistore.app"
-alias dc="cd /Users/deneshshan/Documents/work/data-collector.app"
+#alias store="cd /Users/deneshshan/Documents/work/zappistore.app"
+#alias dc="cd /Users/deneshshan/Documents/work/data-collector.app"
 
 # rails testing with zeus
-alias test="zeus test"
-alias server="zeus server"
-alias console="zeus console"
-alias zrake="zeus rake"
-alias zst="reset && zeus start"
+#alias test="zeus test"
+#alias server="zeus server"
+#alias console="zeus console"
+#alias zrake="zeus rake"
+#alias zst="reset && zeus start"
 
 # taskwarrior
 alias all="reset && task all"
@@ -101,7 +101,7 @@ alias next="reset && task next"
 alias add="task add"
 alias burn="reset && task burndown.daily"
 
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
