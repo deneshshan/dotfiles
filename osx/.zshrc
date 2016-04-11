@@ -101,6 +101,8 @@ alias next="reset && task next"
 alias add="task add"
 alias burn="reset && task burndown.daily"
 
+alias vconf="vim ~/.vimrc"
+
 eval "$(rbenv init -)"
 
 # control s not working in terminal. this makes it work. useful for command t

@@ -15,7 +15,7 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 " ===================================================
-" =  VUNDLE SETUP 
+" =  VUNDLE SETUP
 " ===================================================
 
 " set the runtime path to include Vundle and initialize
@@ -145,13 +145,15 @@ highlight Search ctermbg=002
 highlight Visual ctermbg=002 ctermbg=004
 highlight StatusLine ctermbg=007 ctermfg=000
 highlight StatusLineNC ctermbg=000 ctermfg=007
-highlight Pmenu ctermbg=000
-highlight PmenuSel ctermbg=002 ctermfg=000
+highlight Pmenu ctermbg=238 ctermfg=001
+highlight PmenuSel ctermbg=002 ctermfg=238
 highlight Directory guifg=#FF0000 ctermfg=red
 hi DiffAdd	ctermbg=4 ctermfg=007
 hi DiffChange	ctermbg=002 ctermfg=000
 hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
 hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+hi CursorLine ctermbg=238
+hi CursorColumn ctermbg=238
 
 " ================== Long Lines =====================
 "
@@ -214,7 +216,7 @@ nmap <right> :tabn<CR>
 
 nmap <up> :bp<CR><Esc><Esc>
 nmap <down> :bn<CR><Esc>
-nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>q :bp <BAR> bd #<CR>
 
 
 " =========== Wiki ==========
@@ -281,11 +283,21 @@ map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git -
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_tabs = 0
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline_theme='bubblegum'
+let g:airline_theme='papercolor'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
+
+
+"==================================================
+"=  JAVASCRIPT
+"==================================================
+
+"==================================================
+"=  EMMET
+"==================================================
