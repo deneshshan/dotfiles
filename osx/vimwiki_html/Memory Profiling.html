@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Memory Profiling</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Memory Profiling</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Memory Profiling</a>
+<ul>
+<li><a href="#toc_1.1">Play back balancer requests</a>
+<ul>
+<li><a href="#toc_1.1.1">Garbage Collection in Ruby 2.1.2</a>
+<li><a href="#toc_1.1.2">OOBGC</a>
+</ul>
+<li><a href="#toc_1.2">Logging and Profiling</a>
+<ul>
+<li><a href="#toc_1.2.1">Unicorn Memory Logger</a>
+<li><a href="#toc_1.2.2">GC.stat</a>
+<li><a href="#toc_1.2.3">Object Space</a>
+<li><a href="#toc_1.2.4">Rack Mini Profiler</a>
+<li><a href="#toc_1.2.5">Rack Mini Profiler Query Strings</a>
+<li><a href="#toc_1.2.6">Oink</a>
+</ul>
+<li><a href="#toc_1.3">dtrace</a>
+<li><a href="#toc_1.4">libumem</a>
+<li><a href="#toc_1.5">Solution</a>
+<li><a href="#toc_1.6">GC Tuning</a>
+</ul>
+</ul>
+</div>
+
+<p>
+On deploying to the new SmartOs server memory leak was discovered. The causes of the leak have been determined as:
+</p>
+
+<ul>
+<li>
+A bug in the custom templating system -- fixed
+
+<li>
+A problem with the GC not seeing associated ImageMagick image objects in memory, since Ruby is only aware of associated Ruby object, which is small in comparison -- fixed
+
+</ul>
+
+<p>
+The memory leak still exists. Possible causes:
+</p>
+
+<ul>
+<li>
+A quirk in SmartOs
+
+<li>
+Upgrading from Ruby 1.9.3 just uses more memory
+
+<li>
+GC not running properly
+
+<li>
+Other
+
+</ul>
+
+<h2 id="toc_1.1">Play back balancer requests</h2>
+
+<ul>
+<li>
+<code>cat log/balancer1.log | grep -o 'GET.*HTTP' | grep -o '/.* ' &gt; log/urls.txt</code>
+
+<li>
+Use curl to hit urls after sshing into server
+
+<li>
+Only for get requests
+
+<li>
+Somewhat limited usefulness
+
+</ul>
+
+<h3 id="toc_1.1.1">Garbage Collection in Ruby 2.1.2</h3>
+<p>
+<a href="http://discuss.samsaffron.com/t/demystifying-the-ruby-gc/81">http://discuss.samsaffron.com/t/demystifying-the-ruby-gc/81</a>
+<a href="http://www.omniref.com/blog/blog/2014/03/27/ruby-garbage-collection-still-not-ready-for-production/">http://www.omniref.com/blog/blog/2014/03/27/ruby-garbage-collection-still-not-ready-for-production/</a>
+</p>
+
+<ul>
+<li>
+Lazy sweeping and full GC.
+
+<li>
+Full GC runs after we allocate more than our malloc_limit
+
+<li>
+Lazy sweep runs when we run out of free slots in the heap
+
+<li>
+Lazy sweep takes less time than full GC but only performs partial GC.
+
+</ul>
+
+<h3 id="toc_1.1.2">OOBGC</h3>
+
+<ul>
+<li>
+Out of bounds garbage collection.
+
+<li>
+Garbage collects between requests.
+
+<li>
+Needs to be turned on for RUBY version &gt; 2.1 in <code>config/initializers/middleware.rb</code>
+
+<li>
+And also in <code>lib/audioboo/rack/unicorn_oobgc.rb</code>
+
+<li>
+Is it working?
+
+</ul>
+
+<h2 id="toc_1.2">Logging and Profiling</h2>
+
+<h3 id="toc_1.2.1">Unicorn Memory Logger</h3>
+
+<ul>
+<li>
+Code located in lib/audioboo/rack/unicorn_memory_logger.rb
+
+<li>
+Dumps memory stats using Rails logger when the memory increase is large.
+
+<li>
+Initialized in config/initializers/middleware.rb
+
+</ul>
+
+<h3 id="toc_1.2.2">GC.stat</h3>
+
+<p>
+GC.stat method returns a hash that gives you the following data:
+</p>
+
+<ul>
+<li>
+count: the number of times a GC ran (both full GC and lazy sweep are included)
+
+<li>
+heap_used: the number of heaps that have more than 0 slots used in them. The larger this number, the slower your GC will be.
+
+<li>
+heap_length: the total number of heaps allocated in memory. For example 1648 means - about 25.75MB is allocated to Ruby heaps. <code>(1648 * (2 &lt;&lt; 13)).to_f / (2 &lt;&lt; 19)</code>
+
+<li>
+heap_increment: Is the number of extra heaps to be allocated, next time Ruby grows the number of heaps (as it does after it runs a GC and discovers it does not have enough free space), this number is updated each GC run to be 1.8 * heap_used. In later versions of Ruby this multiplier is configurable. 
+
+<li>
+heap_live_num: This is the running number objects in Ruby heaps, it will change every time you call GC.stat
+
+<li>
+heap_free_num: This is a slightly confusing number, it changes after a GC runs, it will let you know how many objects were left in the heaps after the GC finished running. So, in this example we had 102447 slots empty after the last GC. (it also increased when objects are recycled internally - which can happen between GCs) 
+
+<li>
+heap_final_num: Is the count of objects that were not finalized during the last GC
+
+<li>
+total_allocated_object: The running total of allocated objects from the beginning of the process. This number will change every time you allocate objects. Note: in a corner case this value may overflow. 
+
+<li>
+total_freed_object: The number of objects that were freed by the GC from the beginning of the process.
+
+</ul>
+
+<h3 id="toc_1.2.3">Object Space</h3>
+
+<ul>
+<li>
+Ruby class
+
+<li>
+Gives you the ability to account for memory usage by data type
+
+<li>
+<a href="https://www.omniref.com/ruby/2.1.1/symbols/ObjectSpace">https://www.omniref.com/ruby/2.1.1/symbols/ObjectSpace</a>
+
+</ul>
+
+<h3 id="toc_1.2.4">Rack Mini Profiler</h3>
+
+<ul>
+<li>
+Prints details in a per page basis
+
+<li>
+Allows us to inspect objects, queries and other things
+
+<li>
+SQL queries happening in the background
+
+<li>
+Show/hide method in  ApplicationController.setup_profiler
+
+<li>
+Set up at the moment so only admins can see it
+
+<li>
+Data can be shown/hidden by passing in various query strings
+
+</ul>
+
+<h3 id="toc_1.2.5">Rack Mini Profiler Query Strings</h3>
+<ul>
+<li>
+<code>?pp=profile-gc</code>
+
+</ul>
+
+<h3 id="toc_1.2.6">Oink</h3>
+
+<ul>
+<li>
+Oink is a gem that checks for bloat
+
+<li>
+It can be queried to return a list of most bloated requests by controller#action as follows <code>oink --threshold=X path/to/log/file</code>
+
+</ul>
+
+<h2 id="toc_1.3">dtrace</h2>
+
+<p>
+DTrace is a comprehensive dynamic tracing framework created by Sun Microsystems for troubleshooting kernel and application problems on production systems in real time. Originally developed for Solaris, it has since been released under the free Common Development and Distribution License (CDDL) and has been ported to several other Unix-like systems.
+</p>
+
+<p>
+DTrace can be used to get a global overview of a running system, such as the amount of memory, CPU time, filesystem and network resources used by the active processes. It can also provide much more fine-grained information, such as a log of the arguments with which a specific function is being called, or a list of the processes accessing a specific file.
+</p>
+
+<p>
+Oracle has begun porting DTrace from Solaris as a Linux kernel module.
+</p>
+
+<p>
+Useful links:
+</p>
+
+<ul>
+<li>
+<a href="http://redartisan.com/2008/5/18/dtrace-ruby">http://redartisan.com/2008/5/18/dtrace-ruby</a>
+
+<li>
+<a href="http://www.ruby-doc.org/core-2.1.0/doc/dtrace_probes_rdoc.html">http://www.ruby-doc.org/core-2.1.0/doc/dtrace_probes_rdoc.html</a>
+
+<li>
+<a href="https://bugs.ruby-lang.org/projects/ruby/wiki/DTraceProbes">https://bugs.ruby-lang.org/projects/ruby/wiki/DTraceProbes</a>
+
+</ul>
+
+<h2 id="toc_1.4">libumem</h2>
+
+<p>
+Libumem is a library used to detect memory management bugs in applications. It is based on the Slab allocator concept. Libumem is available as a standard part of the Solaris Operating System from Solaris 9 Update 3 onwards.
+</p>
+
+<p>
+In order to get better stack trace data from libumem, <code>UMEM_DEBIG=audit</code> was put in unicorn.method and exported.
+</p>
+
+<p>
+Useful reading:
+</p>
+
+<ul>
+<li>
+<a href="https://blogs.oracle.com/dlutz/entry/memory_leak_detection_with_libumem">https://blogs.oracle.com/dlutz/entry/memory_leak_detection_with_libumem</a>
+
+<li>
+Logging turned on with <code>UMEM_DEBUG=audit</code> in <code>deploy\lib\smf\unicorn.method</code>
+
+<li>
+<code>cap production sys:update_methods</code> and a restart of unicorn is required for the changes to take effect.
+
+</ul>
+
+<h2 id="toc_1.5">Solution</h2>
+
+<p>
+After three memory leaks were discovered in templating, imagemagick/rmagick, the unicorn processes were double the size than on 1.9.3. This correlates with what is being reported on the web for &gt;= 2.1. Sometimes, for some reason, the unicorn processes will grow but also shrink again. This is probably due to ruby putting certain objects and their associated system heap c objects in the remembered set, during calls to bloated controller actions. In order to combat this unicorn worker killer gem was used.
+</p>
+
+<h2 id="toc_1.6">GC Tuning</h2>
+
+<p>
+Garbage collection was tuned in <code>lib/deploy/smf/unicorn.method</code>
+</p>
+
+</body>
+</html>

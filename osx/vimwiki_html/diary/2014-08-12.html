@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>2014-08-12</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">11/08/2014</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">11/08/2014</a>
+<ul>
+<li><a href="#toc_1.1">Analytics</a>
+<ul>
+<li><a href="#toc_1.1.1">TOP</a>
+<li><a href="#toc_1.1.2">Other</a>
+</ul>
+<li><a href="#toc_1.2">Notes</a>
+<li><a href="#toc_1.3">Memory leak on SmartOS machines</a>
+<ul>
+<li><a href="#toc_1.3.1">Top</a>
+<li><a href="#toc_1.3.2">Other</a>
+</ul>
+<li><a href="#toc_1.4">If time</a>
+</ul>
+</ul>
+</div>
+<h2 id="toc_1.1">Analytics</h2>
+<h3 id="toc_1.1.1">TOP</h3>
+<ul>
+<li>
+<del>What time is the meeting?</del> --&gt; 11AM
+
+<li>
+<del>How is the data put into stat bot</del>
+
+<li>
+<del>Check accuracy of reports</del>
+
+<ul>
+<li>
+<del>How close do they match up with what we see in GA web console</del>
+
+<li>
+<del>Capture sampling rate on each request?</del>
+
+</ul>
+<li>
+<del>What questions to ask in meeting tomorrow?</del>
+
+<ul>
+<li>
+<del>How do we get unsampled data?</del>§
+
+<li>
+<del>Can generating and picking up of this data be automated?</del>
+
+<li>
+<del>Management API? How do I hook up to this?</del>
+
+<ul>
+<li>
+<del>Are we doing it already?</del>
+
+<li>
+<del>Is it different endpoint? </del>
+
+<li>
+<del>Different way of authenticating</del>
+
+</ul>
+<li>
+<del>How comes the percentage SR dropped down to 12%, is there a minimum SR we get? 7.9% sample rate through GARB</del>
+
+<ul>
+<li>
+<del>Do we have to use UA code to access analytics in order to get premium data?</del>
+
+</ul>
+<li>
+What are segments? What is the best way to  use them?
+
+<li>
+<del>What affects sample rates? Query complexity? Time of day? </del>
+
+<ul>
+<li>
+<del>Previously we were being affected by requesting data over a month but now we look up for a week, so should be no problem </del>
+
+</ul>
+<li>
+<del>Is there a limit on unsampled reports that can be pulled in a day/month. Given that there is a day 'down time' for channel stats on the same day as they are being collected.</del>
+
+<ul>
+<li>
+<del>What would happen if we requested unsampled data for every Channel in Audioboo?</del>
+
+<li>
+<del>There are roughly 3200 channels</del>
+
+</ul>
+<li>
+~~Check query, example: <code>https://www.googleapis.com/analytics/v3/data/ga?ids=ga:13207826&amp;dimensions=ga:date&amp;metrics=ga:pageviews&amp;sort=-ga:pageviews&amp;filters=ga:dimension1%3D    %3D1195483;ga:pagePath%3D~/embed&amp;start-date=2014-08-05&amp;end-date=2014-08-11</code>~~
+
+</ul>
+<li>
+<del>Calculate total listening hours from redis of all boos:</del>
+
+<ul>
+<li>
+<del>Is it withing (800,000,000 * 15) / (60 * 60) hours of listening</del>
+
+<li>
+<del>Can only find rough estimate via 'PlaybackEnded'</del>
+
+</ul>
+<li>
+Jellyfish:
+
+<ul>
+<li>
+<del>Send queries that need to be processed overnight from client facing reports to Jellyfish</del>
+
+<li>
+<del>Send rough listening time to Alex</del>
+
+<li>
+<del>Message Alex to see what his thoughts are on sending a 'Listening' event</del>
+
+<li>
+Possibly worthwhile sending Google docs to Alex 
+
+</ul>
+<li>
+Reply to Lance's email:
+
+<ul>
+<li>
+<del>How do we currently get this data?</del>
+
+<ul>
+<li>
+<del>Pull it out of Redis</del>
+
+</ul>
+<li>
+Forward to Jellyfish get their input. See how tagging could be used to track this.
+
+</ul>
+</ul>
+<h3 id="toc_1.1.2">Other</h3>
+<ul>
+<li>
+<del>Check out management API</del>
+
+<li>
+Look at segments again
+
+<li>
+Become an admin of audioboo.fm live site.
+
+<li>
+<del>GARB:</del>
+
+<ul>
+<li>
+<del>Does it use management API?</del>
+
+<ul>
+<li>
+<del>uses Garb::Management</del>
+
+</ul>
+<li>
+<del>What sample rate are we getting? =&gt; getting around 7.9% sample rate</del>
+
+</ul>
+</ul>
+<h2 id="toc_1.2">Notes</h2>
+<ul>
+<li>
+Sample responses are caputured in <code>cdab &amp;&amp; vim tmp/responses.yml</code>
+
+<li>
+<code>profile = Garb::Management::Profile.all.detect {|p| p.web_property_id == 'UA-XXXXXXX-X'}</code>
+
+<li>
+Complex query data is sampled (filtered etc)
+
+</ul>
+<h2 id="toc_1.3">Memory leak on SmartOS machines</h2>
+<h3 id="toc_1.3.1">Top</h3>
+<ul>
+<li>
+Read over what Alisdair said about setting up environments for testing
+
+<li>
+Read about libumem:
+
+<ul>
+<li>
+What variables need to be set in order to run it?
+
+</ul>
+<li>
+Get Solaris VM with libumem
+
+<li>
+Dump core when it is large
+
+<li>
+Document core analysis
+
+<li>
+If we can pinpoint segment of memory that is being leaked, we may be able to use GNU strings to "read" this memory as a string.
+
+</ul>
+<h3 id="toc_1.3.2">Other</h3>
+<ul>
+<li>
+Run oink on production
+
+<li>
+<del>Update database so that it mirrors production</del>
+
+<li>
+Sort balancer logs by request type and replay in "bursts"
+
+<ul>
+<li>
+Replay balancer logs against database
+
+<li>
+Replay balancer logs against new app1a
+
+</ul>
+<li>
+Set up environment on Solaris VM
+
+<li>
+Is Oink using POSIX::Spawn
+
+<li>
+Check Oink output
+
+<li>
+<del>Get login detials for everycity from Jon</del>
+
+<li>
+<del>Get everycity help with libumem</del>
+
+<ul>
+<li>
+Ask JT is he plans to use libumem again.
+
+<li>
+Can we get leak location from libumem
+
+</ul>
+<li>
+<del>Ask everycity for puppet or chef configuration scripts</del>
+
+<ul>
+<li>
+Follow up
+
+</ul>
+<li>
+Mess around with libumem on Solaris VM 
+
+<li>
+Look into tools for replaying production traffic on staging machines:
+
+<ul>
+<li>
+~~Gor: <a href="https://github.com/buger/gor">https://github.com/buger/gor</a> ~~   ==&gt; Linux only 
+
+<li>
+Can it be narrowed down by route???
+
+<li>
+What tools can be used?
+
+<ul>
+<li>
+JMeter
+
+</ul>
+</ul>
+<li>
+Is this issue to do with exception logging?
+
+<li>
+Provide list of urls to everycity
+
+<ul>
+<li>
+Get requests
+
+<li>
+Autheniticated get requests
+
+<li>
+Post requests
+
+</ul>
+<li>
+PhantomJS for authenticated user behaviour
+
+<li>
+JMeter reading
+
+<li>
+GDB
+
+<ul>
+<li>
+Analyze core dump
+
+</ul>
+<li>
+MDB and libumem to get live core dump
+
+<li>
+Get core dump of process
+
+<li>
+Reply JT:
+
+<ul>
+<li>
+What are we trying to solve?
+
+<li>
+Is every error logged?
+
+<li>
+Put in logging dump ps per login 
+
+<li>
+Find out how much memory grows per session 
+
+<li>
+Put in tracking of how many users logged in at the same time. -&gt; GA
+
+<li>
+Put in tracking of how many media files being played at a time. -&gt; GA
+
+<ul>
+<li>
+can give a ballpark figure using the 'play' event.
+
+</ul>
+<li>
+Find out which pages/links hit extensions
+
+<ul>
+<li>
+What gems use C extensions?:
+
+<ul>
+<li>
+bcrypt-ruby-3.0.1/
+
+<li>
+binding_of_caller-0.7.2/
+
+<li>
+byebug-2.7.0/
+
+<li>
+debug_inspector-0.0.2/
+
+<li>
+fast_stack-0.1.0/
+
+<li>
+ffi-1.9.3/
+
+<li>
+gc_tracer-0.3.3/
+
+<li>
+gctools-0.2.3/
+
+<li>
+hiredis-0.5.2/
+
+<li>
+kgio-2.9.2/
+
+<li>
+mysql2-0.3.13/
+
+<li>
+nokogiri-1.5.11/
+
+<li>
+oily_png-1.1.1/
+
+<li>
+packet-0.1.15/
+
+<li>
+perftools.rb-2.0.1/
+
+<li>
+posix-spawn-0.3.6/
+
+<li>
+raindrops-0.13.0/
+
+<li>
+rake-10.3.2/
+
+<li>
+rmagick-2.13.2/
+
+<li>
+ruby-prof-0.13.0/
+
+<li>
+unicorn-4.8.3/
+
+<li>
+websocket-driver-0.3.2/
+
+<li>
+yajl-ruby-1.2.1/
+
+</ul>
+</ul>
+</ul>
+</ul>
+<h2 id="toc_1.4">If time</h2>
+<ul>
+<li>
+grep into awk to calculate sampling rate as a command line one liner
+
+<li>
+<del>Table of contents vim wiki</del>
+
+</ul>
+
+</body>
+</html>

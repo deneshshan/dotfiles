@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Deployment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Deployment</h1>
+
+<h2 id="toc_1.1">Capistrano Tasks</h2>
+
+<p>
+make sure ssh agent is running and add key:
+</p>
+<ul>
+<li>
+<code>$(ssh-agent)</code>
+
+<li>
+<code>ssh-add key_location</code>
+
+</ul>
+
+<p>
+Tasks:
+</p>
+
+<ul>
+<li>
+<em>Restart Unicorn</em> -- <code>cap production web:full_restart HOSTS=user@ip</code>
+
+<li>
+<em>Update code</em> -- must be checked in. <code>cap production code:update HOSTS=user@ip</code>
+
+<li>
+Repoint balacer -- Edit <code>deploy/lib/system.rb</code> for either update_balancer1_backend or update_balancer2_backend and run <code>cap production sys:update_balancern_backend</code>
+
+</ul>
+
+<h2 id="toc_1.2">Smart OS</h2>
+
+</body>
+</html>

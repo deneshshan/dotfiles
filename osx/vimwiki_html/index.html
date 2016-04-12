@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Source Control</h1>
+<ul>
+<li>
+<a href="Git.html">Git</a>
+
+</ul>
+
+<h1 id="toc_2">Audioboo</h1>
+<h2 id="toc_2.1">Wiki</h2>
+<ul>
+<li>
+<a href="Writing to the wiki.html">Writing to the wiki</a>
+
+</ul>
+<h2 id="toc_2.2">Systems Administration</h2>
+<ul>
+<li>
+<a href="Deployment.html">Deployment</a>
+
+<li>
+<a href="Memory Profiling.html">Memory Profiling</a>
+
+<li>
+<a href="Reproducing Live Environments.html">Reproducing Live Environments</a>
+
+<li>
+<a href="Capistrano Tasks.html">Capistrano Tasks</a>
+
+<li>
+<a href="SSH.html">SSH</a> 
+
+</ul>
+<h3 id="toc_2.2.1">Server File Transfer</h3>
+<p>
+It's possible to copy large files from a server over to a local machine from the command line by running:
+<code>scp server:filelocation</code> e.g. <code>scp app1a:app/log/production.log</code>
+</p>
+<h2 id="toc_2.3">Data Capture and Client Facing Reports</h2>
+<ul>
+<li>
+<a href="Google Analytics.html">Google Analytics</a>
+
+<li>
+<a href="Redis.html">Redis</a>
+
+</ul>
+<h2 id="toc_2.4">Development</h2>
+<ul>
+<li>
+<a href="Becoming an Admin.html">Becoming an Admin</a>
+
+<li>
+<a href="Application Architecture.html">Application Architecture</a>
+
+</ul>
+<h1 id="toc_3">System Management</h1>
+<h2 id="toc_3.1">MySql</h2>
+<h3 id="toc_3.1.1">OS X</h3>
+<ul>
+<li>
+The mysql folder is located at <code>/usr/local/var/mysql</code> on OS X
+
+</ul>
+<h3 id="toc_3.1.2">Clearing logs</h3>
+<ul>
+<li>
+<code>PURGE BINARY LOGS BEFORE YYYY-MM-DD</code>
+
+<li>
+<code>PURGE MASTER LOGS BEFORE YYYY-MM-DD</code>
+
+<li>
+<a href="http://dev.mysql.com/doc/refman/5.0/en/purge-binary-logs.html">http://dev.mysql.com/doc/refman/5.0/en/purge-binary-logs.html</a>
+
+<li>
+binary logs turned off in <code>/etc/mysql/my.cnf</code> file. commented out <code>log-bin=mysql-bin</code> and <code>binlog_format=mixed</code>
+
+<li>
+ibdata files too large:
+
+<ul>
+<li>
+see this for what is stored in InnoDb table: <a href="http://en.wikipedia.org/wiki/InnoDB">http://en.wikipedia.org/wiki/InnoDB</a>
+
+<li>
+What I did to clear innodb file: <a href="https://david.gyttja.com/2010/11/18/reduce-the-size-of-mysql-ibdata1-on-osx/">https://david.gyttja.com/2010/11/18/reduce-the-size-of-mysql-ibdata1-on-osx/</a> This should not be done on production server obvs.
+
+</ul>
+</ul>
+
+<h1 id="toc_4">New Ultra</h1>
+<ul>
+<li>
+<del>E-mail</del>
+
+<li>
+Paypal
+
+<li>
+Nginx Naxsi
+
+<li>
+<del>Domain Name</del>
+
+<li>
+Disclaimer
+
+<li>
+Email template?
+
+<li>
+<del>Brand in admin section</del>
+
+<li>
+<del>Category in admin section</del>
+
+<li>
+<del>redirect to admin section on login</del>
+
+<li>
+<del>link to admin section on login</del>
+
+<li>
+Link products to brands
+
+<li>
+Link produts to categories
+
+<li>
+What happens if a category with subcategories is made a subcategory???
+
+<ul>
+<li>
+Make is so that a flash error message is displayed and forbid the update
+
+</ul>
+</ul>
+
+<h1 id="toc_5">Jellyfish</h1>
+
+<ul>
+<li>
+Switch to management API:
+
+<ul>
+<li>
+Switch 
+
+</ul>
+<li>
+Pages missing tracking  code on pages:
+
+<ul>
+<li>
+is it because we had to switched player? 
+
+</ul>
+<li>
+Listening data:
+
+<ul>
+<li>
+Capture to podcast name 
+
+<li>
+Grab cid from cid cookie
+
+<li>
+Metric plays
+
+<li>
+Measurement protocol -&gt; send data to GA 
+
+<ul>
+<li>
+POST HTTP request 
+
+<li>
+Key CID value
+
+<li>
+Exists already in app/model/analytics
+
+<li>
+Need to switch over to using _ga cookie
+
+</ul>
+<li>
+redis keys:
+
+<ul>
+<li>
+boo:boo_id:cid_id:listens
+
+<li>
+boo:boo_id:cid_id:plays
+
+<li>
+etc
+
+</ul>
+<li>
+Clustering data together if sent daily:
+
+<ul>
+<li>
+So data appears not at the correct time processing lag.
+
+<li>
+Check with Lance to see if this is OK.
+
+<li>
+Could get around this if showing realtime data to client to get around clustering:
+
+<ul>
+<li>
+Can segment by client.
+
+<li>
+Would need to configure for important clients.
+
+</ul>
+</ul>
+</ul>
+<li>
+Find out how we are pushing the data to GA:
+
+<ul>
+<li>
+Check client side script
+
+<li>
+Are we using gaqPush
+
+</ul>
+<li>
+Embeds and no embeds
+
+<li>
+iOS:
+
+<ul>
+<li>
+In admin section
+
+<li>
+Create new property
+
+<li>
+Use mobile app
+
+<li>
+Set timezone to most populous userbase: Set to UK
+
+</ul>
+<li>
+Check with jon what views can be updated/deleted.
+
+</ul>
+
+</body>
+</html>

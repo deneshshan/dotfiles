@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Git</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+<a href="=.html">=</a> Git =
+</p>
+
+<h2 id="toc_0.1">Push sequence</h2>
+
+<p>
+Add =&gt; Stage =&gt; Commit =&gt; Push
+</p>
+
+<h2 id="toc_0.2">Discarding changes</h2>
+
+<h3 id="toc_0.2.1">Unstaged changes</h3>
+
+<p>
+Can do <code>git stash</code> This sticks the unstaged changes onto a "stack". The stashed changes can be popped at any time replaying changes at any time. This is useful in replaying certain changes post checkin if you did not want the changes checked in in the first place or on a different branch.
+</p>
+
+<p>
+To replace changes: <code>git stash pop</code>
+</p>
+
+<h3 id="toc_0.2.2">Rollback</h3>
+
+<h4 id="toc_0.2.2.1">Soft</h4>
+
+<h4 id="toc_0.2.2.2">Hard</h4>
+
+<p>
+Change all files locally to match a specific commit: <code>git reset --hard _commit_id_</code>
+</p>
+
+<h2 id="toc_0.3">Inspecting Commits</h2>
+
+<h3 id="toc_0.3.1">Show files changed in commit</h3>
+<p>
+<code>git show --pretty="format:" --name-only _commit_id_</code>
+</p>
+
+<h3 id="toc_0.3.2">Show diff of a file in commit</h3>
+<p>
+<code>git show _commit_id_</code>
+</p>
+
+</body>
+</html>

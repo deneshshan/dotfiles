@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Redis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Other Data Sources</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Other Data Sources</a>
+<ul>
+<li><a href="#toc_1.1">MySQL</a>
+<li><a href="#toc_1.2">Download Count</a>
+<li><a href="#toc_1.3">Redis</a>
+<ul>
+<li><a href="#toc_1.3.1">Played count</a>
+<li><a href="#toc_1.3.2">Current Redis Stat Capture</a>
+<ul>
+<li><a href="#toc_1.3.2.1">Download Count (mp3 request)</a>
+</ul>
+<li><a href="#toc_1.3.3">Pulling Data via the Command Line</a>
+</ul>
+<li><a href="#toc_1.4">Statbot</a>
+</ul>
+</ul>
+</div>
+<h2 id="toc_1.1">MySQL</h2>
+<h2 id="toc_1.2">Download Count</h2>
+<ul>
+<li>
+Mp3 requests.
+
+<li>
+Stored in audio_clips table.
+
+<li>
+Pushed up to GA in <code>Analytics.post_data</code> method
+
+</ul>
+<h2 id="toc_1.3">Redis</h2>
+<h3 id="toc_1.3.1">Played count</h3>
+<p>
+Boo count stored in Redis before being pushed up to GA. The GA push does not seem to be working though
+</p>
+
+<ul>
+<li>
+Located in <code>app/models/analytics.rb</code>
+
+<li>
+Redis key is <code>analytics_[TIMESTAMP]</code> with value eq to stat object serialized that is pushed to GA.
+
+<li>
+
+
+</ul>
+<h3 id="toc_1.3.2">Current Redis Stat Capture</h3>
+<h4 id="toc_1.3.2.1">Download Count (mp3 request)</h4>
+<ul>
+<li>
+Data captured 
+
+</ul>
+<h3 id="toc_1.3.3">Pulling Data via the Command Line</h3>
+<p>
+To get Redis data:
+</p>
+<ul>
+<li>
+If you access redis via rails console on live DO NOT run keys
+
+<li>
+Use scan, repeatedly run this to get keys
+
+<li>
+Copy a redis dump locally. Located on <code>r1:/home/audioboo/redis_backups/backup.daily</code>
+
+<li>
+Move dump to <code>/usr/local/var/db/redis</code> and rename
+
+<li>
+Start redis-cli
+
+<li>
+There are helper 'static' functions in <code>AudioClip::Stat</code> class to total up this data.
+
+</ul>
+<h2 id="toc_1.4">Statbot</h2>
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>2014-08-04</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Todo</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Todo</a>
+<ul>
+<li><a href="#toc_1.1">Analytics</a>
+<ul>
+<li><a href="#toc_1.1.1">Notes</a>
+</ul>
+<li><a href="#toc_1.2">Sysadmin</a>
+<li><a href="#toc_1.3">Memory leak on SmartOS machines</a>
+<li><a href="#toc_1.4">If time</a>
+</ul>
+</ul>
+</div>
+<h2 id="toc_1.1">Analytics</h2>
+<ul>
+<li>
+<del>Confirm sampling rate is not 100%</del> --&gt; Sampling rate increased to 20% +
+
+<li>
+<del>Check custom reports are showing unsampled data</del> --&gt; YES
+
+<li>
+<del>Email Alex ask about sampling</del>
+
+<li>
+<del>Does GA recognise that the request comes from a premium subscriber?</del> -&gt; YES
+
+<li>
+<del>Get contact details for GA tech guy and ask how to make the request so that we get 100% unsampled data</del>
+
+<li>
+<del>Go through GA spreadsheet and see what is achievable and what is not.</del>
+
+<li>
+<del>Watch advanced segmentation video</del>
+
+<li>
+<del>Put meeting request in Calender</del>
+
+<li>
+<del>Can now add more than 10 million events per month???</del>
+
+<li>
+Check out management API
+
+<li>
+Look at segments again
+
+<li>
+Calculate how many listening events sent by average listen time and see if this is under 800 million. 
+
+<li>
+Become an admin of audioboo.fm live site.
+
+<li>
+<del>Set up live db and become admin locally</del>
+
+<li>
+<del>We now can capture a billion data points. Does this limit ever get reset? Or is it a billion every x days?</del> ==&gt; Per month
+
+<li>
+Calculate total amount of seconds/hours listened to over the course of a month and compare calcalation
+
+<li>
+Why are the client facing dashboard results showing us bullshit????
+
+</ul>
+<h3 id="toc_1.1.1">Notes</h3>
+<ul>
+<li>
+Boo played time stored in Redis. Have found in 2 places
+
+<ul>
+<li>
+<code>app/models/audio_clips/stat/rb</code> line 79 -- listen_times -- Redis stores time played with a view to restarting playback from last listened to location
+
+<li>
+git grepping for <code>gaqPush</code> sends play event along with other events to GA
+
+<li>
+There are 2 play events "Play" and "play", investigate these.
+
+<ul>
+<li>
+'Play' is a javascript event sent when the player button is pushed. Is stored in GA as a event, it is a count of when this event is trigged.
+
+<li>
+'play' is a js event sent to GA on when an mp3 is requested. 
+
+</ul>
+<li>
+PlaybackEnded even in <code>app/assets/javascripts/global/analytics.js</code> sends event to GA and is the amount of time in seconds the file has been played for. It also is sent on page unload.
+
+<li>
+Disabled "Listening" event. Can be re-enabled now that we are premium?
+
+</ul>
+<li>
+Can track up to 1 billion hits (pageview, events etc etc) per month
+
+<ul>
+<li>
+If we dedicate 800 million hits to a listening event, 
+
+<ul>
+<li>
+This works out at 15 * 800,000,00 = 12000000000 seconds or 3,333,333 listeng hours of listening time.
+
+</ul>
+</ul>
+<li>
+There are two events sent to GA: 'Play' and 'play'
+
+<ul>
+<li>
+'Play' is sent by javascript when the play button is clicked
+
+<li>
+'play' is an mp3 request
+
+</ul>
+</ul>
+<h2 id="toc_1.2">Sysadmin</h2>
+<ul>
+<li>
+<del>Resync stalled scp</del>
+
+<li>
+<del>Get production log from app1a</del>
+
+<li>
+<del>Restore live database on OSX</del>
+
+</ul>
+<h2 id="toc_1.3">Memory leak on SmartOS machines</h2>
+<ul>
+<li>
+Run oink on production
+
+<li>
+Update database so that it mirrors production
+
+<li>
+Sort balancer logs by request type and replay in "bursts"
+
+<li>
+Replay balancer logs against database
+
+<li>
+Replay balancer logs against new app1a
+
+<li>
+Set up environment on Solaris VM
+
+<li>
+<del>POSIX::Spawn</del>
+
+<li>
+Is Oink using POSIX::Spawn
+
+<li>
+Check Oink output
+
+<li>
+Get login detials for everycity from Jon
+
+<li>
+<del>Ask Jon what this irc thing was</del>
+
+<li>
+Get everycity help with libumem 
+
+<li>
+<del>Ask everycity for puppet or chef configuration scripts</del>
+
+<ul>
+<li>
+Follow up
+
+</ul>
+<li>
+<del>Use libumem to check if leak or bloat</del>
+
+<li>
+<del>Contact everycity about libumem</del>
+
+<ul>
+<li>
+<del>Follow up</del>
+
+</ul>
+<li>
+Mess around with libumem on Solaris VM 
+
+<li>
+Look into tools for replaying production traffic on staging machines:
+
+<ul>
+<li>
+~~Gor: <a href="https://github.com/buger/gor">https://github.com/buger/gor</a> ~~   ==&gt; Linux only 
+
+<li>
+Can it be narrowed down by route???
+
+<li>
+What tools can be used?
+
+<ul>
+<li>
+JMeter
+
+</ul>
+</ul>
+<li>
+Is this issue to do with exception logging?
+
+<li>
+Provide list of urls to everycity
+
+<ul>
+<li>
+Get requests
+
+<li>
+Autheniticated get requests
+
+<li>
+Post requests
+
+</ul>
+<li>
+PhantomJS for authenticated user behaviour
+
+<li>
+JMeter reading
+
+<li>
+GDB
+
+<ul>
+<li>
+Analyze core dump
+
+</ul>
+<li>
+MDB and libumem to get live core dump
+
+<li>
+Get core dump of process
+
+<li>
+Reply JT:
+
+<ul>
+<li>
+What are we trying to solve?
+
+<li>
+Is every error logged?
+
+<li>
+Put in logging dump ps per login 
+
+<li>
+Find out how much memory grows per session 
+
+<li>
+Put in tracking of how many users logged in at the same time. -&gt; GA
+
+<li>
+Put in tracking of how many media files being played at a time. -&gt; GA
+
+<ul>
+<li>
+can give a ballpark figure using the 'play' event.
+
+</ul>
+<li>
+Find out which pages/links hit extensions
+
+<ul>
+<li>
+What gems use C extensions?:
+
+<ul>
+<li>
+bcrypt-ruby-3.0.1/
+
+<li>
+binding_of_caller-0.7.2/
+
+<li>
+byebug-2.7.0/
+
+<li>
+debug_inspector-0.0.2/
+
+<li>
+fast_stack-0.1.0/
+
+<li>
+ffi-1.9.3/
+
+<li>
+gc_tracer-0.3.3/
+
+<li>
+gctools-0.2.3/
+
+<li>
+hiredis-0.5.2/
+
+<li>
+kgio-2.9.2/
+
+<li>
+mysql2-0.3.13/
+
+<li>
+nokogiri-1.5.11/
+
+<li>
+oily_png-1.1.1/
+
+<li>
+packet-0.1.15/
+
+<li>
+perftools.rb-2.0.1/
+
+<li>
+posix-spawn-0.3.6/
+
+<li>
+raindrops-0.13.0/
+
+<li>
+rake-10.3.2/
+
+<li>
+rmagick-2.13.2/
+
+<li>
+ruby-prof-0.13.0/
+
+<li>
+unicorn-4.8.3/
+
+<li>
+websocket-driver-0.3.2/
+
+<li>
+yajl-ruby-1.2.1/
+
+</ul>
+</ul>
+</ul>
+</ul>
+<h2 id="toc_1.4">If time</h2>
+<ul>
+<li>
+grep into awk to calculate sampling rate as a command line one liner
+
+<li>
+<del>Table of contents vim wiki</del>
+
+</ul>
+
+</body>
+</html>

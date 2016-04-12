@@ -1,0 +1,559 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Google Analytics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Data Capture and Client Facing Reports</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Data Capture and Client Facing Reports</a>
+<ul>
+<li><a href="#toc_1.1">Google Analytics Queries</a>
+<li><a href="#toc_1.2">Becoming Admin</a>
+<ul>
+<li><a href="#toc_1.2.1">Locally</a>
+</ul>
+<li><a href="#toc_1.3">Client Dashboard</a>
+<ul>
+<li><a href="#toc_1.3.1">Channels</a>
+</ul>
+<li><a href="#toc_1.4">Embeds</a>
+<li><a href="#toc_1.5">Event capture</a>
+<ul>
+<li><a href="#toc_1.5.1">'Play' and 'play'</a>
+<li><a href="#toc_1.5.2">Exact listening time through GA</a>
+<ul>
+<li><a href="#toc_1.5.2.1">Proposed solutions</a>
+</ul>
+<li><a href="#toc_1.5.3">Other ways of capturing listening time</a>
+</ul>
+</ul>
+<li><a href="#toc_2">TODO</a>
+</ul>
+</div>
+<h2 id="toc_1.1">Google Analytics Queries</h2>
+<ul>
+<li>
+Test out all GA queries here <a href="http://ga-dev-tools.appspot.com/explorer/">http://ga-dev-tools.appspot.com/explorer/</a>
+
+<li>
+Also there are descriptions of the dimensions, and metrics here: <a href="https://developers.google.com/analytics/devguides/reporting/core/dimsmets">https://developers.google.com/analytics/devguides/reporting/core/dimsmets</a>
+
+</ul>
+<h2 id="toc_1.2">Becoming Admin</h2>
+<h3 id="toc_1.2.1">Locally</h3>
+<ul>
+<li>
+Get the app running locally and create a user
+
+<li>
+Open up rails console find your user and set <code>user.admin</code> to true and save
+
+<li>
+Find a particular channel that you want to become admin for <code>c = Channel.find id</code>
+
+<li>
+do <code>c.permit_user(user, { :is_admin =&gt; true })</code>
+
+<li>
+This creates a permission object
+
+<li>
+Update permissions can_edit to true: <code>p.can_edit = true</code> and save
+
+<li>
+Go to admin user settings, in admin section:
+
+<ul>
+<li>
+Set verified checkbox
+
+<li>
+Set analytics and update user 
+
+</ul>
+<li>
+Click on "Follow" to easily find this channel again.
+
+</ul>
+<h2 id="toc_1.3">Client Dashboard</h2>
+<h3 id="toc_1.3.1">Channels</h3>
+<p>
+If you are an admin and have permissions to look at a channel, see above. Check the stats at <code>/stats/channel/channel_id</code>
+</p>
+<ul>
+<li>
+Visitors - Currently:                                          
+
+<ul>
+<li>
+dimensions =&gt; date                                                      
+
+<li>
+metric =&gt; pageviews                                                     
+
+<li>
+filter =&gt; stream id                                                     
+
+</ul>
+<li>
+Embeds -                                                                
+
+<ul>
+<li>
+Dimensions =&gt; date                                                      
+
+<li>
+metric =&gt; pageviews                                                     
+
+<li>
+filter =&gt; page_path, '/embeds'                                                
+
+<li>
+sort =&gt; pageviews, additionally filtered by stream or boo id            
+
+</ul>
+<li>
+Browsers - 100% SR through GA web. 7% through audioboo. Sampled if filtered by stream id.
+
+<ul>
+<li>
+metrics =&gt; visitors                                                     
+
+<li>
+dimensions =&gt; browser                                                   
+
+<li>
+filters =&gt; stream_id                                                    
+
+<li>
+limit  =&gt; 10                                                            
+
+</ul>
+<li>
+OS - 100% SR through GA web.
+
+<ul>
+<li>
+metric - visitors                                                       
+
+<li>
+dimensions =&gt; operatingSystem                                           
+
+<li>
+filter =&gt; stream_id                                                     
+
+<li>
+limit =&gt; 20                                                             
+
+</ul>
+<li>
+Plays -
+
+<ul>
+<li>
+metric - total events
+
+<li>
+dimensions - date and clip id
+
+<li>
+filter - stream id / clip id, 'play' custom event
+
+<li>
+limit 100000
+
+</ul>
+<li>
+new vs returning - 100% SR through GA web. sampled when filtered on stream_id
+
+<ul>
+<li>
+metric - visitors
+
+<li>
+dimension - visitor type 
+
+<li>
+filter - channel id
+
+</ul>
+<li>
+top pages - 100% through GA site. In Behaviour -&gt; Site Content -&gt; All pages, sampled filtered on stream_id
+
+<ul>
+<li>
+metric - pageviews
+
+<li>
+dumensions - page_path
+
+<li>
+filter - channel id
+
+<li>
+limit - 20
+
+</ul>
+<li>
+top boos - 100% through GA web. Behaviour -&gt; Events -&gt; Top Events -&gt; Boos, sampled filtered on stream_id
+
+<ul>
+<li>
+metrics - total events
+
+<li>
+dimensions - clip id custom var
+
+<li>
+filter channel id
+
+<li>
+limit 20
+
+</ul>
+<li>
+top referrels --- ???? Not sure if sampled or not?
+
+<ul>
+<li>
+metrics - pageviews
+
+<li>
+dimensions -
+
+<ul>
+<li>
+source -
+
+<li>
+referral path - 
+
+</ul>
+<li>
+filter - channel id
+
+<li>
+limit 20
+
+</ul>
+<li>
+top countries -
+
+<ul>
+<li>
+current query:
+
+<ul>
+<li>
+metric - pageviews
+
+<li>
+dimensions - coutntri
+
+<li>
+filters - channel id
+
+<li>
+limit - 20
+
+</ul>
+<li>
+Unsampled on sessions through GA web
+
+<ul>
+<li>
+Is this e better metric than pageviews??
+
+<li>
+Can embed the heatmap into the client facing section?
+
+<li>
+Sampled for stream_id
+
+</ul>
+</ul>
+<li>
+top cities -
+
+<ul>
+<li>
+current query
+
+<ul>
+<li>
+metric - pageviews
+
+<li>
+dimensions - city
+
+<li>
+filter - channel id
+
+<li>
+limit - 20
+
+</ul>
+<li>
+Unsampled on session through GA web
+
+<ul>
+<li>
+Is this e better metric than pageviews??
+
+<li>
+Can embed the heatmap into the client facing section?
+
+<li>
+Sampled for stream_id
+
+</ul>
+</ul>
+</ul>
+<h2 id="toc_1.4">Embeds</h2>
+<p>
+Players are embedded in 2 ways:
+</p>
+<ul>
+<li>
+Old style flash players. Used on pages that will not allow our javascript, such as Tumblr etc. When play is hit the  'play' mp3 send event is fired.
+
+<li>
+Pages that allow our JS. Js will create iframe in page. Full GA analytics available for both pages
+
+</ul>
+<h2 id="toc_1.5">Event capture</h2>
+<h3 id="toc_1.5.1">'Play' and 'play'</h3>
+<ul>
+<li>
+There are 2 play events "Play" and "play", investigate these.
+
+</ul>
+<p>
+git grepping for <code>gaqPush</code> sends play event along with other events to GA
+</p>
+<ul>
+<li>
+'Play' is a javascript event sent when the player button is pushed. Is stored in GA as a event, it is a count of when this event is trigged.
+
+<li>
+'play' is a js event sent to GA on when an mp3 is requested.
+
+</ul>
+<h3 id="toc_1.5.2">Exact listening time through GA</h3>
+<p>
+It would be useful get the exact listening time through GA, since it allows for "drill down" reporting and filtering. The actual accurate capture of this data is somewhat difficult. 
+</p>
+<ul>
+<li>
+Currently listening length capture by events in GA
+
+<li>
+Custom even "PlaybackEnded" captures listening time
+
+<li>
+Event "PlaybackEnded" bound to page unload or pause pressed.
+
+<li>
+Listening event commented out in code. This event sends a listening event every 15 seconds, this was commented out since 10 million limit on events before.
+
+<li>
+Code at <code>app/assets/javascripts/global/analytics.js</code>
+
+</ul>
+<h4 id="toc_1.5.2.1">Proposed solutions</h4>
+<ul>
+<li>
+Send a listening event every x seconds. Can be fine tuned to be under limit. can be sent less often for less accuracy.
+
+<ul>
+<li>
+Given that we can now capture a billion data points, assigning 800 million to capturing listening events does not seem unreasonable
+
+<li>
+Sending an even every 15 seconds: his works out at 15 * 800,000,00 = 12000000000 seconds or 3,333,333 listeng hours of listening time.
+
+</ul>
+</ul>
+
+<p>
+Proposed by Jellyfish:
+</p>
+
+<p>
+Just following on from our conversation yesterday:
+</p>
+ 
+<p>
+It would be beneficial to collect the Podcast Name, ID and plays (counter metric) within Custom Dimensions as this is relatively simply and will provide a fair amount of value. This will also enable you to breakdown podcast by demographic, location, etc.
+</p>
+ 
+<p>
+In terms of the average playtime, this will require a bit more thought – probably an onsite meeting with you guys to discuss. We have a suggestions that may be beneficial, however:
+</p>
+ 
+<ul>
+<li>
+Podcast Name collected in Custom Dimension &amp; Audiboo’s CRM
+
+<li>
+Podcast Play collected in Custom Metric
+
+<li>
+Trigger sent to Audioboo’s CRM every x seconds based on Podcast – counter so increments every x seconds
+
+<li>
+BigQuery used to sum average playtime by podcast
+
+<li>
+Dimension Widening (widening Podcast dimension) with average visit duration
+
+</ul>
+ 
+<p>
+I’ll also have a word with Google to discuss.
+</p>
+
+<h3 id="toc_1.5.3">Other ways of capturing listening time</h3>
+<ul>
+<li>
+Boo played time stored in Redis. In the code at: <code>app/models/audio_clips/stat.rb line 79</code>, method listen times
+
+<li>
+Supposedly the key is <code>stats:boos:listen_time:123</code> for boo with id 123, getting the total listen time would mean finding all these keys and totalling?
+
+<ul>
+<li>
+redis-cli: get keys command <code>KEYS [REGEX]</code>. 
+
+</ul>
+</ul>
+
+<h1 id="toc_2">TODO</h1>
+
+<ul>
+<li>
+Switch to management API:
+
+<ul>
+<li>
+Switch 
+
+</ul>
+<li>
+Pages missing tracking  code on pages:
+
+<ul>
+<li>
+is it because we had to switched player? 
+
+</ul>
+<li>
+Listening data:
+
+<ul>
+<li>
+Capture to podcast name 
+
+<li>
+Grab cid from cid cookie
+
+<li>
+Metric plays
+
+<li>
+Measurement protocol -&gt; send data to GA 
+
+<ul>
+<li>
+POST HTTP request 
+
+<li>
+Key CID value
+
+<li>
+Exists already in app/model/analytics
+
+<li>
+Need to switch over to using _ga cookie
+
+</ul>
+<li>
+redis keys:
+
+<ul>
+<li>
+boo:boo_id:cid_id:listens
+
+<li>
+boo:boo_id:cid_id:plays
+
+<li>
+etc
+
+</ul>
+<li>
+Clustering data together if sent daily:
+
+<ul>
+<li>
+So data appears not at the correct time processing lag.
+
+<li>
+Check with Lance to see if this is OK.
+
+<li>
+Could get around this if showing realtime data to client to get around clustering:
+
+<ul>
+<li>
+Can segment by client.
+
+<li>
+Would need to configure for important clients.
+
+</ul>
+</ul>
+</ul>
+<li>
+Find out how we are pushing the data to GA:
+
+<ul>
+<li>
+Check client side script
+
+<li>
+Are we using gaqPush
+
+</ul>
+<li>
+Embeds and no embeds
+
+<li>
+iOS:
+
+<ul>
+<li>
+In admin section
+
+<li>
+Create new property
+
+<li>
+Use mobile app
+
+<li>
+Set timezone to most populous userbase: Set to UK
+
+</ul>
+<li>
+Check with jon what views can be updated/deleted.
+
+</ul>
+
+</body>
+</html>
