@@ -15,7 +15,7 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 " ===================================================
-" =  VUNDLE SETUP 
+" =  VUNDLE SETUP
 " ===================================================
 
 " set the runtime path to include Vundle and initialize
@@ -52,6 +52,7 @@ Plugin 'christoomey/vim-system-copy'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -84,7 +85,14 @@ set backspace=indent,eol,start
 " ===================================================
 
 syntax enable
-colorscheme zellner
+set background=dark
+
+"==================================================
+"= COLOUR SCHEME
+"==================================================
+
+colorscheme base16-ocean
+"colorscheme zellner
 "colorscheme ron
 "colorscheme elflord
 "colorscheme slate
@@ -139,19 +147,19 @@ endfunction
 " =  COLOURS
 " ===================================================
 
-highlight Folded ctermbg=000 ctermfg=007
-highlight FoldColumn ctermbg=000 ctermfg=007
-highlight Search ctermbg=002
-highlight Visual ctermbg=002 ctermbg=004
-highlight StatusLine ctermbg=007 ctermfg=000
-highlight StatusLineNC ctermbg=000 ctermfg=007
-highlight Pmenu ctermbg=000
-highlight PmenuSel ctermbg=002 ctermfg=000
-highlight Directory guifg=#FF0000 ctermfg=red
-hi DiffAdd	ctermbg=4 ctermfg=007
-hi DiffChange	ctermbg=002 ctermfg=000
-hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
-hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+"highlight Folded ctermbg=000 ctermfg=007
+"highlight FoldColumn ctermbg=000 ctermfg=007
+"highlight Search ctermbg=002
+"highlight Visual ctermbg=002 ctermbg=004
+"highlight StatusLine ctermbg=007 ctermfg=000
+"highlight StatusLineNC ctermbg=000 ctermfg=007
+"highlight Pmenu ctermbg=000
+"highlight PmenuSel ctermbg=002 ctermfg=000
+"highlight Directory guifg=#FF0000 ctermfg=red
+"hi DiffAdd	ctermbg=4 ctermfg=007
+"hi DiffChange	ctermbg=002 ctermfg=000
+"hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
+"hi DiffText	cterm=bold ctermbg=1 ctermfg=20
 
 " ================== Long Lines =====================
 "
@@ -187,18 +195,6 @@ nnoremap <tab> /
 
 nmap <S-CR> o<Esc>
 
-" scvim shortcuts
-
-"imap  <F2> <Esc><Esc>:SClangStart<CR>
-"nmap  <F2> :SClangStart<CR>
-"vmap  <F2> <Esc><Esc>:SClangStart<CR>
-"imap  <F3> <Esc><Esc>:SClangKill<CR>
-"nmap  <F3> :SClangKill<CR>
-"vmap  <F3> <Esc><Esc>:SClangKill<CR>
-"imap  <F4> <Esc><Esc>:SClangRecompile<CR>
-"nmap  <F4> :SClangRecompile<CR>
-"vmap  <F4> <Esc><Esc>:SClangRecompile<CR>
-
 let g:sclangTerm = "tmux split-window -h"
 
 imap <F12> <C-w>w
@@ -214,13 +210,35 @@ nmap <right> :tabn<CR>
 
 nmap <up> :bp<CR><Esc><Esc>
 nmap <down> :bn<CR><Esc>
-nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>q :bp <BAR> bd #<CR>
 
 
 " =========== Wiki ==========
 "
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
+
+let vimwiki_path='/Users/deneshshan/vimwiki'
+let vimwiki_export_path='/Users/deneshshan/vimwiki_html'
+let wiki_settings={
+\ 'template_path': vimwiki_export_path.'vimwiki-assets/',
+\ 'template_default': 'default',
+\ 'template_ext': '.html',
+\ 'auto_export': 0,
+\ 'nested_syntaxes': {
+\ 'js':'javascript'
+\ }}
+
+let wikis=["_zappistore", "_personal"]
+let g:vimwiki_list = []
+for wiki_name in wikis
+    let wiki=copy(wiki_settings)
+    let wiki.path = vimwiki_path.wiki_name.'/'
+    let wiki.path_html = vimwiki_export_path.wiki_name.'/'
+    let wiki.diary_index = 'index'
+    let wiki.diary_rel_path = 'diary/'
+    call add(g:vimwiki_list, wiki)
+endfor
 
 " ========== Specs ==========
 
@@ -285,7 +303,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline_theme='bubblegum'
+let g:airline_theme='base16'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
+
+
