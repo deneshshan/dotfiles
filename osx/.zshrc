@@ -83,6 +83,8 @@ alias ll="ls -al"
 alias zshconfig="vim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias tmuxconfig="vim ~/.tmux.conf"
+alias vimconfig="vim ~/.vimrc"
 
 # directory navigation
 alias store="cd /Users/deneshshan/Documents/work/zappistore.app"
