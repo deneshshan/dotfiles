@@ -39,7 +39,7 @@ Plugin 'jgdavey/tslime.vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'sbl/scvim'
@@ -289,7 +289,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline_theme='base16_ocean'
+let g:airline_theme='base16'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
