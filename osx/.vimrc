@@ -39,13 +39,13 @@ Plugin 'jgdavey/tslime.vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'sbl/scvim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'burnettk/vim-angular'
-"Plugin 'rust-lang/rust.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'craigemery/vim-autotag'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-system-copy'
@@ -53,6 +53,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'Shutnik/jshint2.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -91,8 +92,8 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-colorscheme base16-ocean
-"colorscheme zellner
+"colorscheme base16-ocean
+colorscheme zellner
 "colorscheme ron
 "colorscheme elflord
 "colorscheme slate
@@ -147,19 +148,20 @@ endfunction
 " =  COLOURS
 " ===================================================
 
-"highlight Folded ctermbg=000 ctermfg=007
-"highlight FoldColumn ctermbg=000 ctermfg=007
-"highlight Search ctermbg=002
-"highlight Visual ctermbg=002 ctermbg=004
-"highlight StatusLine ctermbg=007 ctermfg=000
-"highlight StatusLineNC ctermbg=000 ctermfg=007
-"highlight Pmenu ctermbg=000
-"highlight PmenuSel ctermbg=002 ctermfg=000
-"highlight Directory guifg=#FF0000 ctermfg=red
-"hi DiffAdd	ctermbg=4 ctermfg=007
-"hi DiffChange	ctermbg=002 ctermfg=000
-"hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
-"hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+highlight Folded ctermbg=000 ctermfg=007
+highlight FoldColumn ctermbg=000 ctermfg=007
+highlight Search ctermbg=002
+highlight Visual ctermbg=002 ctermbg=004
+highlight StatusLine ctermbg=007 ctermfg=000
+highlight StatusLineNC ctermbg=000 ctermfg=007
+highlight Pmenu ctermbg=000
+highlight Pmenu ctermbg=007
+highlight PmenuSel ctermbg=002 ctermfg=000
+highlight Directory guifg=#FF0000 ctermfg=red
+hi DiffAdd	ctermbg=4 ctermfg=007
+hi DiffChange	ctermbg=002 ctermfg=000
+hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
+hi DiffText	cterm=bold ctermbg=1 ctermfg=20
 
 " ================== Long Lines =====================
 "
@@ -211,6 +213,13 @@ nmap <right> :tabn<CR>
 nmap <up> :bp<CR><Esc><Esc>
 nmap <down> :bn<CR><Esc>
 nmap <leader>q :bp <BAR> bd #<CR>
+
+"===================================================
+"=  CWINDOW
+"===================================================
+
+"nmap <c-down> :cn<CR>
+"nmap <c-up> :cp<CR>
 
 
 " =========== Wiki ==========
@@ -274,6 +283,25 @@ set clipboard=unnamed
 "==================================================
 nnoremap <leader>. :CtrlPTag<cr>
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
 "==================================================
 "=  WHITESPACE
 "==================================================
@@ -291,7 +319,8 @@ function! TrimWhiteSpace()
 
 " ======== grep ====================
 
-map <F4> :execute " grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-dir=logs --exclude=tags . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+"map <F4> :execute "grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-dir=logs --exclude=tags . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+"map <F4> :command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!<CR>
 
 "==================================================
 "=  AIRLINE
@@ -303,7 +332,10 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline_theme='base16'
+"let g:airline_theme='base16'
+"let g:airline_theme='papercolor'
+"let g:airline_theme='hybrid'
+let g:airline_theme='hybridline'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
