@@ -140,22 +140,22 @@ endfunction
 " =  COLOURS
 " ===================================================
 
-"highlight Folded ctermbg=000 ctermfg=007
-"highlight FoldColumn ctermbg=000 ctermfg=007
-"highlight Search ctermbg=002
-"highlight Visual ctermbg=002 ctermbg=004
-"highlight StatusLine ctermbg=007 ctermfg=000
-"highlight StatusLineNC ctermbg=000 ctermfg=007
-"highlight Pmenu ctermbg=000
-"highlight PmenuSel ctermbg=002 ctermfg=000
-"highlight Directory guifg=#FF0000 ctermfg=red
-"hi DiffAdd	ctermbg=4 ctermfg=007
-"hi DiffChange	ctermbg=002 ctermfg=000
-"hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
-"hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+highlight Folded ctermbg=000 ctermfg=007
+highlight FoldColumn ctermbg=000 ctermfg=007
+highlight Search ctermbg=002
+highlight Visual ctermbg=002 ctermbg=004
+highlight StatusLine ctermbg=007 ctermfg=000
+highlight StatusLineNC ctermbg=000 ctermfg=007
+highlight Pmenu ctermbg=000
+highlight PmenuSel ctermbg=002 ctermfg=000
+highlight Directory guifg=#FF0000 ctermfg=red
+hi DiffAdd	ctermbg=4 ctermfg=007
+hi DiffChange	ctermbg=002 ctermfg=000
+hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
+hi DiffText	cterm=bold ctermbg=1 ctermfg=20
 
 set background=dark
-colorscheme base16-ocean
+"colorscheme base16-ocean
 
 " ================== Long Lines =====================
 "
@@ -289,7 +289,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline_theme='base16'
+let g:airline_theme='papercolor'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
