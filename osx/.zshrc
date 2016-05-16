@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="rkj-repos"
+ZSH_THEME="dpoggi"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,7 +52,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 #export PATH=$PATH:$HOME/bin:/usr/local/bin
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export GOPATH='/Users/denesh/Documents/learning/go'
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$GOPATH/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -103,7 +104,7 @@ alias next="reset && task next"
 alias add="task add"
 alias burn="reset && task burndown.daily"
 
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
