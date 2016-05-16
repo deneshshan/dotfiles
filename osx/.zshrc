@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="dpoggi"
+ZSH_THEME="xiong-chiamiov-plus"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,11 +51,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-#export PATH=$PATH:$HOME/bin:/usr/local/bin
-export GOPATH='/Users/denesh/Documents/learning/go'
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$GOPATH/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -97,6 +92,7 @@ alias server="zeus server"
 alias console="zeus console"
 alias zrake="zeus rake"
 alias zst="reset && zeus start"
+alias be="bundle exec"
 
 # taskwarrior
 alias all="reset && task all"
@@ -104,7 +100,12 @@ alias next="reset && task next"
 alias add="task add"
 alias burn="reset && task burndown.daily"
 
-#eval "$(rbenv init -)"
+export GOPATH='/Users/denesh/Documents/learning/go'
+export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
+
+if [ -n "$TMUX" ]; then
+  eval "$(rbenv init -)"
+fi
 
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
