@@ -42,7 +42,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'fatih/vim-go'
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'sbl/scvim'
+Plugin 'sbl/scvim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'burnettk/vim-angular'
 Plugin 'rust-lang/rust.vim'
@@ -340,4 +340,13 @@ let g:airline_theme='hybridline'
 let g:airline_powerline_fonts=1
 set t_Co=256
 
-
+"==================================================
+"= VIM GO 
+"==================================================
+"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
