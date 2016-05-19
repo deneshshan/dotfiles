@@ -30,7 +30,7 @@ Plugin 'gmarik/Vundle.vim'
 " =  PLUGINS
 " ===================================================
 
-Plugin 'wincent/command-t'
+"Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
@@ -347,8 +347,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme='hybridline'
 "let g:airline_theme='term'
 "let g:airline_theme='simple'
+"let g:airline_theme='wombat'
 
-let g:airline_powerline_fonts=1
+"let g:airline_powerline_fonts=1
 set t_Co=256
 
 "==================================================
