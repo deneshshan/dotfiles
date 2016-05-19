@@ -83,8 +83,8 @@ alias tmuxconfig="vim ~/.tmux.conf"
 alias vimconfig="vim ~/.vimrc"
 
 # directory navigation
-alias store="cd /Users/deneshshan/Documents/work/zappistore.app"
-alias dc="cd /Users/deneshshan/Documents/work/data-collector.app"
+alias store="cd /Users/denesh/Documents/work/zappi/zappistore.app"
+alias dc="cd /Users/denesh/Documents/work/zappi/data-collector.app"
 
 # rails testing with zeus
 alias test="zeus test"

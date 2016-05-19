@@ -39,7 +39,8 @@ Plugin 'jgdavey/tslime.vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
+Plugin 'tpope/vim-unimpaired'
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'sbl/scvim'
@@ -134,6 +135,12 @@ function! FoldDefs()
   setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zd :call FoldDefs()<CR>
+" Fold Cucumber
+function! FoldCucumber()
+  let @/='\(Given\ \|When\ \)'
+  setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
+endfunction
+map ,zs :call FoldCucumber()<CR>
 
 " Set the text that represents folded lines to a simple dash, showing no
 " information.
@@ -150,7 +157,7 @@ endfunction
 
 highlight Folded ctermbg=000 ctermfg=007
 highlight FoldColumn ctermbg=000 ctermfg=007
-highlight Search ctermbg=002
+highlight Search ctermbg=012 ctermfg=004
 highlight Visual ctermbg=002 ctermbg=004
 highlight StatusLine ctermbg=007 ctermfg=000
 highlight StatusLineNC ctermbg=000 ctermfg=007
@@ -162,6 +169,8 @@ hi DiffAdd	ctermbg=4 ctermfg=007
 hi DiffChange	ctermbg=002 ctermfg=000
 hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
 hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+
+set hlsearch
 
 " ================== Long Lines =====================
 "
@@ -335,14 +344,15 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme='base16'
 "let g:airline_theme='papercolor'
 "let g:airline_theme='hybrid'
-"let g:airline_theme='hybridline'
-let g:airline_theme='simple'
+let g:airline_theme='hybridline'
+"let g:airline_theme='term'
+"let g:airline_theme='simple'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
 
 "==================================================
-"= VIM GO 
+"= VIM GO
 "==================================================
 "
 let g:go_highlight_functions = 1
@@ -351,3 +361,17 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+"==================================================
+"= QARGS
+"==================================================
+"
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
