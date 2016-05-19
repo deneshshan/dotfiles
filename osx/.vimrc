@@ -344,12 +344,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme='base16'
 "let g:airline_theme='papercolor'
 "let g:airline_theme='hybrid'
-let g:airline_theme='hybridline'
-"let g:airline_theme='term'
+"let g:airline_theme='hybridline'
+let g:airline_theme='term'
 "let g:airline_theme='simple'
 "let g:airline_theme='wombat'
 
-"let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=1
 set t_Co=256
 
 "==================================================
