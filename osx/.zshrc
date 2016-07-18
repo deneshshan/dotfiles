@@ -85,6 +85,7 @@ alias vimconfig="vim ~/.vimrc"
 # directory navigation
 alias store="cd /Users/deneshshan/Documents/work/zappi/zappistore.app"
 alias dc="cd /Users/deneshshan/Documents/work/zappi/data-collector.app"
+alias clnt="cd /Users/deneshshan/Documents/work/zappi/data-collector.app"
 
 # rails testing with zeus
 alias test="zeus test"
