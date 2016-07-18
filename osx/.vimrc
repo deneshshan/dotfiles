@@ -48,13 +48,14 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'burnettk/vim-angular'
 Plugin 'rust-lang/rust.vim'
 Plugin 'craigemery/vim-autotag'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'Shutnik/jshint2.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'gabesoft/vim-ags'
 
 call vundle#end()
 filetype plugin indent on
@@ -98,8 +99,22 @@ colorscheme zellner
 "colorscheme ron
 "colorscheme elflord
 "colorscheme slate
-set wrap
 set number
+
+"==================================================
+"= WRAPPING
+"==================================================
+
+function ToggleWrap()
+ if (&wrap == 1)
+   set nowrap
+ else
+   set wrap
+ endif
+endfunction
+
+set nowrap
+nnoremap <leader>w :call ToggleWrap()<CR>
 
 " ===================================================
 " =  FOLDING
@@ -293,7 +308,11 @@ set clipboard=unnamed
 "==================================================
 nnoremap <leader>. :CtrlPTag<cr>
 
-" The Silver Searcher
+
+"==================================================
+"=  SILVER SEARCHER
+"==================================================
+
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -303,14 +322,16 @@ if executable('ag')
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+
+  let g:ags_agcontext = 5
 endif
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :Ags '<C-R><C-W>' --ignore=cscope.out<CR>
 
 " bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
+command -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ags<SPACE>
 
 "==================================================
 "=  WHITESPACE
