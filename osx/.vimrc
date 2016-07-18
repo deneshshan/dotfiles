@@ -186,7 +186,7 @@ hi DiffAdd	ctermbg=4 ctermfg=007
 hi DiffChange	ctermbg=002 ctermfg=000
 hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
 hi DiffText	cterm=bold ctermbg=1 ctermfg=20
-hi VertSplit ctermfg=235
+hi VertSplit ctermfg=002
 
 set hlsearch
 nnoremap <leader>h :noh<CR>
