@@ -30,7 +30,7 @@ Plugin 'gmarik/Vundle.vim'
 " =  PLUGINS
 " ===================================================
 
-"Plugin 'wincent/command-t'
+Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
@@ -54,6 +54,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'Shutnik/jshint2.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gabesoft/vim-ags'
 
