@@ -187,6 +187,7 @@ hi DiffText	cterm=bold ctermbg=1 ctermfg=20
 hi VertSplit ctermfg=002
 
 set hlsearch
+nnoremap <leader>h :noh<CR>
 
 " ================== Long Lines =====================
 "
