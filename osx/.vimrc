@@ -39,7 +39,7 @@ Plugin 'jgdavey/tslime.vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-unimpaired'
 "Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -186,7 +186,7 @@ hi DiffAdd	ctermbg=4 ctermfg=007
 hi DiffChange	ctermbg=002 ctermfg=000
 hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
 hi DiffText	cterm=bold ctermbg=1 ctermfg=20
-hi VertSplit ctermfg=002
+hi VertSplit ctermfg=235
 
 set hlsearch
 nnoremap <leader>h :noh<CR>
@@ -372,7 +372,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme='hybridline'
 "let g:airline_theme='term'
 "let g:airline_theme='simple'
-"let g:airline_theme='wombat'
 
 let g:airline_powerline_fonts=1
 set t_Co=256
