@@ -155,10 +155,10 @@ endfunction
 " =  COLOURS
 " ===================================================
 
-highlight Folded ctermbg=000 ctermfg=007
+highlight Folded ctermbg=000 ctermfg=005
 highlight FoldColumn ctermbg=000 ctermfg=007
-highlight Search ctermbg=012 ctermfg=004
-highlight Visual ctermbg=002 ctermbg=004
+highlight Search ctermbg=000 ctermfg=005
+highlight Visual ctermbg=004
 highlight StatusLine ctermbg=007 ctermfg=000
 highlight StatusLineNC ctermbg=000 ctermfg=007
 highlight Pmenu ctermbg=000
@@ -345,8 +345,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme='base16'
 "let g:airline_theme='papercolor'
 "let g:airline_theme='hybrid'
-"let g:airline_theme='hybridline'
-let g:airline_theme='term'
+let g:airline_theme='hybridline'
+"let g:airline_theme='term'
 "let g:airline_theme='simple'
 "let g:airline_theme='wombat'
 
