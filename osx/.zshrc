@@ -104,6 +104,8 @@ alias burn="reset && task burndown.daily"
 export GOPATH='/Users/denesh/Documents/learning/go'
 export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
+alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
+
 if [ -n "$TMUX" ]; then
   eval "$(rbenv init -)"
 fi
