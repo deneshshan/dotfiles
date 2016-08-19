@@ -30,7 +30,7 @@ Plugin 'gmarik/Vundle.vim'
 " =  PLUGINS
 " ===================================================
 
-Plugin 'wincent/command-t'
+"Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
@@ -58,6 +58,9 @@ Plugin 'tpope/vim-abolish'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gabesoft/vim-ags'
+Plugin 'schickling/vim-bufonly'
+"Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'lilydjwg/colorizer'
 
 call vundle#end()
 filetype plugin indent on
@@ -410,3 +413,9 @@ vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
+"==================================================
+"= CONVENIENCE
+"==================================================
+"
+"
+nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
