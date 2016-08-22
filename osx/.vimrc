@@ -61,6 +61,9 @@ Plugin 'gabesoft/vim-ags'
 Plugin 'schickling/vim-bufonly'
 "Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'lilydjwg/colorizer'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
 
 call vundle#end()
 filetype plugin indent on
