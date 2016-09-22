@@ -30,7 +30,7 @@ Plugin 'gmarik/Vundle.vim'
 " =  PLUGINS
 " ===================================================
 
-"Plugin 'wincent/command-t'
+Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
@@ -59,11 +59,11 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gabesoft/vim-ags'
 Plugin 'schickling/vim-bufonly'
-"Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'lilydjwg/colorizer'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -180,7 +180,7 @@ endfunction
 
 highlight Folded ctermbg=000 ctermfg=005
 highlight FoldColumn ctermbg=000 ctermfg=007
-highlight Search ctermbg=000 ctermfg=005
+highlight Search ctermbg=016 ctermfg=005
 highlight Visual ctermbg=004
 highlight StatusLine ctermbg=007 ctermfg=000
 highlight StatusLineNC ctermbg=000 ctermfg=007
@@ -193,6 +193,7 @@ hi DiffChange	ctermbg=002 ctermfg=000
 hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
 hi DiffText	cterm=bold ctermbg=1 ctermfg=20
 hi VertSplit ctermfg=002
+hi LineNr ctermfg=002
 
 set hlsearch
 nnoremap <leader>h :noh<CR>
@@ -306,6 +307,7 @@ map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
 let g:rspec_command = 'call Send_to_Tmux("rspec --format documentation {spec}\n")'
+"let g:rspec_command = 'call Send_to_Tmux("test {spec}\n")'
 let g:rspec_runner = "os_x_iterm"
 
 " ===== clipboard options ==
@@ -375,8 +377,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme='base16'
 "let g:airline_theme='papercolor'
 "let g:airline_theme='hybrid'
-let g:airline_theme='hybridline'
-"let g:airline_theme='term'
+let g:airline_theme='term'
+"let g:airline_theme='hybridline'
+hi VertSplit ctermfg=000
 "let g:airline_theme='simple'
 
 let g:airline_powerline_fonts=1
@@ -422,3 +425,12 @@ nmap <C-c>r <Plug>SetTmuxVars
 "
 "
 nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
+
+"==================================================
+"= CONVENIENCE
+"==================================================
+"
+
+"let g:ags_winheight = '20'
+"let g:ags_bufopenpos = 'left'
+"let g:ags_fileopenpos = 'right'

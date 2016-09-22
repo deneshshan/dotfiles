@@ -60,7 +60,7 @@ export EDITOR='vim'
 # clint slack env variables
 export ENABLE_SLACK="true"
 export SLACKUSER="denesh"
-export SLACK_CHANNEL="#zappistore-core"
+export SLACK_CHANNEL="#zc_private"
 export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
 
 # Compilation flags
@@ -83,9 +83,9 @@ alias tmuxconfig="vim ~/.tmux.conf"
 alias vimconfig="vim ~/.vimrc"
 
 # directory navigation
-alias store="cd /Users/deneshshan/Documents/work/zappi/zappistore.app"
-alias dc="cd /Users/deneshshan/Documents/work/zappi/data-collector.app"
-alias clnt="cd /Users/deneshshan/Documents/work/zappi/data-collector.app"
+alias store="cd /Users/deneshshan/Documents/work/zappi/zappistore"
+alias dc="cd /Users/deneshshan/Documents/work/zappi/data-collector"
+alias clnt="cd /Users/deneshshan/Documents/work/zappi/clint"
 
 # rails testing with zeus
 alias test="zeus test"
@@ -106,8 +106,8 @@ export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
-if [ -n "$TMUX" ]; then
-  eval "$(rbenv init -)"
+if ! [ -n "$TMUX" ]; then
+  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 fi
 
 # control s not working in terminal. this makes it work. useful for command t
