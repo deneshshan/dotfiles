@@ -106,7 +106,10 @@ export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
+alias nv='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+
 if ! [ -n "$TMUX" ]; then
+  #$(rbenv init)
   export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 fi
 
