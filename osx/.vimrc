@@ -7,7 +7,7 @@ set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
+set mouse=a		" Enable mouse usage (all modes)
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -30,43 +30,48 @@ Plugin 'gmarik/Vundle.vim'
 " =  PLUGINS
 " ===================================================
 
-Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
-"Plugin 'elixir-lang/vim-elixir'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-unimpaired'
-"Plugin 'vim-ruby/vim-ruby'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'sbl/scvim'
 Plugin 'vimwiki/vimwiki'
-Plugin 'burnettk/vim-angular'
-Plugin 'rust-lang/rust.vim'
-Plugin 'craigemery/vim-autotag'
+"Plugin 'craigemery/vim-autotag'
 Plugin 'christoomey/vim-system-copy'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
-Plugin 'chriskempson/base16-vim'
 Plugin 'Shutnik/jshint2.vim'
-Plugin 'tpope/vim-abolish'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gabesoft/vim-ags'
 Plugin 'schickling/vim-bufonly'
-Plugin 'lilydjwg/colorizer'
+"Plugin 'lilydjwg/colorizer'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'jelera/vim-javascript-syntax'
+Plugin 'tpope/vim-dispatch'
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'tyrannicaltoucan/vim-deep-space'
+Plugin 'ryanoasis/vim-devicons'
+"Plugin 'neomake/neomake'
 
 call vundle#end()
 filetype plugin indent on
+
+" ===================================================
+" =  YOUCOMPLETEME
+" ===================================================
+ 
+" These are the tweaks I apply to YCM's config, you don't need them but they might help.
+" YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
+"let g:ycm_add_preview_to_completeopt=0
+"let g:ycm_confirm_extra_conf=0
+"set completeopt-=preview
 
 " ===================================================
 " =  NERDTREE
@@ -103,17 +108,18 @@ set background=dark
 "==================================================
 
 "colorscheme base16-ocean
-colorscheme zellner
+"colorscheme zellner
 "colorscheme ron
 "colorscheme elflord
 "colorscheme slate
+colorscheme gotham
 set number
 
 "==================================================
 "= WRAPPING
-"==================================================
+"=o=================================================
 
-function ToggleWrap()
+function! ToggleWrap()
  if (&wrap == 1)
    set nowrap
  else
@@ -121,8 +127,15 @@ function ToggleWrap()
  endif
 endfunction
 
-set nowrap
+set wrap
 nnoremap <leader>w :call ToggleWrap()<CR>
+
+"==================================================
+"= CURSOR
+"===================================================
+
+set cursorline
+set cursorcolumn
 
 " ===================================================
 " =  FOLDING
@@ -141,7 +154,7 @@ set foldenable
 " zR  -- Remove all folds
 "
 " From http://vim.wikia.com/wiki/Folding_with_Regular_Expression
-nnoremap ,z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
+"nnoremap ,z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
 
 " Then variations on that, with different searches ...
 "
@@ -178,22 +191,22 @@ endfunction
 " =  COLOURS
 " ===================================================
 
-highlight Folded ctermbg=000 ctermfg=005
-highlight FoldColumn ctermbg=000 ctermfg=007
+highlight Folded ctermbg=008
+"highlight FoldColumn ctermbg=000 ctermfg=007
 highlight Search ctermbg=016 ctermfg=005
-highlight Visual ctermbg=004
-highlight StatusLine ctermbg=007 ctermfg=000
-highlight StatusLineNC ctermbg=000 ctermfg=007
+"highlight Visual ctermbg=004
+"highlight StatusLine ctermbg=007 ctermfg=000
+"highlight StatusLineNC ctermbg=000 ctermfg=007
 highlight Pmenu ctermbg=000
-highlight Pmenu ctermbg=007
-highlight PmenuSel ctermbg=002 ctermfg=000
-highlight Directory guifg=#FF0000 ctermfg=red
-hi DiffAdd	ctermbg=4 ctermfg=007
-hi DiffChange	ctermbg=002 ctermfg=000
-hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
-hi DiffText	cterm=bold ctermbg=1 ctermfg=20
-hi VertSplit ctermfg=002
-hi LineNr ctermfg=002
+"highlight Pmenu ctermbg=007
+"highlight PmenuSel ctermbg=002 ctermfg=000
+"highlight Directory guifg=#FF0000 ctermfg=red
+"hi DiffAdd	ctermbg=4 ctermfg=007
+"hi DiffChange	ctermbg=002 ctermfg=000
+"hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
+"hi DiffText	cterm=bold ctermbg=1 ctermfg=20
+"hi VertSplit ctermfg=002
+"hi LineNr ctermfg=002
 
 set hlsearch
 nnoremap <leader>h :noh<CR>
@@ -306,13 +319,18 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("rspec --format documentation {spec}\n")'
-"let g:rspec_command = 'call Send_to_Tmux("test {spec}\n")'
-let g:rspec_runner = "os_x_iterm"
+"let g:rspec_command = 'Dispatch rspec {spec}'
+"let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
+let g:rspec_command = 'call Send_to_Tmux("test {spec}\n")'
+let g:rspec_runner = "os_x_iterm2"
 
 " ===== clipboard options ==
 
 set clipboard=unnamed
+
+" ===== cursor =============
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 "==================================================
 "=  CTRLP
@@ -341,23 +359,23 @@ endif
 nnoremap K :Ags '<C-R><C-W>' --ignore=cscope.out<CR>
 
 " bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
+command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ags<SPACE>
 
 "==================================================
 "=  WHITESPACE
 "==================================================
 
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-function! TrimWhiteSpace()
-    %s/\s\+$//e
-  endfunction
-  autocmd BufWritePre     *.rb :call TrimWhiteSpace()
+"highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$/
+"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+"autocmd BufWinLeave * call clearmatches()
+"function! TrimWhiteSpace()
+    "%s/\s\+$//e
+  "endfunction
+  "autocmd BufWritePre     *.rb :call TrimWhiteSpace()
 
 " ======== grep ====================
 
@@ -374,16 +392,20 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-"let g:airline_theme='base16'
-"let g:airline_theme='papercolor'
-"let g:airline_theme='hybrid'
-let g:airline_theme='term'
-"let g:airline_theme='hybridline'
+let g:airline_theme='gotham'
 hi VertSplit ctermfg=000
-"let g:airline_theme='simple'
 
-let g:airline_powerline_fonts=1
+"let g:airline_powerline_fonts=1
 set t_Co=256
+
+"==================================================
+"=  NO AIRLINE
+"==================================================
+
+hi StatusLine ctermbg=000
+hi StatusLineNC ctermbg=000
+
+hi TabLine ctermfg=004
 
 "==================================================
 "= VIM GO
@@ -399,7 +421,7 @@ let g:go_highlight_build_constraints = 1
 "==================================================
 "= QARGS
 "==================================================
-"
+
 command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
 function! QuickfixFilenames()
   " Building a hash ensures we get each buffer only once
@@ -427,10 +449,8 @@ nmap <C-c>r <Plug>SetTmuxVars
 nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
 
 "==================================================
-"= CONVENIENCE
+"= AGS
 "==================================================
 "
 
-"let g:ags_winheight = '20'
-"let g:ags_bufopenpos = 'left'
-"let g:ags_fileopenpos = 'right'
+let g:ags_winheight = '20'
