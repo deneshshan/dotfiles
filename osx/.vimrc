@@ -1,3 +1,4 @@
+
 "The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "set showcmd		" Show (partial) command in status line.
@@ -40,38 +41,40 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vimwiki/vimwiki'
-"Plugin 'craigemery/vim-autotag'
+Plugin 'craigemery/vim-autotag'
 Plugin 'christoomey/vim-system-copy'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
 Plugin 'Shutnik/jshint2.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gabesoft/vim-ags'
 Plugin 'schickling/vim-bufonly'
-"Plugin 'lilydjwg/colorizer'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'pangloss/vim-javascript'
-"Plugin 'jelera/vim-javascript-syntax'
 Plugin 'tpope/vim-dispatch'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'tyrannicaltoucan/vim-deep-space'
 Plugin 'ryanoasis/vim-devicons'
-"Plugin 'neomake/neomake'
+Plugin 'neomake/neomake'
+Plugin 'scrooloose/syntastic'
+Plugin 'rust-lang/rust.vim'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 filetype plugin indent on
 
 " ===================================================
-" =  YOUCOMPLETEME
+" =  SUPERTAB
 " ===================================================
- 
-" These are the tweaks I apply to YCM's config, you don't need them but they might help.
-" YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
-"let g:ycm_add_preview_to_completeopt=0
-"let g:ycm_confirm_extra_conf=0
-"set completeopt-=preview
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" ===================================================
+" =  DEOPLETE
+" ===================================================
+
+let g:deoplete#enable_at_startup = 1
 
 " ===================================================
 " =  NERDTREE
@@ -107,11 +110,6 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-"colorscheme base16-ocean
-"colorscheme zellner
-"colorscheme ron
-"colorscheme elflord
-"colorscheme slate
 colorscheme gotham
 set number
 
@@ -188,33 +186,12 @@ function! MyFoldText()
 endfunction
 
 " ===================================================
-" =  COLOURS
+" =  SEARCH
 " ===================================================
 
-highlight Folded ctermbg=008
-"highlight FoldColumn ctermbg=000 ctermfg=007
-highlight Search ctermbg=016 ctermfg=005
-"highlight Visual ctermbg=004
-"highlight StatusLine ctermbg=007 ctermfg=000
-"highlight StatusLineNC ctermbg=000 ctermfg=007
-highlight Pmenu ctermbg=000
-"highlight Pmenu ctermbg=007
-"highlight PmenuSel ctermbg=002 ctermfg=000
-"highlight Directory guifg=#FF0000 ctermfg=red
-"hi DiffAdd	ctermbg=4 ctermfg=007
-"hi DiffChange	ctermbg=002 ctermfg=000
-"hi DiffDelete	cterm=bold ctermfg=000 ctermbg=6
-"hi DiffText	cterm=bold ctermbg=1 ctermfg=20
-"hi VertSplit ctermfg=002
-"hi LineNr ctermfg=002
 
 set hlsearch
 nnoremap <leader>h :noh<CR>
-
-" ================== Long Lines =====================
-"
-
-"match ErrorMsg '\%>100v.\+'
 
 " ================ Turn Off Swap Files ==============
 
@@ -262,21 +239,13 @@ nmap <up> :bp<CR><Esc><Esc>
 nmap <down> :bn<CR><Esc>
 nmap <leader>q :bp <BAR> bd #<CR>
 
-"===================================================
-"=  CWINDOW
-"===================================================
-
-"nmap <c-down> :cn<CR>
-"nmap <c-up> :cp<CR>
-
-
 " =========== Wiki ==========
 "
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
-let vimwiki_path='/Users/deneshshan/vimwiki'
-let vimwiki_export_path='/Users/deneshshan/vimwiki_html'
+let vimwiki_path='/Users/denesh/vimwiki'
+let vimwiki_export_path='/Users/denesh/vimwiki_html'
 let wiki_settings={
 \ 'template_path': vimwiki_export_path.'vimwiki-assets/',
 \ 'template_default': 'default',
@@ -286,7 +255,7 @@ let wiki_settings={
 \ 'js':'javascript'
 \ }}
 
-let wikis=["_zappistore", "_personal"]
+let wikis=["_zappi", "_personal"]
 let g:vimwiki_list = []
 for wiki_name in wikis
     let wiki=copy(wiki_settings)
@@ -319,9 +288,7 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-"let g:rspec_command = 'Dispatch rspec {spec}'
-"let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
-let g:rspec_command = 'call Send_to_Tmux("test {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("reset && test {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
 
 " ===== clipboard options ==
@@ -356,67 +323,26 @@ if executable('ag')
 endif
 
 " bind K to grep word under cursor
-nnoremap K :Ags '<C-R><C-W>' --ignore=cscope.out<CR>
+nnoremap K :Ags <C-R><C-W><CR>
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ags<SPACE>
 
 "==================================================
-"=  WHITESPACE
-"==================================================
-
-"highlight ExtraWhitespace ctermbg=red guibg=red
-"match ExtraWhitespace /\s\+$/
-"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-"autocmd BufWinLeave * call clearmatches()
-"function! TrimWhiteSpace()
-    "%s/\s\+$//e
-  "endfunction
-  "autocmd BufWritePre     *.rb :call TrimWhiteSpace()
-
-" ======== grep ====================
-
-"map <F4> :execute "grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-dir=logs --exclude=tags . -e " . expand("<cword>") . " " <bar> cwindow<CR>
-"map <F4> :command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!<CR>
-
-"==================================================
-"=  AIRLINE
-"==================================================
-
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-let g:airline_theme='gotham'
-hi VertSplit ctermfg=000
-
-"let g:airline_powerline_fonts=1
-set t_Co=256
-
-"==================================================
 "=  NO AIRLINE
 "==================================================
 
-hi StatusLine ctermbg=000
-hi StatusLineNC ctermbg=000
+hi Folded ctermbg=008
+hi FoldColumn ctermbg=008
+hi Search ctermbg=016 ctermfg=003
 
-hi TabLine ctermfg=004
+hi StatusLine ctermbg=008
+hi StatusLineNC ctermbg=008
+hi VertSplit ctermbg=008 ctermfg=000
+hi LineNr ctermbg=008
 
-"==================================================
-"= VIM GO
-"==================================================
-"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+hi TabLine ctermfg=004 ctermbg=008
 
 "==================================================
 "= QARGS
