@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # clint slack env variables
 export ENABLE_SLACK="true"
@@ -76,16 +76,16 @@ export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/T029T8PL3/B0HRJ9QSE/f
 #
 # Example aliases
 alias ll="ls -al"
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="nvim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias tmuxconfig="vim ~/.tmux.conf"
-alias vimconfig="vim ~/.vimrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias tmuxconfig="nvim ~/.tmux.conf"
+alias vimconfig="nvim ~/.vimrc"
 
 # directory navigation
-alias store="cd /Users/deneshshan/Documents/work/zappi/zappistore"
-alias dc="cd /Users/deneshshan/Documents/work/zappi/data-collector"
-alias clnt="cd /Users/deneshshan/Documents/work/zappi/clint"
+alias store="cd /Users/denesh/Documents/work/zappi/zappistore"
+alias dc="cd /Users/denesh/Documents/work/zappi/data-collector"
+alias clnt="cd /Users/denesh/Documents/work/zappi/clint"
 
 # rails testing with zeus
 alias test="zeus test"
