@@ -126,7 +126,7 @@ function! ToggleWrap()
  endif
 endfunction
 
-set wrap
+set nowrap
 nnoremap <leader>w :call ToggleWrap()<CR>
 
 "==================================================
