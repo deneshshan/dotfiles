@@ -52,7 +52,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-dispatch'
 Plugin 'whatyouhide/vim-gotham'
-Plugin 'tyrannicaltoucan/vim-deep-space'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'neomake/neomake'
 Plugin 'scrooloose/syntastic'
@@ -110,6 +109,8 @@ set background=dark
 "==================================================
 "= COLOUR SCHEME
 "==================================================
+
+"set termguicolors
 
 colorscheme gotham
 set number

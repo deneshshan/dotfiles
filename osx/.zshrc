@@ -106,7 +106,8 @@ export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
-alias nv='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+alias nv='nvim'
+#alias tmux='env TERM=xterm-256color tmux'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
