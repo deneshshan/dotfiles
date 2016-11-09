@@ -108,10 +108,7 @@ alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
 alias nv='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 
-if ! [ -n "$TMUX" ]; then
-  #$(rbenv init)
-  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-fi
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
