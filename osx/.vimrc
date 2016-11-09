@@ -42,7 +42,6 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vimwiki/vimwiki'
 Plugin 'craigemery/vim-autotag'
-Plugin 'christoomey/vim-system-copy'
 Plugin 'mattn/emmet-vim'
 Plugin 'Shutnik/jshint2.vim'
 Plugin 'jlanzarotta/bufexplorer'
@@ -60,6 +59,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'tpope/vim-repeat'
+Plugin 'svermeulen/vim-easyclip'
 
 call vundle#end()
 filetype plugin indent on
