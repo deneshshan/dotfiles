@@ -112,6 +112,11 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
+set termguicolors
+
+"colorscheme base16-ocean 
+"colorscheme hilal
+"colorscheme deep-space
 colorscheme gotham
 set number
 
@@ -141,7 +146,7 @@ set cursorcolumn
 " =  FOLDING
 " ===================================================
 
-set foldenable
+"set foldenable
 "set foldmethod=exprt
 "set foldlevel=1
 "set foldnestmax=2
@@ -332,19 +337,12 @@ command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ags<SPACE>
 
 "==================================================
-"=  NO AIRLINE
+"=  CUSTOM COLOUR SCHEME CHANGES
 "==================================================
 
-hi Folded ctermbg=008
-hi FoldColumn ctermbg=008
-hi Search ctermbg=016 ctermfg=003
-
-hi StatusLine ctermbg=008
-hi StatusLineNC ctermbg=008
-hi VertSplit ctermbg=008 ctermfg=000
-hi LineNr ctermbg=008
-
-hi TabLine ctermfg=004 ctermbg=008
+" GOTHAM
+hi VertSplit guifg=#0c1014
+hi Search guifg=#0c1014 guibg=#1c5465
 
 "==================================================
 "= QARGS
@@ -387,47 +385,13 @@ let g:ags_winheight = '20'
 "= LIGHTLINE
 "==================================================
 "
+augroup reload_vimrc
+  autocmd!
+  autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
+augroup END
+
 let g:lightline = {
       \ 'colorscheme': 'gotham',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
-      \   'readonly': 'LightlineReadonly',
-      \   'modified': 'LightlineModified'
-      \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
-
-function! LightlineReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightlineFugitive()
-    if exists("*fugitive#head")
-    let branch = fugitive#head()
-    return branch !=# '' ? ''.branch : ''
-  endif
-  return ''
-endfunction
-
-function! LightlineModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
