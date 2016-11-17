@@ -53,15 +53,19 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-dispatch'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'tyrannicaltoucan/vim-deep-space'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'neomake/neomake'
 Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
-Plugin 'Shougo/deoplete.nvim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'itchyny/lightline.vim'
+Plugin 'kchmck/vim-coffee-script'
+
+if has('nvim')
+  Plugin 'ryanoasis/vim-devicons'
+  Plugin 'neomake/neomake'
+  Plugin 'Shougo/deoplete.nvim'
+endif
 
 call vundle#end()
 filetype plugin indent on
@@ -112,7 +116,9 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-set termguicolors
+if has('nvim')
+  set termguicolors
+endif
 
 "colorscheme base16-ocean 
 "colorscheme hilal
