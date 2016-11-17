@@ -21,3 +21,5 @@ let g:rspec_runner = "os_x_iterm2"
 let g:rspec_command="zeus test {spec}"
 
 let g:webdevicons_enable = 0
+
+let g:airline#extensions#tabline#enabled = 1

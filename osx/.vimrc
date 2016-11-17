@@ -58,13 +58,16 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
-Plugin 'itchyny/lightline.vim'
 Plugin 'kchmck/vim-coffee-script'
 
 if has('nvim')
+  Plugin 'itchyny/lightline.vim'
   Plugin 'ryanoasis/vim-devicons'
   Plugin 'neomake/neomake'
   Plugin 'Shougo/deoplete.nvim'
+else
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
 endif
 
 call vundle#end()
@@ -348,8 +351,11 @@ nnoremap \ :Ags<SPACE>
 
 " GOTHAM
 hi VertSplit guifg=#0c1014
-hi Search guibg=#1c5465 guifg=#f0e591
 hi Folded guibg=#0c1014
+
+if has('nvim')
+  hi Search guibg=#1c5465 guifg=#f0e591
+endif
 
 "==================================================
 "= QARGS
@@ -397,8 +403,10 @@ augroup reload_vimrc
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-let g:lightline = {
-      \ 'colorscheme': 'gotham',
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+if has('nvim')
+  let g:lightline = {
+        \ 'colorscheme': 'gotham',
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '', 'right': '' }
+        \ }
+endif
