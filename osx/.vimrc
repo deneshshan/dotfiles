@@ -342,7 +342,8 @@ nnoremap \ :Ags<SPACE>
 
 " GOTHAM
 hi VertSplit guifg=#0c1014
-hi Search guifg=#0c1014 guibg=#1c5465
+hi Search guibg=#1c5465 guifg=#f0e591
+hi Folded guibg=#0c1014
 
 "==================================================
 "= QARGS
