@@ -1,6 +1,6 @@
 set guioptions=
 
-set guifont=Ubuntu\ Mono\ derivative\ Powerline:h10
+set guifont=Roboto\ Mono\ for\ Powerline:h10
 set linespace=1
 
 set hlsearch
@@ -9,7 +9,7 @@ set hlsearch
 autocmd! GUIEnter * set vb t_vb=
 
 " cursor column + line
-set rnu
+"set rnu
 set cursorcolumn
 set cursorline
 
