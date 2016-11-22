@@ -25,3 +25,7 @@ let g:rspec_command="zeus test {spec}"
 let g:webdevicons_enable = 0
 
 let g:airline#extensions#tabline#enabled = 1
+
+" Custom highlighting
+hi FoldColumn guibg=#11151c
+hi Search guibg=#11151c guifg=#f0e591
