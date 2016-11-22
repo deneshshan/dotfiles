@@ -88,9 +88,9 @@ alias dc="cd /Users/denesh/Documents/work/zappi/data-collector"
 alias clnt="cd /Users/denesh/Documents/work/zappi/clint"
 
 # rails testing with zeus
-alias test="zeus test"
-alias server="zeus server"
-alias console="zeus console"
+alias ztest="zeus test"
+alias zserver="zeus server"
+alias zconsole="zeus console"
 alias zrake="zeus rake"
 alias zst="reset && zeus start"
 alias be="bundle exec"
