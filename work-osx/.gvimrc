@@ -1,7 +1,9 @@
 set guioptions=
 
-set guifont=Roboto\ Mono\ for\ Powerline:h10
-set linespace=1
+set macligatures
+set guifont=Fira\ Code:h10
+"set guifont=Roboto\ Mono\ for\ Powerline:h10
+"set linespace=1
 
 set hlsearch
 
