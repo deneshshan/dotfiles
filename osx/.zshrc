@@ -111,6 +111,8 @@ alias tmux="env TERM=xterm-256color tmux"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
 stty start undef stop undef
