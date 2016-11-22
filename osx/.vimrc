@@ -128,7 +128,8 @@ endif
 "colorscheme hilal
 "colorscheme deep-space
 colorscheme gotham
-set number
+"set number
+set rnu
 
 "==================================================
 "= WRAPPING
