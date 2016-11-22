@@ -20,7 +20,7 @@ let g:ags_winheight = '20'
 
 " vim-rspec
 let g:rspec_runner = "os_x_iterm2"
-let g:rspec_command="zeus test {spec}"
+let g:rspec_command="reset && zeus test {spec}"
 
 let g:webdevicons_enable = 0
 
