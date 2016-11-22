@@ -59,6 +59,7 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'elixir-lang/vim-elixir'
 
 if has('nvim')
   Plugin 'itchyny/lightline.vim'
