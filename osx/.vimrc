@@ -409,4 +409,6 @@ if has('nvim')
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
         \ }
+else
+  let g:airline_powerline_fonts = 1
 endif
