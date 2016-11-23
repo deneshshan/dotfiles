@@ -11,7 +11,7 @@ set hlsearch
 autocmd! GUIEnter * set vb t_vb=
 
 " cursor column + line
-"set rnu
+set number
 set cursorcolumn
 set cursorline
 
