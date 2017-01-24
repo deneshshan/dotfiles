@@ -60,15 +60,14 @@ Plugin 'tpope/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'sbl/scvim'
 
-if has('nvim')
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'ryanoasis/vim-devicons'
-  Plugin 'neomake/neomake'
-  Plugin 'Shougo/deoplete.nvim'
-else
+if has('gui_running')
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
+else
+  Plugin 'itchyny/lightline.vim'
+  Plugin 'ryanoasis/vim-devicons'
 endif
 
 call vundle#end()
@@ -119,10 +118,6 @@ set background=dark
 "==================================================
 "= COLOUR SCHEME
 "==================================================
-
-if has('nvim')
-  set termguicolors
-endif
 
 "colorscheme base16-ocean 
 "colorscheme hilal
@@ -315,7 +310,7 @@ set clipboard=unnamed
 
 " ===== cursor =============
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 "==================================================
 "=  CTRLP
@@ -352,12 +347,17 @@ nnoremap \ :Ags<SPACE>
 "==================================================
 
 " GOTHAM
-hi VertSplit guifg=#0c1014
-hi Folded guibg=#0c1014
+hi Folded ctermbg=008
+hi FoldColumn ctermbg=008
+hi Search ctermbg=016 ctermfg=003
 
-if has('nvim')
-  hi Search guibg=#1c5465 guifg=#f0e591
-endif
+hi StatusLine ctermbg=008
+hi StatusLineNC ctermbg=008
+hi VertSplit ctermbg=008 ctermfg=000
+hi LineNr ctermbg=008
+
+hi TabLine ctermfg=004 ctermbg=008
+
 
 "==================================================
 "= QARGS
@@ -405,12 +405,12 @@ augroup reload_vimrc
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-if has('nvim')
+if has('gui_running')
+  let g:airline_powerline_fonts = 1
+else
   let g:lightline = {
         \ 'colorscheme': 'gotham',
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
         \ }
-else
-  let g:airline_powerline_fonts = 1
 endif
