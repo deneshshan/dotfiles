@@ -1,7 +1,7 @@
 set guioptions=
 
 set macligatures
-set guifont=Fira\ Code:h10
+set guifont=Fira\ Code\ Medium:h10
 
 set hlsearch
 
@@ -26,5 +26,7 @@ let g:webdevicons_enable = 0
 let g:airline#extensions#tabline#enabled = 1
 
 " Custom highlighting
+hi VertSplit guifg=#0c1014
+hi Folded guibg=#0c1014
 hi FoldColumn guibg=#11151c
 hi Search guibg=#11151c guifg=#f0e591
