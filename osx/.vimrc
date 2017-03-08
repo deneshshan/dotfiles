@@ -119,10 +119,13 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
+
 "colorscheme base16-ocean 
 "colorscheme hilal
 "colorscheme deep-space
-colorscheme gotham
+"colorscheme gotham
 "set number
 set rnu
 
@@ -347,16 +350,16 @@ nnoremap \ :Ags<SPACE>
 "==================================================
 
 " GOTHAM
-hi Folded ctermbg=008
-hi FoldColumn ctermbg=008
+"hi Folded ctermbg=008
+"hi FoldColumn ctermbg=008
 hi Search ctermbg=016 ctermfg=003
 
-hi StatusLine ctermbg=008
-hi StatusLineNC ctermbg=008
-hi VertSplit ctermbg=008 ctermfg=000
-hi LineNr ctermbg=008
+"hi StatusLine ctermbg=008
+"hi StatusLineNC ctermbg=008
+"hi VertSplit ctermbg=008 ctermfg=000
+"hi LineNr ctermbg=008
 
-hi TabLine ctermfg=004 ctermbg=008
+"hi TabLine ctermfg=004 ctermbg=008
 
 
 "==================================================
