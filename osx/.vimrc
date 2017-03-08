@@ -271,7 +271,7 @@ let wiki_settings={
 \ 'js':'javascript'
 \ }}
 
-let wikis=["_zappi", "_personal"]
+let wikis=["_personal"]
 let g:vimwiki_list = []
 for wiki_name in wikis
     let wiki=copy(wiki_settings)
