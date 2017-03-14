@@ -405,7 +405,7 @@ if has('gui_running')
   let g:airline_powerline_fonts = 1
 else
   let g:lightline = {
-        \ 'colorscheme': '16color',
+        \ 'colorscheme': 'seashells_edit',
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
         \ }
