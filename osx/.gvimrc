@@ -10,8 +10,6 @@ autocmd! GUIEnter * set vb t_vb=
 
 " cursor column + line
 set number
-set nocursorcolumn
-set nocursorline
 set cursorline
 
 " AGS 
