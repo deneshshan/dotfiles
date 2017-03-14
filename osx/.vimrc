@@ -349,7 +349,7 @@ hi Search ctermbg=016 ctermfg=003
 
 "hi StatusLine ctermbg=008
 "hi StatusLineNC ctermbg=008
-"hi VertSplit ctermbg=008 ctermfg=000
+hi VertSplit ctermbg=016 ctermfg=002
 "hi LineNr ctermbg=008
 
 "hi TabLine ctermfg=004 ctermbg=008
@@ -405,7 +405,7 @@ if has('gui_running')
   let g:airline_powerline_fonts = 1
 else
   let g:lightline = {
-        \ 'colorscheme': 'jellybeans',
+        \ 'colorscheme': '16color',
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
         \ }
