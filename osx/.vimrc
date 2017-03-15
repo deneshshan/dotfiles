@@ -33,34 +33,36 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'jgdavey/tslime.vim'
-Plugin 'thoughtbot/vim-rspec'
+"Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-unimpaired'
+"Plugin 'tpope/vim-rails'
+"Plugin 'tpope/vim-unimpaired'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vimwiki/vimwiki'
-Plugin 'craigemery/vim-autotag'
-Plugin 'mattn/emmet-vim'
-Plugin 'Shutnik/jshint2.vim'
+"Plugin 'craigemery/vim-autotag'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'Shutnik/jshint2.vim'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'gabesoft/vim-ags'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'gabesoft/vim-ags'
 Plugin 'schickling/vim-bufonly'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-dispatch'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'tyrannicaltoucan/vim-deep-space'
-Plugin 'scrooloose/syntastic'
-Plugin 'rust-lang/rust.vim'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'svermeulen/vim-easyclip'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'sbl/scvim'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'tpope/vim-dispatch'
+"Plugin 'whatyouhide/vim-gotham'
+"Plugin 'tyrannicaltoucan/vim-deep-space'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'rust-lang/rust.vim'
+"Plugin 'chriskempson/base16-vim'
+"Plugin 'tpope/vim-repeat'
+"Plugin 'svermeulen/vim-easyclip'
+"Plugin 'kchmck/vim-coffee-script'
+"Plugin 'elixir-lang/vim-elixir'
+"Plugin 'sbl/scvim'
+"Plugin 'munshkr/vim-tidal'
+Plugin 'fatih/vim-go'
 
 if has('gui_running')
   Plugin 'vim-airline/vim-airline'
@@ -78,12 +80,6 @@ filetype plugin indent on
 " ===================================================
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" ===================================================
-" =  DEOPLETE
-" ===================================================
-
-let g:deoplete#enable_at_startup = 1
 
 " ===================================================
 " =  NERDTREE
@@ -126,7 +122,7 @@ colorscheme hybrid
 "colorscheme hilal
 "colorscheme deep-space
 "colorscheme gotham
-"set number
+set number
 set rnu
 
 "==================================================
@@ -349,7 +345,7 @@ hi Search ctermbg=016 ctermfg=003
 
 "hi StatusLine ctermbg=008
 "hi StatusLineNC ctermbg=008
-hi VertSplit ctermbg=016 ctermfg=002
+hi VertSplit ctermbg=236 ctermfg=002
 "hi LineNr ctermbg=008
 
 "hi TabLine ctermfg=004 ctermbg=008
@@ -411,3 +407,8 @@ else
         \ }
 endif
 
+"==================================================
+"= LOCALLEADER TIDAL
+"==================================================
+"
+let maplocalleader=","
