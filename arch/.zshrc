@@ -91,3 +91,6 @@ alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
 alias nv='nvim'
 alias tmux="env TERM=xterm-256color tmux"
+
+# MPD daemon start (if no other user instance exists)
+[ ! -s ~/.config/mpd/pid ] && mpd .config/mpd/mpd.conf

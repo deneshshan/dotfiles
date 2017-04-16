@@ -52,12 +52,14 @@ Plug 'scrooloose/syntastic'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-repeat'
+Plug 'kocakosm/hilal'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'AlessandroYorba/Monrovia'
 
 call plug#end()
 filetype plugin indent on
@@ -112,8 +114,8 @@ set termguicolors
 
 "colorscheme base16-ocean
 "colorscheme hilal
-colorscheme deep-space
-"colorscheme gotham
+"colorscheme deep-space
+colorscheme monrovia
 set number
 set rnu
 
@@ -136,8 +138,8 @@ nnoremap <leader>w :call ToggleWrap()<CR>
 "= CURSOR
 "===================================================
 
-set cursorline
-set cursorcolumn
+set nocursorline
+set nocursorcolumn
 
 " ===================================================
 " =  FOLDING
@@ -248,27 +250,27 @@ nmap <leader>q :bp <BAR> bd #<CR>
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
-let vimwiki_path='/Users/denesh/vimwiki'
-let vimwiki_export_path='/Users/denesh/vimwiki_html'
-let wiki_settings={
-\ 'template_path': vimwiki_export_path.'vimwiki-assets/',
-\ 'template_default': 'default',
-\ 'template_ext': '.html',
-\ 'auto_export': 0,
-\ 'nested_syntaxes': {
-\ 'js':'javascript'
-\ }}
+"let vimwiki_path='/Users/denesh/vimwiki'
+"let vimwiki_export_path='/Users/denesh/vimwiki_html'
+"let wiki_settings={
+"\ 'template_path': vimwiki_export_path.'vimwiki-assets/',
+"\ 'template_default': 'default',
+"\ 'template_ext': '.html',
+"\ 'auto_export': 0,
+"\ 'nested_syntaxes': {
+"\ 'js':'javascript'
+"\ }}
 
-let wikis=["_zappi", "_personal"]
-let g:vimwiki_list = []
-for wiki_name in wikis
-  let wiki=copy(wiki_settings)
-  let wiki.path = vimwiki_path.wiki_name.'/'
-  let wiki.path_html = vimwiki_export_path.wiki_name.'/'
-  let wiki.diary_index = 'index'
-  let wiki.diary_rel_path = 'diary/'
-  call add(g:vimwiki_list, wiki)
-endfor
+"let wikis=["_personal"]
+"let g:vimwiki_list = []
+"for wiki_name in wikis
+  "let wiki=copy(wiki_settings)
+  "let wiki.path = vimwiki_path.wiki_name.'/'
+  "let wiki.path_html = vimwiki_export_path.wiki_name.'/'
+  "let wiki.diary_index = 'index'
+  "let wiki.diary_rel_path = 'diary/'
+  "call add(g:vimwiki_list, wiki)
+"endfor
 
 " ========== Specs ==========
 
@@ -341,9 +343,7 @@ nnoremap \ :Ags<SPACE>
 "hi VertSplit guifg=#0c1014
 hi Folded guibg=#0c1014
 
-if has('nvim')
 hi Search guibg=#1c5465 guifg=#f0e591
-endif
 
 "==================================================
 "= QARGS
@@ -391,7 +391,7 @@ augroup END
 "= AIRLINE
 "==================================================
 "
-
+let g:airline_theme = "deep_space"
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep = '»'
-let g:airline_right_sep = '«'
+"let g:airline_left_sep = '»'
+"let g:airline_right_sep = '«'
