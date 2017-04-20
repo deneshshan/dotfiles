@@ -60,8 +60,8 @@ Plugin 'airblade/vim-gitgutter'
 "Plugin 'svermeulen/vim-easyclip'
 "Plugin 'kchmck/vim-coffee-script'
 "Plugin 'elixir-lang/vim-elixir'
-"Plugin 'sbl/scvim'
-"Plugin 'munshkr/vim-tidal'
+Plugin 'sbl/scvim'
+Plugin 'munshkr/vim-tidal'
 Plugin 'fatih/vim-go'
 
 if has('gui_running')
