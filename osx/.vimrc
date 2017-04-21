@@ -33,42 +33,43 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'jgdavey/tslime.vim'
-Plugin 'thoughtbot/vim-rspec'
+"Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-unimpaired'
+"Plugin 'tpope/vim-rails'
+"Plugin 'tpope/vim-unimpaired'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vimwiki/vimwiki'
-Plugin 'craigemery/vim-autotag'
-Plugin 'mattn/emmet-vim'
-Plugin 'Shutnik/jshint2.vim'
+"Plugin 'craigemery/vim-autotag'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'Shutnik/jshint2.vim'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'gabesoft/vim-ags'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'gabesoft/vim-ags'
 Plugin 'schickling/vim-bufonly'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-dispatch'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'tyrannicaltoucan/vim-deep-space'
-Plugin 'scrooloose/syntastic'
-Plugin 'rust-lang/rust.vim'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'svermeulen/vim-easyclip'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'elixir-lang/vim-elixir'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'tpope/vim-dispatch'
+"Plugin 'whatyouhide/vim-gotham'
+"Plugin 'tyrannicaltoucan/vim-deep-space'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'rust-lang/rust.vim'
+"Plugin 'chriskempson/base16-vim'
+"Plugin 'tpope/vim-repeat'
+"Plugin 'svermeulen/vim-easyclip'
+"Plugin 'kchmck/vim-coffee-script'
+"Plugin 'elixir-lang/vim-elixir'
+Plugin 'sbl/scvim'
+Plugin 'munshkr/vim-tidal'
+Plugin 'fatih/vim-go'
 
-if has('nvim')
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'ryanoasis/vim-devicons'
-  Plugin 'neomake/neomake'
-  Plugin 'Shougo/deoplete.nvim'
-else
+if has('gui_running')
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
+else
+  Plugin 'itchyny/lightline.vim'
+  Plugin 'ryanoasis/vim-devicons'
 endif
 
 call vundle#end()
@@ -79,12 +80,6 @@ filetype plugin indent on
 " ===================================================
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" ===================================================
-" =  DEOPLETE
-" ===================================================
-
-let g:deoplete#enable_at_startup = 1
 
 " ===================================================
 " =  NERDTREE
@@ -120,15 +115,14 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-if has('nvim')
-  set termguicolors
-endif
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
 
 "colorscheme base16-ocean 
 "colorscheme hilal
 "colorscheme deep-space
-colorscheme gotham
-"set number
+"colorscheme gotham
+set number
 set rnu
 
 "==================================================
@@ -145,13 +139,6 @@ endfunction
 
 set nowrap
 nnoremap <leader>w :call ToggleWrap()<CR>
-
-"==================================================
-"= CURSOR
-"===================================================
-
-set cursorline
-set cursorcolumn
 
 " ===================================================
 " =  FOLDING
@@ -273,7 +260,7 @@ let wiki_settings={
 \ 'js':'javascript'
 \ }}
 
-let wikis=["_zappi", "_personal"]
+let wikis=["_personal"]
 let g:vimwiki_list = []
 for wiki_name in wikis
     let wiki=copy(wiki_settings)
@@ -315,7 +302,7 @@ set clipboard=unnamed
 
 " ===== cursor =============
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 "==================================================
 "=  CTRLP
@@ -352,12 +339,17 @@ nnoremap \ :Ags<SPACE>
 "==================================================
 
 " GOTHAM
-hi VertSplit guifg=#0c1014
-hi Folded guibg=#0c1014
+"hi Folded ctermbg=008
+"hi FoldColumn ctermbg=008
+hi Search ctermbg=016 ctermfg=003
 
-if has('nvim')
-  hi Search guibg=#1c5465 guifg=#f0e591
-endif
+"hi StatusLine ctermbg=008
+"hi StatusLineNC ctermbg=008
+hi VertSplit ctermbg=236 ctermfg=002
+"hi LineNr ctermbg=008
+
+"hi TabLine ctermfg=004 ctermbg=008
+
 
 "==================================================
 "= QARGS
@@ -405,12 +397,18 @@ augroup reload_vimrc
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-if has('nvim')
+if has('gui_running')
+  let g:airline_powerline_fonts = 1
+else
   let g:lightline = {
-        \ 'colorscheme': 'gotham',
+        \ 'colorscheme': 'seashells_edit',
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
         \ }
-else
-  let g:airline_powerline_fonts = 1
 endif
+
+"==================================================
+"= LOCALLEADER TIDAL
+"==================================================
+"
+let maplocalleader=","

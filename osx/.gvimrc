@@ -1,7 +1,7 @@
 set guioptions=
 
 set macligatures
-set guifont=Fira\ Code:h10
+set guifont=Fira\ Code\ Medium:h10
 
 set hlsearch
 
@@ -10,8 +10,6 @@ autocmd! GUIEnter * set vb t_vb=
 
 " cursor column + line
 set number
-set nocursorcolumn
-set nocursorline
 set cursorline
 
 " AGS 
@@ -25,6 +23,19 @@ let g:webdevicons_enable = 0
 
 let g:airline#extensions#tabline#enabled = 1
 
+colorscheme hilal
+let g:airline_theme='deep_space'
+
+
 " Custom highlighting
+"hi VertSplit guifg=#0c1014
+hi Folded guibg=#0c1014
 hi FoldColumn guibg=#11151c
-hi Search guibg=#11151c guifg=#f0e591
+hi Search guifg=#11151c guibg=#f0e591
+hi Visual guibg=#232a36 guifg=#45afce
+
+augroup reload_gvimrc
+  autocmd!
+  autocmd bufwritepost $MYGVIMRC nested source $MYGVIMRC
+augroup END
+

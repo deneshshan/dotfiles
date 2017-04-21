@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # clint slack env variables
 export ENABLE_SLACK="true"
@@ -76,11 +76,11 @@ export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/T029T8PL3/B0HRJ9QSE/f
 #
 # Example aliases
 alias ll="ls -al"
-alias zshconfig="nvim ~/.zshrc"
+alias zshconfig="vim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
-alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias tmuxconfig="nvim ~/.tmux.conf"
-alias vimconfig="nvim ~/.vimrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
+alias tmuxconfig="vim ~/.tmux.conf"
+alias vimconfig="vim ~/.vimrc"
 
 # directory navigation
 alias store="cd /Users/denesh/Documents/work/zappi/zappistore"
@@ -106,7 +106,7 @@ export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
-alias nv='nvim'
+#alias nv='vim'
 alias tmux="env TERM=xterm-256color tmux"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
