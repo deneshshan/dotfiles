@@ -343,8 +343,6 @@ nnoremap \ :Ags<SPACE>
 "hi VertSplit guifg=#0c1014
 hi Folded guibg=#0c1014
 
-hi Search guibg=#1c5465 guifg=#f0e591
-
 "==================================================
 "= QARGS
 "==================================================
@@ -388,10 +386,12 @@ autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
 "==================================================
-"= AIRLINE
+"= LIGHTLINE
 "==================================================
 "
-let g:airline_theme = "deep_space"
-let g:airline_powerline_fonts = 1
-"let g:airline_left_sep = '»'
-"let g:airline_right_sep = '«'
+let g:lightline = {
+      \ 'colorscheme': 'Dracula',
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
