@@ -20,6 +20,13 @@
 					"istime": true
 				}
 			},
+      {
+        "function": "powerline.segments.common.players.spotify_apple_script",
+        "name": "player",
+        "args": {
+          "format": "{state_symbol} {title}"
+        }
+      },
 			{
 				"function": "powerline.segments.common.net.hostname"
 			}
