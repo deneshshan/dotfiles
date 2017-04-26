@@ -69,39 +69,36 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (Seashell Edit)
+# Colors (Deep space dark)
 colors:
   # Default colors
   primary:
-    background: '0x071a24'
-    foreground: '0x9ee5d3'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x061923'
-    cursor: '0xfeaf3c'
+    # hard contrast: background = '0x1d2021'
+    background: '0x1e2834'
+    # soft contrast: background = '0x32302f'
+    foreground: '0x9aa7bd'
 
   # Normal colors
   normal:
-    black:   '0x1d495f'
-    red:     '0xdc662e'
-    green:   '0x008eab'
-    yellow:  '0xfeaf3c'
-    blue:    '0x265b63'
-    magenta: '0x78dcf4'
-    cyan:    '0x60b2c2'
-    white:   '0xcbefb1'
+    black:   '0x000000'
+    red:     '0xb15e7c'
+    green:   '0x709d6c'
+    yellow:  '0xb5a262'
+    blue:    '0x608cc3'
+    magenta: '0x8f72bf'
+    cyan:    '0x56adb7'
+    white:   '0x323c4d'
 
   # Bright colors
   bright:
-    black:   '0x545e65'
-    red:     '0xdd9a8a'
-    green:   '0x749ea9'
-    yellow:  '0xfedaae'
-    blue:    '0x0cc7e4'
-    magenta: '0xc7e8f2'
-    cyan:    '0x98b9c1'
-    white:   '0xe8ffd7'
+    black:   '0x2a3341'
+    red:     '0xb15e7c'
+    green:   '0x709d6c'
+    yellow:  '0xb5a262'
+    blue:    '0x608cc3'
+    magenta: '0x8f72bf'
+    cyan:    '0x56adb7'
+    white:   '0xffffff'
 
 # Visual Bell
 #
