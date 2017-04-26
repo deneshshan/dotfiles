@@ -23,7 +23,7 @@ let g:webdevicons_enable = 0
 
 let g:airline#extensions#tabline#enabled = 1
 
-colorscheme hilal
+colorscheme monrovia
 let g:airline_theme='deep_space'
 
 
@@ -31,7 +31,7 @@ let g:airline_theme='deep_space'
 "hi VertSplit guifg=#0c1014
 hi Folded guibg=#0c1014
 hi FoldColumn guibg=#11151c
-hi Search guifg=#11151c guibg=#f0e591
+"hi Search guifg=#11151c guibg=#f0e591
 hi Visual guibg=#232a36 guifg=#45afce
 
 augroup reload_gvimrc
