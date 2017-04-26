@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # clint slack env variables
 export ENABLE_SLACK="true"
@@ -81,6 +81,7 @@ alias zshreload="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias tmuxconfig="vim ~/.tmux.conf"
 alias vimconfig="vim ~/.vimrc"
+alias nvimconfig="nvim ~/.config/nvim/init.vim"
 
 # directory navigation
 alias store="cd /Users/denesh/Documents/work/zappi/zappistore"
@@ -104,6 +105,7 @@ alias burn="reset && task burndown.daily"
 export GOPATH='/Users/denesh/Documents/learning/go'
 export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
+alias vim="nvim"
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
 #alias nv='vim'
