@@ -23,43 +23,47 @@ endif
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 
 " ===================================================
 " =  PLUGINS
 " ===================================================
 
+"Plug 'Shutnik/jshint2.vim'
+"Plug 'craigemery/vim-autotag'
+"Plug 'ervandew/supertab'
+"Plug 'mattn/emmet-vim'
+"Plug 'pangloss/vim-javascript'
+"Plug 'tpope/vim-repeat'
+"Plug 'tpope/vim-unimpaired'
+Plug 'AlessandroYorba/Monrovia'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/vim-go'
+Plug 'gabesoft/vim-ags'
+Plug 'itchyny/lightline.vim'
+Plug 'jgdavey/tslime.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'kocakosm/hilal'
+Plug 'munshkr/vim-tidal'
+Plug 'rust-lang/rust.vim'
+Plug 'sbl/scvim'
+Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'ervandew/supertab'
-Plug 'jgdavey/tslime.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'vimwiki/vimwiki'
-Plug 'craigemery/vim-autotag'
-Plug 'mattn/emmet-vim'
-Plug 'Shutnik/jshint2.vim'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'gabesoft/vim-ags'
-Plug 'schickling/vim-bufonly'
-Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'scrooloose/syntastic'
-Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go'
-Plug 'tpope/vim-repeat'
-Plug 'kocakosm/hilal'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'vimwiki/vimwiki'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'junegunn/fzf'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'AlessandroYorba/Monrovia'
+Plug 'Shougo/echodoc.vim'
 
 call plug#end()
 filetype plugin indent on
@@ -113,9 +117,9 @@ set background=dark
 set termguicolors
 
 "colorscheme base16-ocean
-"colorscheme hilal
+colorscheme hilal
 "colorscheme deep-space
-colorscheme monrovia
+"colorscheme monrovia
 set number
 set rnu
 
@@ -197,7 +201,7 @@ endfunction
 
 
 set hlsearch
-nnoremap <leader>h :noh<CR>
+nnoremap <CR> :noh<CR>
 
 " ================ Turn Off Swap Files ==============
 
@@ -329,19 +333,11 @@ let g:ags_agcontext = 5
 endif
 
 " bind K to grep word under cursor
-nnoremap K :Ags <C-R><C-W><CR>
+"nnoremap K :Ags <C-R><C-W><CR>
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ags<SPACE>
-
-"==================================================
-"=  CUSTOM COLOUR SCHEME CHANGES
-"==================================================
-
-" GOTHAM
-"hi VertSplit guifg=#0c1014
-hi Folded guibg=#0c1014
 
 "==================================================
 "= QARGS
@@ -390,8 +386,35 @@ augroup END
 "==================================================
 "
 let g:lightline = {
-      \ 'colorscheme': 'Dracula',
+      \ 'colorscheme': 'molokai',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
+"==================================================
+"= VIM GO
+"==================================================
+"
+ 
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_extra_types = 1
 
+"==================================================
+"= LSP
+"==================================================
+"
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'go': ['go-langserver'],
+    \ }
+
+" Automatically start language servers.
+"let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>

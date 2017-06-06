@@ -22,33 +22,21 @@ endif
 " set the runtime path to include Vundle and initialize
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
 
 " ===================================================
 " =  PLUGINS
 " ===================================================
+call plug#begin('~/.vim/plugged')
 
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
 "Plugin 'ervandew/supertab'
-Plugin 'jgdavey/tslime.vim'
 "Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-fugitive'
 "Plugin 'tpope/vim-rails'
 "Plugin 'tpope/vim-unimpaired'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'vimwiki/vimwiki'
 "Plugin 'craigemery/vim-autotag'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Shutnik/jshint2.vim'
-Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'gabesoft/vim-ags'
-Plugin 'schickling/vim-bufonly'
-Plugin 'airblade/vim-gitgutter'
 "Plugin 'pangloss/vim-javascript'
 "Plugin 'tpope/vim-dispatch'
 "Plugin 'whatyouhide/vim-gotham'
@@ -60,19 +48,31 @@ Plugin 'airblade/vim-gitgutter'
 "Plugin 'svermeulen/vim-easyclip'
 "Plugin 'kchmck/vim-coffee-script'
 "Plugin 'elixir-lang/vim-elixir'
-Plugin 'sbl/scvim'
-Plugin 'munshkr/vim-tidal'
-Plugin 'fatih/vim-go'
+ 
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'jgdavey/tslime.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vimwiki/vimwiki'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'schickling/vim-bufonly'
+Plug 'airblade/vim-gitgutter'
+Plug 'sbl/scvim'
+Plug 'munshkr/vim-tidal'
+Plug 'fatih/vim-go'
 
 if has('gui_running')
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'AlessandroYorba/Monrovia'
 else
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'ryanoasis/vim-devicons'
+  Plug 'itchyny/lightline.vim'
+  Plug 'ryanoasis/vim-devicons'
 endif
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 " ===================================================

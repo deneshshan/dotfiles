@@ -5,7 +5,10 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="xiong-chiamiov-plus"
+# jnrowe
+# robbyrussell
+# kardan
+ZSH_THEME="norm"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +48,7 @@ ZSH_THEME="xiong-chiamiov-plus"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,11 +79,11 @@ export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/T029T8PL3/B0HRJ9QSE/f
 #
 # Example aliases
 alias ll="ls -al"
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="nvim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias tmuxconfig="vim ~/.tmux.conf"
-alias vimconfig="vim ~/.vimrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias tmuxconfig="nvim ~/.tmux.conf"
+alias vimconfig="nvim ~/.vimrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 
 # directory navigation
@@ -102,10 +105,12 @@ alias next="reset && task next"
 alias add="task add"
 alias burn="reset && task burndown.daily"
 
+alias dirtsamples="cd ~/Library/Application\ Support/SuperCollider/downloaded-quarks/Dirt-Samples"
+
 export GOPATH='/Users/denesh/Documents/learning/go'
 export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 
-alias vim="nvim"
+#alias vim="nvim"
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
 #alias nv='vim'
