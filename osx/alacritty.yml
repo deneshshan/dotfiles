@@ -69,36 +69,36 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (Deep space dark)
+# Colors (hilal)
 colors:
   # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x1e2834'
+    background: '0x14171a'
     # soft contrast: background = '0x32302f'
-    foreground: '0x9aa7bd'
+    foreground: '0x3290a0'
 
   # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0xb15e7c'
-    green:   '0x709d6c'
-    yellow:  '0xb5a262'
+    black:   '0x14171a'
+    red:     '0xb36995'
+    green:   '0x1c4e5a'
+    yellow:  '0xbdbca6'
     blue:    '0x608cc3'
-    magenta: '0x8f72bf'
-    cyan:    '0x56adb7'
-    white:   '0x323c4d'
+    magenta: '0x3290a0'
+    cyan:    '0x79b3a8'
+    white:   '0xc0c6cb'
 
   # Bright colors
   bright:
-    black:   '0x2a3341'
-    red:     '0xb15e7c'
-    green:   '0x709d6c'
-    yellow:  '0xb5a262'
-    blue:    '0x608cc3'
-    magenta: '0x8f72bf'
-    cyan:    '0x56adb7'
-    white:   '0xffffff'
+    black:   '0x404f59'
+    red:     '0xf62d73'
+    green:   '0x3290a5'
+    yellow:  '0xf8f7da'
+    blue:    '0x0b6085'
+    magenta: '0x6bd9ed'
+    cyan:    '0x9be4e6'
+    white:   '0xc0c6cb'
 
 # Visual Bell
 #
