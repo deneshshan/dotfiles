@@ -107,8 +107,10 @@ alias burn="reset && task burndown.daily"
 
 alias dirtsamples="cd ~/Library/Application\ Support/SuperCollider/downloaded-quarks/Dirt-Samples"
 
+alias nv="nvim"
+
 export GOPATH='/Users/denesh/Documents/learning/go'
-export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
+export PATH="/usr/local/sbin:/usr/local/opt/gnu-getopt/bin:$PATH:$GOPATH/bin"
 
 #alias vim="nvim"
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'

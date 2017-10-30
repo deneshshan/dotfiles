@@ -58,6 +58,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vimwiki/vimwiki'
+Plug 'itchyny/calendar.vim'
 
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'
@@ -117,9 +118,9 @@ set background=dark
 set termguicolors
 
 "colorscheme base16-ocean
-colorscheme hilal
+"colorscheme hilal
 "colorscheme deep-space
-"colorscheme monrovia
+colorscheme monrovia
 set number
 set rnu
 
@@ -385,8 +386,18 @@ augroup END
 "= LIGHTLINE
 "==================================================
 "
+" Monrovia == monrovia
+" Hilal == molokai
+"
+"16color                 Tomorrow_Night          jellybeans              seashells_edit
+"Dracula                 Tomorrow_Night_Blue     landscape               seoul256
+"PaperColor              Tomorrow_Night_Bright   molokai                 solarized
+"PaperColor_dark         Tomorrow_Night_Eighties monrovia                wombat
+"PaperColor_light        darcula                 one
+"Tomorrow                default                 powerline
+"
 let g:lightline = {
-      \ 'colorscheme': 'molokai',
+      \ 'colorscheme': 'monrovia',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
