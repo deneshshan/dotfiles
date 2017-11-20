@@ -69,36 +69,36 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (hilal)
+# Colors (monrovia)
 colors:
   # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x14171a'
+    background: '0x1e2834'
     # soft contrast: background = '0x32302f'
-    foreground: '0x3290a0'
+    foreground: '0xc6c4bd'
 
   # Normal colors
   normal:
-    black:   '0x14171a'
-    red:     '0xb36995'
-    green:   '0x1c4e5a'
-    yellow:  '0xbdbca6'
-    blue:    '0x608cc3'
-    magenta: '0x3290a0'
-    cyan:    '0x79b3a8'
-    white:   '0xc0c6cb'
+    black:   '0x1e2834'
+    red:     '0xbd384c'
+    green:   '0xa28e8f'
+    yellow:  '0x146a6b'
+    blue:    '0x006686'
+    magenta: '0x864451'
+    cyan:    '0x538798'
+    white:   '0xc6c4bd'
 
   # Bright colors
   bright:
-    black:   '0x404f59'
-    red:     '0xf62d73'
-    green:   '0x3290a5'
-    yellow:  '0xf8f7da'
-    blue:    '0x0b6085'
-    magenta: '0x6bd9ed'
-    cyan:    '0x9be4e6'
-    white:   '0xc0c6cb'
+    black:   '0x35475d'
+    red:     '0xbd384c'
+    green:   '0xa28e8f'
+    yellow:  '0x146a6b'
+    blue:    '0x006686'
+    magenta: '0x864451'
+    cyan:    '0x538798'
+    white:   '0x96a2b0'
 
 # Visual Bell
 #
