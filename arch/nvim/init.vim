@@ -66,8 +66,16 @@ Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
 
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 filetype plugin indent on
+
+" ===================================================
+" =  DEVICONS
+" ===================================================
+
+set guifont=FuraMono_Nerd_Font_Bold:h10
 
 " ===================================================
 " =  SUPERTAB
@@ -399,8 +407,20 @@ augroup END
 let g:lightline = {
       \ 'colorscheme': 'monrovia',
       \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
+      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'component_function': {
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'MyFileformat',
       \ }
+      \ }
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 "==================================================
 "= VIM GO
 "==================================================
