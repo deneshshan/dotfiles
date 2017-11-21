@@ -342,7 +342,7 @@ let g:ags_agcontext = 5
 endif
 
 " bind K to grep word under cursor
-"nnoremap K :Ags <C-R><C-W><CR>
+nnoremap K :Ags <C-R><C-W><CR>
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
@@ -446,6 +446,6 @@ let g:LanguageClient_serverCommands = {
 " Automatically start language servers.
 "let g:LanguageClient_autoStart = 1
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
