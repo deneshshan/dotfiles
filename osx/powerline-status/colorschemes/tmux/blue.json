@@ -2,7 +2,7 @@
 	"groups": {
 		"active_window_status": {"fg": "darkblue",   "bg": "darkestblue",    "attrs": []},
 		"window_status":        {"fg": "darkblue",     "bg": "darkestblue",    "attrs": []},
-		"activity_status":      {"fg": "lightyellowgreen",        "bg": "darkestblue",    "attrs": ["bold"]},
+		"activity_status":      {"fg": "green",        "bg": "darkestblue",    "attrs": ["bold"]},
 		"bell_status":          {"fg": "red",        "bg": "darkblue",    "attrs": []},
 		"window":               {"fg": "mediumcyan", "bg": "darkestblue",    "attrs": []},
 		"window:divider":       {"fg": "mediumcyan", "bg": "darkestblue",    "attrs": []},
