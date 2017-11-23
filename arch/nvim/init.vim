@@ -59,6 +59,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vimwiki/vimwiki'
 Plug 'itchyny/calendar.vim'
+Plug 'dkanani/vim-material-theme'
 
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'

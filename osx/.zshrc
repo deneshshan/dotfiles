@@ -118,6 +118,10 @@ alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 #alias nv='vim'
 alias tmux="env TERM=xterm-256color tmux"
 
+#building c apps
+ 
+alias mmake='docker run --rm -v "$(pwd):/src" -t ownyourbits/mmake'
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"

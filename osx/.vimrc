@@ -63,14 +63,9 @@ Plug 'sbl/scvim'
 Plug 'munshkr/vim-tidal'
 Plug 'fatih/vim-go'
 
-if has('gui_running')
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'AlessandroYorba/Monrovia'
-else
-  Plug 'itchyny/lightline.vim'
-  Plug 'ryanoasis/vim-devicons'
-endif
+Plug 'itchyny/lightline.vim'
+Plug 'AlessandroYorba/Monrovia'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 filetype plugin indent on
@@ -396,16 +391,6 @@ augroup reload_vimrc
   autocmd!
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
-
-if has('gui_running')
-  let g:airline_powerline_fonts = 1
-else
-  let g:lightline = {
-        \ 'colorscheme': 'seashells_edit',
-        \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': '', 'right': '' }
-        \ }
-endif
 
 "==================================================
 "= LOCALLEADER TIDAL
