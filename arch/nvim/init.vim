@@ -60,6 +60,9 @@ Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vimwiki/vimwiki'
 Plug 'itchyny/calendar.vim'
 Plug 'dkanani/vim-material-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'jdkanani/vim-material-theme'
+Plug 'whatyouhide/vim-gotham'
 
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'
@@ -124,12 +127,13 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-set termguicolors
+"set termguicolors
 
 "colorscheme base16-ocean
 "colorscheme hilal
 "colorscheme deep-space
-colorscheme monrovia
+colorscheme Monrovia
+"colorscheme gotham
 set number
 set rnu
 
@@ -406,47 +410,47 @@ augroup END
 "Tomorrow                default                 powerline
 "
 let g:lightline = {
-      \ 'colorscheme': 'monrovia',
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
-      \ 'component_function': {
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat',
+        \ 'colorscheme': 'mg',
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '', 'right': '' },
+        \ 'component_function': {
+        \   'filetype': 'MyFiletype',
+        \   'fileformat': 'MyFileformat',
+        \ }
+        \ }
+
+  function! MyFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  endfunction
+
+  function! MyFileformat()
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+  endfunction
+  "==================================================
+  "= VIM GO
+  "==================================================
+  "
+   
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_extra_types = 1
+
+  "==================================================
+  "= LSP
+  "==================================================
+  "
+  " Required for operations modifying multiple buffers like rename.
+  set hidden
+
+  let g:LanguageClient_serverCommands = {
+      \ 'go': ['go-langserver'],
       \ }
-      \ }
 
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
+  " Automatically start language servers.
+  "let g:LanguageClient_autoStart = 1
 
-function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-"==================================================
-"= VIM GO
-"==================================================
-"
- 
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_extra_types = 1
-
-"==================================================
-"= LSP
-"==================================================
-"
-" Required for operations modifying multiple buffers like rename.
-set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'go': ['go-langserver'],
-    \ }
-
-" Automatically start language servers.
-"let g:LanguageClient_autoStart = 1
-
-"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+  "nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 "nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 "nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>

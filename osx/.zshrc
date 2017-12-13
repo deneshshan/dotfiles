@@ -116,7 +116,7 @@ export PATH="/usr/local/sbin:/usr/local/opt/gnu-getopt/bin:$PATH:$GOPATH/bin"
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
 #alias nv='vim'
-alias tmux="env TERM=xterm-256color tmux"
+#alias tmux="env TERM=xterm-256color tmux"
 
 #building c apps
  
