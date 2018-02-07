@@ -129,3 +129,6 @@ test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
 stty start undef stop undef
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

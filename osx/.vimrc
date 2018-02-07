@@ -63,9 +63,9 @@ Plug 'sbl/scvim'
 Plug 'munshkr/vim-tidal'
 Plug 'fatih/vim-go'
 
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'AlessandroYorba/Monrovia'
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 filetype plugin indent on
@@ -383,10 +383,6 @@ nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
 
 let g:ags_winheight = '20'
 
-"==================================================
-"= LIGHTLINE
-"==================================================
-"
 augroup reload_vimrc
   autocmd!
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC

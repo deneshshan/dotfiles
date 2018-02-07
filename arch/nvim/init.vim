@@ -37,6 +37,8 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'pangloss/vim-javascript'
 "Plug 'tpope/vim-repeat'
 "Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 Plug 'AlessandroYorba/Monrovia'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
@@ -53,6 +55,7 @@ Plug 'sbl/scvim'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
@@ -63,6 +66,7 @@ Plug 'dkanani/vim-material-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'jdkanani/vim-material-theme'
 Plug 'whatyouhide/vim-gotham'
+Plug 'matze/vim-move'
 
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'
@@ -74,6 +78,13 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 filetype plugin indent on
+
+" ===================================================
+" =  CONVENIENCE
+" ===================================================
+
+nnoremap <C-T> :tabe %<CR>
+nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
 
 " ===================================================
 " =  DEVICONS
@@ -136,6 +147,8 @@ colorscheme Monrovia
 "colorscheme gotham
 set number
 set rnu
+
+hi VertSplit ctermbg=008 ctermfg=000
 
 "==================================================
 "= WRAPPING
@@ -268,6 +281,8 @@ nmap <leader>q :bp <BAR> bd #<CR>
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_toc': 1}]
+
 "let vimwiki_path='/Users/denesh/vimwiki'
 "let vimwiki_export_path='/Users/denesh/vimwiki_html'
 "let wiki_settings={
@@ -347,7 +362,7 @@ let g:ags_agcontext = 5
 endif
 
 " bind K to grep word under cursor
-nnoremap K :Ags <C-R><C-W><CR>
+nnoremap F :Ags <C-R><C-W><CR>
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
@@ -375,13 +390,6 @@ endfunction
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
-
-"==================================================
-"= CONVENIENCE
-"==================================================
-"
-"
-nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
 
 "==================================================
 "= AGS
@@ -416,6 +424,11 @@ let g:lightline = {
         \ 'component_function': {
         \   'filetype': 'MyFiletype',
         \   'fileformat': 'MyFileformat',
+        \   'gitbranch': 'fugitive#head'
+        \ },
+        \ 'active': {
+        \   'left': [ [ 'mode' ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
         \ }
         \ }
 
@@ -454,3 +467,16 @@ let g:lightline = {
   "nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 "nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 "nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+"==================================================
+"= NERDTREE tabs
+"==================================================
+"
+
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+"==================================================
+"= Move
+"==================================================
+"
+let g:move_key_modifier = 'S'
