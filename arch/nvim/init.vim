@@ -47,6 +47,8 @@ Plug 'fatih/vim-go'
 Plug 'gabesoft/vim-ags'
 Plug 'itchyny/lightline.vim'
 Plug 'jgdavey/tslime.vim'
+Plug 'thoughtbot/vim-rspec'
+Plug 'easymotion/vim-easymotion'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kocakosm/hilal'
 Plug 'munshkr/vim-tidal'
@@ -90,7 +92,7 @@ nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
 " =  DEVICONS
 " ===================================================
 
-set guifont=FuraMono_Nerd_Font_Bold:h10
+"set guifont=FuraMono_Nerd_Font_Bold:h10
 
 " ===================================================
 " =  SUPERTAB
@@ -142,13 +144,15 @@ set background=dark
 
 "colorscheme base16-ocean
 "colorscheme hilal
+colorscheme monrovia
 "colorscheme deep-space
-colorscheme Monrovia
+"colorscheme alchemie
 "colorscheme gotham
 set number
-set rnu
+"set rnu
 
-hi VertSplit ctermbg=008 ctermfg=000
+"hi LineNr guibg=000 guifg=001
+hi Search ctermfg=008 ctermbg=002
 
 "==================================================
 "= WRAPPING
@@ -407,7 +411,7 @@ augroup END
 "= LIGHTLINE
 "==================================================
 "
-" Monrovia == monrovia
+" Monrovia == monrovia, mg
 " Hilal == molokai
 "
 "16color                 Tomorrow_Night          jellybeans              seashells_edit
@@ -472,7 +476,6 @@ let g:lightline = {
 "= NERDTREE tabs
 "==================================================
 "
-
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "==================================================
@@ -480,3 +483,24 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 "==================================================
 "
 let g:move_key_modifier = 'S'
+
+"==================================================
+"= Go
+"==================================================
+"
+let g:go_fmt_command = "goimports"
+
+" Go lint
+"set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+
+
+"==================================================
+"= EASY MOTION
+"==================================================
+
+
+"==================================================
+"= POLYGLOT
+"==================================================
+"
+"let g:polyglot_disabled = ['vue']
