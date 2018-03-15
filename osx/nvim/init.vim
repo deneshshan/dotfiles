@@ -32,51 +32,62 @@ call plug#begin('~/.config/nvim/plugged')
 
 "Plug 'Shutnik/jshint2.vim'
 "Plug 'craigemery/vim-autotag'
-"Plug 'ervandew/supertab'
 "Plug 'mattn/emmet-vim'
 "Plug 'pangloss/vim-javascript'
 "Plug 'tpope/vim-repeat'
 "Plug 'tpope/vim-unimpaired'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'AlessandroYorba/Monrovia'
-Plug 'airblade/vim-gitgutter'
+"Plug 'ervandew/supertab'
+
+" ==== ESSENTIAL TOOLS
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fatih/vim-go'
 Plug 'gabesoft/vim-ags'
-Plug 'itchyny/lightline.vim'
 Plug 'jgdavey/tslime.vim'
-Plug 'thoughtbot/vim-rspec'
-Plug 'easymotion/vim-easymotion'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'kocakosm/hilal'
-Plug 'munshkr/vim-tidal'
-Plug 'rust-lang/rust.vim'
-Plug 'sbl/scvim'
+Plug 'vimwiki/vimwiki'
+Plug 'matze/vim-move'
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/syntastic'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fugitive'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'vimwiki/vimwiki'
-Plug 'itchyny/calendar.vim'
-Plug 'dkanani/vim-material-theme'
-Plug 'chriskempson/base16-vim'
-Plug 'jdkanani/vim-material-theme'
-Plug 'whatyouhide/vim-gotham'
-Plug 'matze/vim-move'
 
+" ==== OTHER TOOLS
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/calendar.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'easymotion/vim-easymotion'
+Plug 'ryanoasis/vim-devicons'
+
+" ==== RUBY
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
+
+" ==== OTHER LANGUAGES
+Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
+
+" ==== MUSIC
+Plug 'munshkr/vim-tidal'
+Plug 'sbl/scvim'
+
+" ==== COLOR SCHEMES
+Plug 'dwkmatt/Monrovia'
+Plug 'whatyouhide/vim-gotham'
+Plug 'chriskempson/base16-vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'kocakosm/hilal'
+Plug 'arcticicestudio/nord-vim'
+
+" ==== NEOVIM
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
 
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 filetype plugin indent on
@@ -151,8 +162,14 @@ colorscheme monrovia
 set number
 "set rnu
 
-"hi LineNr guibg=000 guifg=001
-hi Search ctermfg=008 ctermbg=002
+hi LineNr guibg=000 guifg=001
+if has("gui_vimr") 
+  hi clear Search
+  hi link Search Boolean
+else
+  hi Search ctermfg=000 ctermbg=001 
+endif
+hi IncSearch ctermbg=000 ctermfg=005
 
 "==================================================
 "= WRAPPING
@@ -285,7 +302,10 @@ nmap <leader>q :bp <BAR> bd #<CR>
 
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_toc': 1}]
+let wiki = {'path': '~/vimwiki/', 'auto_toc': 1}
+let wiki.nested_syntaxes = { 'ruby': 'ruby' }
+let g:vimwiki_list = [wiki]
+
 
 "let vimwiki_path='/Users/denesh/vimwiki'
 "let vimwiki_export_path='/Users/denesh/vimwiki_html'
@@ -331,8 +351,10 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("reset && zeus test {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
+
+map <Leader>rp :call Send_to_Tmux("spring rake parallel:spec\n")<CR>
 
 " ===== clipboard options ==
 
@@ -354,10 +376,10 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 if executable('ag')
 " Use ag over grep
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --nogroup
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l -g ""'
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
@@ -399,7 +421,6 @@ nmap <C-c>r <Plug>SetTmuxVars
 "= AGS
 "==================================================
 "
-
 let g:ags_winheight = '20'
 
 augroup reload_vimrc
@@ -422,7 +443,6 @@ augroup END
 "Tomorrow                default                 powerline
 "
 let g:lightline = {
-        \ 'colorscheme': 'mg',
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' },
         \ 'component_function': {
@@ -436,6 +456,12 @@ let g:lightline = {
         \ }
         \ }
 
+if has("gui_vimr")
+  let g:lightline.colorscheme = 'monrovia'
+else
+  let g:lightline.colorscheme = 'mg'
+endif
+
   function! MyFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
   endfunction
@@ -443,6 +469,24 @@ let g:lightline = {
   function! MyFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
   endfunction
+
+  function! s:set_lightline_colorscheme(name) abort
+    let g:lightline.colorscheme = a:name
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+  endfunction
+
+  function! s:lightline_colorschemes(...) abort
+    return join(map(
+          \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+          \ "fnamemodify(v:val,':t:r')"),
+          \ "\n")
+  endfunction
+
+  command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
+        \ call s:set_lightline_colorscheme(<q-args>)
+
   "==================================================
   "= VIM GO
   "==================================================
