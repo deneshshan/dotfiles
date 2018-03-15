@@ -36,7 +36,6 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'pangloss/vim-javascript'
 "Plug 'tpope/vim-repeat'
 "Plug 'tpope/vim-unimpaired'
-"Plug 'ervandew/supertab'
 
 " ==== ESSENTIAL TOOLS
 Plug 'christoomey/vim-tmux-navigator'
@@ -53,6 +52,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 
 " ==== OTHER TOOLS
+Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/calendar.vim'
