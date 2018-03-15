@@ -100,6 +100,7 @@ alias zserver="zeus server"
 alias zconsole="zeus console"
 alias zrake="zeus rake"
 alias zst="reset && zeus start"
+
 alias be="bundle exec"
 
 # taskwarrior
@@ -123,7 +124,7 @@ alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
 #building c apps
  
-alias mmake='docker run --rm -v "$(pwd):/src" -t ownyourbits/mmake'
+# alias mmake='docker run --rm -v "$(pwd):/src" -t ownyourbits/mmake'
 
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
