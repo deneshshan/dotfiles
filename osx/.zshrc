@@ -64,10 +64,10 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 
 # clint slack env variables
-export ENABLE_SLACK="true"
-export SLACKUSER="denesh"
-export SLACK_CHANNEL="#zc_private"
-export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+#export ENABLE_SLACK="true"
+#export SLACKUSER="denesh"
+#export SLACK_CHANNEL="#zc_private"
+#export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
