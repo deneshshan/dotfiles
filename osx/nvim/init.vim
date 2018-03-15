@@ -155,7 +155,7 @@ set background=dark
 
 "colorscheme base16-ocean
 "colorscheme hilal
-colorscheme monrovia
+colorscheme nord
 "colorscheme deep-space
 "colorscheme alchemie
 "colorscheme gotham
@@ -167,7 +167,13 @@ if has("gui_vimr")
   hi clear Search
   hi link Search Boolean
 else
-  hi Search ctermfg=000 ctermbg=001 
+  "hi Search ctermfg=000 ctermbg=001 
+  hi clear Visual
+  hi clear Search
+  hi clear String
+  hi link Search IncSearch
+  hi link Visual StatusLine
+  hi link String GitGutterChangeDefault
 endif
 hi IncSearch ctermbg=000 ctermfg=005
 
