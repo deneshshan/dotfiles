@@ -25,7 +25,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call plug#begin('~/.config/nvim/plugged')
 
-
 " ===================================================
 " =  PLUGINS
 " ===================================================
@@ -132,16 +131,8 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-"set termguicolors
-
-"colorscheme base16-ocean
-"colorscheme hilal
 colorscheme nord
-"colorscheme deep-space
-"colorscheme alchemie
-"colorscheme gotham
 set number
-"set rnu
 
 hi LineNr guibg=000 guifg=001
 if has("gui_vimr") 
@@ -152,7 +143,6 @@ if has("gui_vimr")
   hi clear LineNr
   hi link LineNr Boolean
 else
-  "hi Search ctermfg=000 ctermbg=001 
   hi clear Visual
   hi clear Search
   hi clear String
@@ -284,20 +274,6 @@ nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 let wiki = {'path': '~/vimwiki/', 'auto_toc': 1}
 let wiki.nested_syntaxes = { 'ruby': 'ruby' }
 let g:vimwiki_list = [wiki]
-
-" ========== Specs ==========
-
-inoremap <leader>sc <Esc>^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
-nmap <leader>sc ^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
-
-inoremap <leader>sd <Esc>^idescribe<Space>'<Esc>A'<Space>do<C-o>oend<Esc>
-nmap <leader>sd ^idescribe<Space>'<Esc>A'<Space>do<C-o>oend<Esc>
-
-inoremap <leader>si <Esc>^iit '<C-o>A'<Esc>
-nmap <leader>si ^iit '<C-o>A'<Esc>
-
-inoremap <leader>sb before(:each)<Space>do<CR>end<Esc>ko
-nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
 
 " ======= vim-rspec ========
 "
