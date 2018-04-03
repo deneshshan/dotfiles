@@ -30,13 +30,6 @@ call plug#begin('~/.config/nvim/plugged')
 " =  PLUGINS
 " ===================================================
 
-"Plug 'Shutnik/jshint2.vim'
-"Plug 'craigemery/vim-autotag'
-"Plug 'mattn/emmet-vim'
-"Plug 'pangloss/vim-javascript'
-"Plug 'tpope/vim-repeat'
-"Plug 'tpope/vim-unimpaired'
-
 " ==== ESSENTIAL TOOLS
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'gabesoft/vim-ags'
@@ -65,14 +58,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'thoughtbot/vim-rspec'
 
-" ==== OTHER LANGUAGES
-Plug 'fatih/vim-go'
-Plug 'rust-lang/rust.vim'
-
-" ==== MUSIC
-Plug 'munshkr/vim-tidal'
-Plug 'sbl/scvim'
-
 " ==== COLOR SCHEMES
 Plug 'dwkmatt/Monrovia'
 Plug 'whatyouhide/vim-gotham'
@@ -80,6 +65,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'kocakosm/hilal'
 Plug 'arcticicestudio/nord-vim'
+Plug 'kamwitsta/nordisk'
+Plug 'tomasr/molokai'
 
 " ==== NEOVIM
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -98,12 +85,6 @@ filetype plugin indent on
 
 nnoremap <C-T> :tabe %<CR>
 nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
-
-" ===================================================
-" =  DEVICONS
-" ===================================================
-
-"set guifont=FuraMono_Nerd_Font_Bold:h10
 
 " ===================================================
 " =  SUPERTAB
@@ -165,7 +146,11 @@ set number
 hi LineNr guibg=000 guifg=001
 if has("gui_vimr") 
   hi clear Search
-  hi link Search Boolean
+  hi clear IncSearch
+  hi Search guifg=#BF616A gui=underline
+  hi link IncSearch Search
+  hi clear LineNr
+  hi link LineNr Boolean
 else
   "hi Search ctermfg=000 ctermbg=001 
   hi clear Visual
@@ -174,12 +159,12 @@ else
   hi link Search IncSearch
   hi link Visual StatusLine
   hi link String GitGutterChangeDefault
+  hi IncSearch ctermbg=000 ctermfg=005
 endif
-hi IncSearch ctermbg=000 ctermfg=005
 
 "==================================================
 "= WRAPPING
-"=o=================================================
+"===================================================
 
 function! ToggleWrap()
 if (&wrap == 1)
@@ -253,7 +238,6 @@ endfunction
 " =  SEARCH
 " ===================================================
 
-
 set hlsearch
 nnoremap <CR> :noh<CR>
 
@@ -278,19 +262,8 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 " ==== Easier non-interactive command insertion =====
 nnoremap <space> :
 nnoremap <tab> /
-"nnoremap <c-space>?
 
 " ============== Other shortcuts ====================
-
-" remap insert new line
-
-nmap <S-CR> o<Esc>
-
-let g:sclangTerm = "tmux split-window -h"
-
-imap <F12> <C-w>w
-nmap <F12> <Esc><C-w>w
-vmap <F12> <Esc><Esc><C-w>w
 
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
@@ -311,29 +284,6 @@ nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 let wiki = {'path': '~/vimwiki/', 'auto_toc': 1}
 let wiki.nested_syntaxes = { 'ruby': 'ruby' }
 let g:vimwiki_list = [wiki]
-
-
-"let vimwiki_path='/Users/denesh/vimwiki'
-"let vimwiki_export_path='/Users/denesh/vimwiki_html'
-"let wiki_settings={
-"\ 'template_path': vimwiki_export_path.'vimwiki-assets/',
-"\ 'template_default': 'default',
-"\ 'template_ext': '.html',
-"\ 'auto_export': 0,
-"\ 'nested_syntaxes': {
-"\ 'js':'javascript'
-"\ }}
-
-"let wikis=["_personal"]
-"let g:vimwiki_list = []
-"for wiki_name in wikis
-  "let wiki=copy(wiki_settings)
-  "let wiki.path = vimwiki_path.wiki_name.'/'
-  "let wiki.path_html = vimwiki_export_path.wiki_name.'/'
-  "let wiki.diary_index = 'index'
-  "let wiki.diary_rel_path = 'diary/'
-  "call add(g:vimwiki_list, wiki)
-"endfor
 
 " ========== Specs ==========
 
@@ -356,7 +306,7 @@ map <Leader>c :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-
+ 
 let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
 
@@ -375,6 +325,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 "==================================================
 nnoremap <leader>. :CtrlPTag<cr>
 
+let g:ctrlp_cmd='CtrlPBuffer'
 
 "==================================================
 "=  SILVER SEARCHER
@@ -395,24 +346,6 @@ endif
 
 " bind K to grep word under cursor
 nnoremap F :Ags <C-R><C-W><CR>
-
-" bind \ (backward slash) to grep shortcut
-command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ags<SPACE>
-
-"==================================================
-"= QARGS
-"==================================================
-
-command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
-function! QuickfixFilenames()
-" Building a hash ensures we get each buffer only once
-let buffer_numbers = {}
-for quickfix_item in getqflist()
-  let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-endfor
-return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction
 
 "==================================================
 "= TSLIME
@@ -493,35 +426,6 @@ endif
   command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
         \ call s:set_lightline_colorscheme(<q-args>)
 
-  "==================================================
-  "= VIM GO
-  "==================================================
-  "
-   
-  let g:go_highlight_types = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_functions = 1
-  let g:go_highlight_methods = 1
-  let g:go_highlight_extra_types = 1
-
-  "==================================================
-  "= LSP
-  "==================================================
-  "
-  " Required for operations modifying multiple buffers like rename.
-  set hidden
-
-  let g:LanguageClient_serverCommands = {
-      \ 'go': ['go-langserver'],
-      \ }
-
-  " Automatically start language servers.
-  "let g:LanguageClient_autoStart = 1
-
-  "nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 "==================================================
 "= NERDTREE tabs
 "==================================================
@@ -535,22 +439,14 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 let g:move_key_modifier = 'S'
 
 "==================================================
-"= Go
+"= SYNTASTIC
 "==================================================
 "
-let g:go_fmt_command = "goimports"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" Go lint
-"set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-
-
-"==================================================
-"= EASY MOTION
-"==================================================
-
-
-"==================================================
-"= POLYGLOT
-"==================================================
-"
-"let g:polyglot_disabled = ['vue']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
