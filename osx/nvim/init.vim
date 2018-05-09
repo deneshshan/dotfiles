@@ -4,8 +4,10 @@
 "set showcmd		" Show (partial) command in status line.
 "set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
+set nowrapscan
+set nowrap
+set linebreak
 set smartcase		" Do smart case matching
-set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
@@ -34,7 +36,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'gabesoft/vim-ags'
 Plug 'jgdavey/tslime.vim'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'vimwiki/vimwiki'
 Plug 'matze/vim-move'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
@@ -42,15 +43,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'skalnik/vim-vroom'
+Plug 'qpkorr/vim-bufkill'
+Plug 'vimwiki/vimwiki'
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " ==== OTHER TOOLS
 Plug 'ervandew/supertab'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'itchyny/calendar.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
-Plug 'ryanoasis/vim-devicons'
 
 " ==== RUBY
 Plug 'vim-ruby/vim-ruby'
@@ -60,12 +64,16 @@ Plug 'thoughtbot/vim-rspec'
 " ==== COLOR SCHEMES
 Plug 'dwkmatt/Monrovia'
 Plug 'whatyouhide/vim-gotham'
-Plug 'chriskempson/base16-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'kocakosm/hilal'
 Plug 'arcticicestudio/nord-vim'
 Plug 'kamwitsta/nordisk'
 Plug 'tomasr/molokai'
+Plug 'jnurmine/Zenburn'
+Plug 'acepukas/vim-zenburn'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'iCyMind/NeoSolarized'
+
 
 " ==== NEOVIM
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -131,41 +139,30 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-colorscheme nord
 set number
 
-hi LineNr guibg=000 guifg=001
+"hi LineNr guibg=000 guifg=001
 if has("gui_vimr") 
-  hi clear Search
-  hi clear IncSearch
-  hi Search guifg=#BF616A gui=underline
-  hi link IncSearch Search
+  set termguicolors
+  colorscheme zenburn
   hi clear LineNr
-  hi link LineNr Boolean
+  hi link LineNr ErrorMsg
 else
+  colorscheme nord
   hi clear Visual
-  hi clear Search
+  hi clear Search 
   hi clear String
-  hi link Search IncSearch
+  hi clear Substitute
+  hi clear DiffText
+  hi clear Title
+  hi link Search Float
+  hi link DiffText Visual
   hi link Visual StatusLine
   hi link String GitGutterChangeDefault
+  hi link Title MoreMsg
   hi IncSearch ctermbg=000 ctermfg=005
+  hi DiffAdd ctermfg=4
 endif
-
-"==================================================
-"= WRAPPING
-"===================================================
-
-function! ToggleWrap()
-if (&wrap == 1)
- set nowrap
-else
- set wrap
-endif
-endfunction
-
-set nowrap
-nnoremap <leader>w :call ToggleWrap()<CR>
 
 "==================================================
 "= CURSOR
@@ -229,7 +226,10 @@ endfunction
 " ===================================================
 
 set hlsearch
-nnoremap <CR> :noh<CR>
+set incsearch
+
+autocmd InsertEnter * :setlocal nohlsearch
+autocmd InsertLeave * :setlocal hlsearch
 
 " ================ Turn Off Swap Files ==============
 
@@ -269,6 +269,7 @@ nmap <leader>q :bp <BAR> bd #<CR>
 " =========== Wiki ==========
 "
 
+
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
 let wiki = {'path': '~/vimwiki/', 'auto_toc': 1}
@@ -301,42 +302,43 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 "==================================================
 nnoremap <leader>. :CtrlPTag<cr>
 
-let g:ctrlp_cmd='CtrlPBuffer'
+let g:ctrlp_cmd='CtrlPMRU'
 
 "==================================================
 "=  SILVER SEARCHER
 "==================================================
 
 if executable('ag')
-" Use ag over grep
-set grepprg=ag\ --nogroup
+  " Use ag over grep
+  set grepprg=ag\ --nogroup
 
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l -g ""'
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l -g ""'
 
-" ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 
-let g:ags_agcontext = 5
+  let g:ags_agcontext = 5
+
+  let g:ags_winheight = '20'
 endif
 
-" bind K to grep word under cursor
+" bind F to grep word under cursor
 nnoremap F :Ags <C-R><C-W><CR>
 
 "==================================================
 "= TSLIME
 "==================================================
 "
-"
+
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
 "==================================================
-"= AGS
+"= RELOAD VIMRC
 "==================================================
 "
-let g:ags_winheight = '20'
 
 augroup reload_vimrc
 autocmd!
@@ -362,51 +364,44 @@ let g:lightline = {
         \ 'subseparator': { 'left': '', 'right': '' },
         \ 'component_function': {
         \   'filetype': 'MyFiletype',
-        \   'fileformat': 'MyFileformat',
-        \   'gitbranch': 'fugitive#head'
+        \   'fileformat': 'MyFileformat'
         \ },
         \ 'active': {
         \   'left': [ [ 'mode' ],
-        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+        \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
         \ }
         \ }
 
 if has("gui_vimr")
-  let g:lightline.colorscheme = 'monrovia'
+  let g:lightline.colorscheme = 'zenburn'
 else
   let g:lightline.colorscheme = 'mg'
 endif
 
-  function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-  endfunction
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
 
-  function! MyFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-  endfunction
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
-  function! s:set_lightline_colorscheme(name) abort
-    let g:lightline.colorscheme = a:name
-    call lightline#init()
-    call lightline#colorscheme()
-    call lightline#update()
-  endfunction
+function! s:set_lightline_colorscheme(name) abort
+  let g:lightline.colorscheme = a:name
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
 
-  function! s:lightline_colorschemes(...) abort
-    return join(map(
-          \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
-          \ "fnamemodify(v:val,':t:r')"),
-          \ "\n")
-  endfunction
+function! s:lightline_colorschemes(...) abort
+  return join(map(
+        \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+        \ "fnamemodify(v:val,':t:r')"),
+        \ "\n")
+endfunction
 
-  command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
-        \ call s:set_lightline_colorscheme(<q-args>)
-
-"==================================================
-"= NERDTREE tabs
-"==================================================
-"
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
+      \ call s:set_lightline_colorscheme(<q-args>)
 
 "==================================================
 "= Move
@@ -426,3 +421,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+"==================================================
+"= VROOM
+"==================================================
+"
+let g:vroom_use_bundle_exec=0
+let g:vroom_use_terminal=1
+let g:vroom_use_spring=1
