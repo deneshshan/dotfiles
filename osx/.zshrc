@@ -89,47 +89,19 @@ alias tmuxconfig="nvim ~/.tmux.conf"
 alias vimconfig="nvim ~/.vimrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 
-# directory navigation
-alias store="cd /Users/denesh/Documents/work/zappi/zappistore"
-alias dc="cd /Users/denesh/Documents/work/zappi/data-collector"
-alias clnt="cd /Users/denesh/Documents/work/zappi/clint"
-
-# rails testing with zeus
-alias ztest="zeus test"
-alias zserver="zeus server"
-alias zconsole="zeus console"
-alias zrake="zeus rake"
-alias zst="reset && zeus start"
-
+# ruby stuff
 alias be="bundle exec"
 
+# elixir stuff
+alias iexdebug="iex -S mix test --trace"
+alias iexserverdebug="iex -S mix phoenix.server"
+alias mt="mix test"
+alias mps="mix phoenix.server"
+
 # taskwarrior
-alias all="reset && task all"
-alias next="reset && task next"
-alias add="task add"
-alias burn="reset && task burndown.daily"
-
-alias dirtsamples="cd ~/Library/Application\ Support/SuperCollider/downloaded-quarks/Dirt-Samples"
-
 alias nv="nvim"
 
-#export GOPATH='/Users/denesh/Documents/learning/go'
-#export PATH="/usr/local/sbin:/usr/local/opt/gnu-getopt/bin:$PATH:$GOPATH/bin"
-
-#alias vim="nvim"
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
-
-#alias nv='vim'
-#alias tmux="env TERM=xterm-256color tmux"
-
-#building c apps
- 
-# alias mmake='docker run --rm -v "$(pwd):/src" -t ownyourbits/mmake'
-
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-#
 
 if [[ $TMUX ]]; then
   source ~/.bash_profile
