@@ -140,23 +140,32 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-"set termguicolors
+colorscheme nord
 
-"colorscheme base16-ocean
-"colorscheme hilal
-colorscheme monrovia
-"colorscheme deep-space
-"colorscheme alchemie
-"colorscheme gotham
 set number
 "set rnu
 
-"hi LineNr guibg=000 guifg=001
-hi Search ctermfg=008 ctermbg=002
+hi LineNr guibg=000 guifg=001
+if has("gui_vimr") 
+  hi clear Search
+  hi clear IncSearch
+  hi Search guifg=#BF616A gui=underline
+  hi link IncSearch Search
+  hi clear LineNr
+  hi link LineNr Boolean
+else
+  hi clear Visual
+  hi clear Search
+  hi clear String
+  hi link Search IncSearch
+  hi link Visual StatusLine
+  hi link String GitGutterChangeDefault
+  hi IncSearch ctermbg=000 ctermfg=005
+endif
 
 "==================================================
 "= WRAPPING
-"=o=================================================
+"===================================================
 
 function! ToggleWrap()
 if (&wrap == 1)

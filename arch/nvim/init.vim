@@ -69,6 +69,13 @@ Plug 'chriskempson/base16-vim'
 Plug 'jdkanani/vim-material-theme'
 Plug 'whatyouhide/vim-gotham'
 Plug 'matze/vim-move'
+Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
+Plug 'jnurmine/Zenburn'
+Plug 'acepukas/vim-zenburn'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'morhetz/gruvbox'
+Plug 'nathanaelkane/vim-indent-guides'
 
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'
@@ -76,7 +83,7 @@ Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
 
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 filetype plugin indent on
@@ -87,12 +94,6 @@ filetype plugin indent on
 
 nnoremap <C-T> :tabe %<CR>
 nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
-
-" ===================================================
-" =  DEVICONS
-" ===================================================
-
-"set guifont=FuraMono_Nerd_Font_Bold:h10
 
 " ===================================================
 " =  SUPERTAB
@@ -140,19 +141,37 @@ set background=dark
 "= COLOUR SCHEME
 "==================================================
 
-"set termguicolors
+set number
 
-"colorscheme base16-ocean
-"colorscheme hilal
-colorscheme monrovia
-"colorscheme deep-space
-"colorscheme alchemie
-"colorscheme gotham
+colorscheme nord
+
 set number
 "set rnu
 
-"hi LineNr guibg=000 guifg=001
-hi Search ctermfg=008 ctermbg=002
+hi LineNr guibg=000 guifg=001
+if has("gui_vimr") 
+  "colorscheme zenburn
+  "hi clear LineNr
+  "hi clear VertSplit
+  "hi link LineNr DiffDelete
+  "hi link VertSplit DiffDelete
+  "hi clear Search
+  "hi link Search DiffAdd
+  "
+  colorscheme nord
+  hi clear Search
+  hi link Search Float
+  hi clear Underlined
+  hi link Underlined Todo
+else
+  hi clear Visual
+  hi clear Search
+  hi clear String
+  hi link Search Float
+  hi link Visual StatusLine
+  hi link String GitGutterChangeDefault
+  hi IncSearch ctermbg=000 ctermfg=005
+endif
 
 "==================================================
 "= WRAPPING
@@ -259,15 +278,7 @@ nnoremap <tab> /
 
 " ============== Other shortcuts ====================
 
-" remap insert new line
-
-nmap <S-CR> o<Esc>
-
 let g:sclangTerm = "tmux split-window -h"
-
-imap <F12> <C-w>w
-nmap <F12> <Esc><C-w>w
-vmap <F12> <Esc><Esc><C-w>w
 
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
@@ -286,42 +297,6 @@ nmap <leader>q :bp <BAR> bd #<CR>
 nmap <leader>st <Esc>?*<CR>lli~~A~~<Esc>
 
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_toc': 1}]
-
-"let vimwiki_path='/Users/denesh/vimwiki'
-"let vimwiki_export_path='/Users/denesh/vimwiki_html'
-"let wiki_settings={
-"\ 'template_path': vimwiki_export_path.'vimwiki-assets/',
-"\ 'template_default': 'default',
-"\ 'template_ext': '.html',
-"\ 'auto_export': 0,
-"\ 'nested_syntaxes': {
-"\ 'js':'javascript'
-"\ }}
-
-"let wikis=["_personal"]
-"let g:vimwiki_list = []
-"for wiki_name in wikis
-  "let wiki=copy(wiki_settings)
-  "let wiki.path = vimwiki_path.wiki_name.'/'
-  "let wiki.path_html = vimwiki_export_path.wiki_name.'/'
-  "let wiki.diary_index = 'index'
-  "let wiki.diary_rel_path = 'diary/'
-  "call add(g:vimwiki_list, wiki)
-"endfor
-
-" ========== Specs ==========
-
-inoremap <leader>sc <Esc>^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
-nmap <leader>sc ^icontext<Space>'#<Space><C-o>A'<Space>do<C-o>oend<Esc>
-
-inoremap <leader>sd <Esc>^idescribe<Space>'<Esc>A'<Space>do<C-o>oend<Esc>
-nmap <leader>sd ^idescribe<Space>'<Esc>A'<Space>do<C-o>oend<Esc>
-
-inoremap <leader>si <Esc>^iit '<C-o>A'<Esc>
-nmap <leader>si ^iit '<C-o>A'<Esc>
-
-inoremap <leader>sb before(:each)<Space>do<CR>end<Esc>ko
-nmap <leader>sb ibefore(:each)<Space>do<CR>end<Esc>ko
 
 " ======= vim-rspec ========
 "
@@ -367,10 +342,6 @@ endif
 
 " bind K to grep word under cursor
 nnoremap F :Ags <C-R><C-W><CR>
-
-" bind \ (backward slash) to grep shortcut
-command! -nargs=+ -complete=file -bar Ags silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ags<SPACE>
 
 "==================================================
 "= QARGS
@@ -426,8 +397,6 @@ let g:lightline = {
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' },
         \ 'component_function': {
-        \   'filetype': 'MyFiletype',
-        \   'fileformat': 'MyFileformat',
         \   'gitbranch': 'fugitive#head'
         \ },
         \ 'active': {
@@ -436,13 +405,35 @@ let g:lightline = {
         \ }
         \ }
 
-  function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+if has("gui_vimr") 
+  "let g:lightline.colorscheme = 'zenburn'
+  let g:lightline.colorscheme = 'nord'
+endif
+
+  "function! MyFiletype()
+    "return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  "endfunction
+
+  "function! MyFileformat()
+    "return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+  "endfunction
+
+  function! s:set_lightline_colorscheme(name) abort
+    let g:lightline.colorscheme = a:name
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
   endfunction
 
-  function! MyFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+  function! s:lightline_colorschemes(...) abort
+    return join(map(
+          \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+          \ "fnamemodify(v:val,':t:r')"),
+          \ "\n")
   endfunction
+
+  command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
+        \ call s:set_lightline_colorscheme(<q-args>)
   "==================================================
   "= VIM GO
   "==================================================
@@ -454,30 +445,6 @@ let g:lightline = {
   let g:go_highlight_methods = 1
   let g:go_highlight_extra_types = 1
 
-  "==================================================
-  "= LSP
-  "==================================================
-  "
-  " Required for operations modifying multiple buffers like rename.
-  set hidden
-
-  let g:LanguageClient_serverCommands = {
-      \ 'go': ['go-langserver'],
-      \ }
-
-  " Automatically start language servers.
-  "let g:LanguageClient_autoStart = 1
-
-  "nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-"==================================================
-"= NERDTREE tabs
-"==================================================
-"
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
 "==================================================
 "= Move
 "==================================================
@@ -487,20 +454,5 @@ let g:move_key_modifier = 'S'
 "==================================================
 "= Go
 "==================================================
-"
+
 let g:go_fmt_command = "goimports"
-
-" Go lint
-"set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-
-
-"==================================================
-"= EASY MOTION
-"==================================================
-
-
-"==================================================
-"= POLYGLOT
-"==================================================
-"
-"let g:polyglot_disabled = ['vue']

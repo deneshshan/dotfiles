@@ -110,7 +110,12 @@ alias dirtsamples="cd ~/Library/Application\ Support/SuperCollider/downloaded-qu
 alias nv="nvim"
 
 export GOPATH='/Users/denesh/Documents/learning/go'
-export PATH="/usr/local/sbin:/usr/local/opt/gnu-getopt/bin:$PATH:$GOPATH/bin"
+#export PATH="/usr/local/sbin:/usr/local/opt/gnu-getopt/bin:$PATH:$GOPATH/bin"
+
+if [ -n "$TMUX" ]; then
+  source ~/.bash_profile
+  echo "PATH IS " $PATH
+fi
 
 #alias vim="nvim"
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
@@ -118,17 +123,10 @@ alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 #alias nv='vim'
 #alias tmux="env TERM=xterm-256color tmux"
 
-#building c apps
+alias life='cd $GOPATH/src/github.com/deneshshan/electronic_life'
  
 alias mmake='docker run --rm -v "$(pwd):/src" -t ownyourbits/mmake'
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
 # control s not working in terminal. this makes it work. useful for command t
 # in vim to open a split pane.
 stty start undef stop undef
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
