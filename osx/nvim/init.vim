@@ -4,7 +4,7 @@
 "set showcmd		" Show (partial) command in status line.
 "set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
-set nowrapscan
+set wrapscan
 set nowrap
 set linebreak
 set smartcase		" Do smart case matching
@@ -16,6 +16,11 @@ set mouse=a		" Enable mouse usage (all modes)
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
+
+if has("gui_vimr")
+  let $PATH="/Users/denesh/.asdf/shims:/Users/denesh/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+endif
+
 
 " ===================================================
 " =  VUNDLE SETUP
@@ -48,13 +53,14 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " ==== OTHER TOOLS
 Plug 'ervandew/supertab'
 Plug 'itchyny/calendar.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ntpeters/vim-better-whitespace'
 
 " ==== RUBY
 Plug 'vim-ruby/vim-ruby'
@@ -72,11 +78,9 @@ Plug 'tomasr/molokai'
 Plug 'jnurmine/Zenburn'
 Plug 'acepukas/vim-zenburn'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'iCyMind/NeoSolarized'
 
 
 " ==== NEOVIM
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -142,26 +146,41 @@ set background=dark
 set number
 
 "hi LineNr guibg=000 guifg=001
-if has("gui_vimr") 
+if has("gui_vimr")
   set termguicolors
-  colorscheme zenburn
-  hi clear LineNr
-  hi link LineNr ErrorMsg
-else
   colorscheme nord
-  hi clear Visual
-  hi clear Search 
-  hi clear String
-  hi clear Substitute
+  hi clear Search
+  hi clear VertSplit
+  hi clear DiffAdd
+  hi clear DiffChange
+  hi clear DiffDelete
   hi clear DiffText
-  hi clear Title
   hi link Search Float
-  hi link DiffText Visual
-  hi link Visual StatusLine
-  hi link String GitGutterChangeDefault
-  hi link Title MoreMsg
-  hi IncSearch ctermbg=000 ctermfg=005
-  hi DiffAdd ctermfg=4
+  hi link VertSplit LineNr
+  hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
+  hi DiffDelete gui=bold guifg=#4a5466
+  hi DiffChange guibg=#332a2f
+  hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
+else
+  set termguicolors
+  colorscheme nord
+  "hi clear Visual
+  hi clear Search
+  "hi clear String
+  "hi clear Substitute
+  "hi clear DiffText
+  "hi clear Title
+  "hi link Search Float
+  "hi link DiffText Visual
+  "hi link Visual StatusLine
+  "hi link String GitGutterChangeDefault
+  "hi link Title MoreMsg
+  "hi IncSearch ctermbg=000 ctermfg=005
+  "hi DiffAdd ctermfg=4
+  "
+  hi link Search Float
+  hi clear VertSplit
+  hi link VertSplit LineNr
 endif
 
 "==================================================
@@ -228,9 +247,6 @@ endfunction
 set hlsearch
 set incsearch
 
-autocmd InsertEnter * :setlocal nohlsearch
-autocmd InsertLeave * :setlocal hlsearch
-
 " ================ Turn Off Swap Files ==============
 
 set noswapfile
@@ -242,12 +258,20 @@ set nowb
 set splitright
 set splitbelow
 
+" ==================== Tmux =========================
+"
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+
+" ==================== Col length ====================
+"
+set textwidth=100
+match DiffText '\%>100v.\+'
 
 " ==== Easier non-interactive command insertion =====
 nnoremap <space> :
@@ -301,8 +325,6 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 "=  CTRLP
 "==================================================
 nnoremap <leader>. :CtrlPTag<cr>
-
-let g:ctrlp_cmd='CtrlPMRU'
 
 "==================================================
 "=  SILVER SEARCHER
@@ -359,21 +381,24 @@ augroup END
 "PaperColor_light        darcula                 one
 "Tomorrow                default                 powerline
 "
+
 let g:lightline = {
-        \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': '', 'right': '' },
-        \ 'component_function': {
-        \   'filetype': 'MyFiletype',
-        \   'fileformat': 'MyFileformat'
-        \ },
-        \ 'active': {
-        \   'left': [ [ 'mode' ],
-        \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
-        \ }
-        \ }
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'active': {
+      \   'left': [ [ 'mode' ],
+      \             [ 'gitbranch', 'bufnum', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'MyFileformat',
+      \   'gitbranch': 'fugitive#head'
+      \ }
+      \ }
 
 if has("gui_vimr")
-  let g:lightline.colorscheme = 'zenburn'
+  "let g:lightline.colorscheme = 'zenburn'
+  let g:lightline.colorscheme = 'nord'
 else
   let g:lightline.colorscheme = 'mg'
 endif

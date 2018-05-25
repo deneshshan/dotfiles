@@ -103,9 +103,11 @@ alias nv="nvim"
 
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 
-if [[ $TMUX ]]; then
-  source ~/.bash_profile
-fi
+export GOPATH="/Users/denesh/Documents/learning/go"
+#if [[ $TMUX ]]; then
+  #source ~/.bash_profile
+  export PATH="/Users/denesh/.asdf/shims:/Users/denesh/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+#fi
 
 echo "PATH is $PATH"
 
