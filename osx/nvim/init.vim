@@ -155,6 +155,8 @@ if has("gui_vimr")
   hi clear DiffChange
   hi clear DiffDelete
   hi clear DiffText
+  hi clear Underlined
+  hi link Underlined Todo
   hi link Search Float
   hi link VertSplit LineNr
   hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
