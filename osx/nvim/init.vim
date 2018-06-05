@@ -147,47 +147,26 @@ set background=dark
 
 set number
 
-"if has("gui_vimr")
-  set termguicolors
-  colorscheme nord
-  hi clear Search
-  hi link Search Float
-  hi clear VertSplit
-  hi link VertSplit LineNr
-  hi clear DiffAdd
-  hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
-  hi clear DiffChange
-  hi DiffChange guibg=#332a2f
-  hi clear DiffDelete
-  hi DiffDelete gui=bold guifg=#4a5466
-  hi clear DiffText
-  hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
-  hi clear CursorLineNr
-  hi clear agsvFilePath
-  hi link agsvFilePath Float
-  hi clear agsvResultPattern
-  hi link agsvResultPattern Underlined
-"else
-  ""set termguicolors
-  "colorscheme nord
-  ""hi clear Visual
-  "hi clear Search
-  ""hi clear String
-  ""hi clear Substitute
-  ""hi clear DiffText
-  ""hi clear Title
-  "hi link Search Float
-  ""hi link DiffText Visual
-  ""hi link Visual StatusLine
-  ""hi link String GitGutterChangeDefault
-  ""hi link Title MoreMsg
-  ""hi IncSearch ctermbg=000 ctermfg=005
-  ""hi DiffAdd ctermfg=4
-  ""
-  "hi link Search Float
-  "hi clear VertSplit
-  "hi link VertSplit LineNr
-"endif
+set termguicolors
+colorscheme nord
+hi clear Search
+hi link Search Float
+hi clear VertSplit
+hi link VertSplit LineNr
+hi clear DiffAdd
+hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
+hi clear DiffChange
+hi DiffChange guibg=#332a2f
+hi clear DiffDelete
+hi DiffDelete gui=bold guifg=#4a5466
+hi clear DiffText
+hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
+"hi clear Underlined
+"hi link Underlined Todo
+hi clear agsvFilePath
+hi link agsvFilePath Float
+hi clear agsvResultPattern
+hi link agsvResultPattern Underlined
 
 "==================================================
 "= CURSOR
@@ -313,7 +292,7 @@ map <Leader>c :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
- 
+
 let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
 
@@ -402,7 +381,7 @@ let g:lightline = {
       \ }
       \ }
 
-      
+
 if has("gui_vimr")
   "let g:lightline.colorscheme = 'zenburn'
   let g:lightline.colorscheme = 'nord'
