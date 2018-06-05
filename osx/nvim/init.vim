@@ -53,7 +53,6 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 
 " ==== OTHER TOOLS
 Plug 'ervandew/supertab'
@@ -61,6 +60,8 @@ Plug 'itchyny/calendar.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ntpeters/vim-better-whitespace'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " ==== RUBY
 Plug 'vim-ruby/vim-ruby'
