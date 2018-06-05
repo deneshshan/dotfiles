@@ -116,6 +116,7 @@ let g:deoplete#enable_at_startup = 1
 
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 45
+"let NERDTreeShowHidden=1
 
 " ===================================================
 " =  VIM RUBY
@@ -146,43 +147,47 @@ set background=dark
 
 set number
 
-"hi LineNr guibg=000 guifg=001
-if has("gui_vimr")
+"if has("gui_vimr")
   set termguicolors
   colorscheme nord
   hi clear Search
+  hi link Search Float
   hi clear VertSplit
+  hi link VertSplit LineNr
   hi clear DiffAdd
-  hi clear DiffChange
-  hi clear DiffDelete
-  hi clear DiffText
-  hi link Search Float
-  hi link VertSplit LineNr
   hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
-  hi DiffDelete gui=bold guifg=#4a5466
+  hi clear DiffChange
   hi DiffChange guibg=#332a2f
+  hi clear DiffDelete
+  hi DiffDelete gui=bold guifg=#4a5466
+  hi clear DiffText
   hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
-else
-  set termguicolors
-  colorscheme nord
-  "hi clear Visual
-  hi clear Search
-  "hi clear String
-  "hi clear Substitute
-  "hi clear DiffText
-  "hi clear Title
+  hi clear CursorLineNr
+  hi clear agsvFilePath
+  hi link agsvFilePath Float
+  hi clear agsvResultPattern
+  hi link agsvResultPattern Underlined
+"else
+  ""set termguicolors
+  "colorscheme nord
+  ""hi clear Visual
+  "hi clear Search
+  ""hi clear String
+  ""hi clear Substitute
+  ""hi clear DiffText
+  ""hi clear Title
   "hi link Search Float
-  "hi link DiffText Visual
-  "hi link Visual StatusLine
-  "hi link String GitGutterChangeDefault
-  "hi link Title MoreMsg
-  "hi IncSearch ctermbg=000 ctermfg=005
-  "hi DiffAdd ctermfg=4
-  "
-  hi link Search Float
-  hi clear VertSplit
-  hi link VertSplit LineNr
-endif
+  ""hi link DiffText Visual
+  ""hi link Visual StatusLine
+  ""hi link String GitGutterChangeDefault
+  ""hi link Title MoreMsg
+  ""hi IncSearch ctermbg=000 ctermfg=005
+  ""hi DiffAdd ctermfg=4
+  ""
+  "hi link Search Float
+  "hi clear VertSplit
+  "hi link VertSplit LineNr
+"endif
 
 "==================================================
 "= CURSOR
@@ -397,11 +402,12 @@ let g:lightline = {
       \ }
       \ }
 
+      
 if has("gui_vimr")
   "let g:lightline.colorscheme = 'zenburn'
   let g:lightline.colorscheme = 'nord'
 else
-  let g:lightline.colorscheme = 'mg'
+  let g:lightline.colorscheme = 'nord'
 endif
 
 function! MyFiletype()
