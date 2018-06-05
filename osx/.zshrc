@@ -88,6 +88,7 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmuxconfig="nvim ~/.tmux.conf"
 alias vimconfig="nvim ~/.vimrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
+alias alacrittyconfig="nvim ~/.config/alacritty/alacritty.yml"
 
 # ruby stuff
 alias be="bundle exec"
