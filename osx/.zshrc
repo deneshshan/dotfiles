@@ -90,6 +90,8 @@ alias vimconfig="nvim ~/.vimrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias alacrittyconfig="nvim ~/.config/alacritty/alacritty.yml"
 
+alias gtree="git log --oneline --graph --abbrev-commit"
+
 # ruby stuff
 alias be="bundle exec"
 
@@ -99,10 +101,19 @@ alias iexserverdebug="iex -S mix phoenix.server"
 alias mt="mix test"
 alias mps="mix phoenix.server"
 
-# taskwarrior
 alias nv="nvim"
 
+# grep stuff
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
+alias grepgr="GREP_COLOR='1;30' grep --color=always"
+alias grepr="GREP_COLOR='1;31' grep --color=always"
+alias grepg="GREP_COLOR='1;32' grep --color=always"
+alias grepy="GREP_COLOR='1;33' grep --color=always"
+alias grepb="GREP_COLOR='1;34' grep --color=always"
+alias grepm="GREP_COLOR='1;35' grep --color=always"
+alias grepc="GREP_COLOR='1;36' grep --color=always"
+alias grepw="GREP_COLOR='1;37' grep --color=always"
+
 
 export GOPATH="/Users/denesh/Documents/learning/go"
 #if [[ $TMUX ]]; then

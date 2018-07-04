@@ -9,7 +9,7 @@ set nowrap
 set linebreak
 set smartcase		" Do smart case matching
 set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
+set hidden             " Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 
 " Source a global configuration file if available
@@ -53,15 +53,17 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
 
 " ==== OTHER TOOLS
 Plug 'ervandew/supertab'
-Plug 'itchyny/calendar.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ntpeters/vim-better-whitespace'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+
+" ==== ELIXIR
+Plug 'slashmili/alchemist.vim'
 
 " ==== RUBY
 Plug 'vim-ruby/vim-ruby'
@@ -85,8 +87,6 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'junegunn/fzf'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/echodoc.vim'
-
 
 call plug#end()
 filetype plugin indent on
@@ -161,8 +161,8 @@ hi clear DiffDelete
 hi DiffDelete gui=bold guifg=#4a5466
 hi clear DiffText
 hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
-"hi clear Underlined
-"hi link Underlined Todo
+hi clear Folded
+hi link Folded LineNr
 hi clear agsvFilePath
 hi link agsvFilePath Float
 hi clear agsvResultPattern
@@ -198,7 +198,7 @@ set nocursorcolumn
 "
 " Fold spec files, displaying "describe ..." and "it ..." lines
 function! FoldSpec()
-let @/='\(describe.*do$\|it.*do$\|context.*do$\)'
+let @/='\(describe.*do$\|it.*do$\|context.*do$\|scenario.*do$\)'
 setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zz :call FoldSpec()<CR>
@@ -293,7 +293,7 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("reset && spring rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
 
 map <Leader>rp :call Send_to_Tmux("spring rake parallel:spec\n")<CR>
@@ -429,7 +429,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -440,3 +440,14 @@ let g:syntastic_check_on_wq = 0
 let g:vroom_use_bundle_exec=0
 let g:vroom_use_terminal=1
 let g:vroom_use_spring=1
+
+"==================================================
+"= LSP
+"==================================================
+"
+let g:LanguageClient_serverCommands = {
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
