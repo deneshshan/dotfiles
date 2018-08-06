@@ -5,8 +5,9 @@
 "set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set wrapscan
-set nowrap
+set wrap
 set linebreak
+set breakindent
 set smartcase		" Do smart case matching
 set autowrite		" Automatically save before commands like :next and :make
 set hidden             " Hide buffers when they are abandoned
@@ -43,7 +44,6 @@ Plug 'jgdavey/tslime.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'matze/vim-move'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdcommenter'
@@ -53,14 +53,26 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 " ==== OTHER TOOLS
 Plug 'ervandew/supertab'
+Plug 'yegappan/mru'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+Plug 'kchmck/vim-coffee-script'
+Plug 'jceb/vim-orgmode'
+Plug 'majutsushi/tagbar'
+
+" ==== Trying out
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " ==== ELIXIR
 Plug 'slashmili/alchemist.vim'
@@ -70,23 +82,24 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'thoughtbot/vim-rspec'
 
+" ==== GO
+Plug 'fatih/vim-go'
+Plug 'jodosha/vim-godebug'
+
 " ==== COLOR SCHEMES
-Plug 'dwkmatt/Monrovia'
-Plug 'whatyouhide/vim-gotham'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'kocakosm/hilal'
 Plug 'arcticicestudio/nord-vim'
 Plug 'kamwitsta/nordisk'
-Plug 'tomasr/molokai'
 Plug 'jnurmine/Zenburn'
 Plug 'acepukas/vim-zenburn'
-Plug 'kristijanhusak/vim-hybrid-material'
-
+Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-solarized8'
 
 " ==== NEOVIM
-Plug 'junegunn/fzf'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 call plug#end()
 filetype plugin indent on
@@ -116,7 +129,8 @@ let g:deoplete#enable_at_startup = 1
 
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 45
-"let NERDTreeShowHidden=1
+"let g:NERDTreeHighlightCursorline = 0
+"let g:NERDTreeLimitedSyntax = 1
 
 " ===================================================
 " =  VIM RUBY
@@ -371,13 +385,17 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
-      \   'left': [ [ 'mode' ],
-      \             [ 'gitbranch', 'bufnum', 'filename', 'modified' ] ]
+      \   'left': [ [ 'mode', 'readonly' ],
+      \             [ 'bufnum', 'gitbranch', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
       \ },
       \ 'component_function': {
+		  \   'readonly': 'LightlineReadonly',
       \   'filetype': 'MyFiletype',
       \   'fileformat': 'MyFileformat',
-      \   'gitbranch': 'fugitive#head'
+		  \   'gitbranch': 'LightlineFugitive'
       \ }
       \ }
 
@@ -388,6 +406,18 @@ if has("gui_vimr")
 else
   let g:lightline.colorscheme = 'nord'
 endif
+
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? ' '.branch : ''
+  endif
+  return ''
+endfunction
 
 function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
@@ -412,42 +442,85 @@ function! s:lightline_colorschemes(...) abort
 endfunction
 
 command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
-      \ call s:set_lightline_colorscheme(<q-args>)
+        \ call s:set_lightline_colorscheme(<q-args>)
 
-"==================================================
-"= Move
-"==================================================
-"
-let g:move_key_modifier = 'S'
+  "==================================================
+  "= Move
+  "==================================================
+  "
+  let g:move_key_modifier = 'S'
 
-"==================================================
-"= SYNTASTIC
-"==================================================
-"
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+  "==================================================
+  "= VROOM
+  "==================================================
+  "
+  let g:vroom_use_bundle_exec=0
+  let g:vroom_use_terminal=1
+  let g:vroom_use_spring=1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+  "==================================================
+  "= ALCHEMIST/ELIXIR
+  "==================================================
 
-"==================================================
-"= VROOM
-"==================================================
-"
-let g:vroom_use_bundle_exec=0
-let g:vroom_use_terminal=1
-let g:vroom_use_spring=1
+  let g:alchemist_iex_term_size = 150
+  let g:alchemist_iex_term_split = 'vsplit'
 
-"==================================================
-"= LSP
-"==================================================
-"
-let g:LanguageClient_serverCommands = {
-    \ }
+  function! ElixirTestFile()
+    call Send_to_Tmux("reset && mix test ".expand('%:p')."\n")
+  endfunction
+  nnoremap <leader>e :call ElixirTestFile()<CR>
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  "=================================================a
+  "= LSP
+  "==================================================
+  "
+  let g:LanguageClient_autoStop = 0
+  let g:LanguageClient_serverCommands = {
+      \ 'go': ['go-langserver']
+      \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <F6> :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+
+set signcolumn=yes
+
+"=================================================a
+"= NEOMAKE
+"==================================================
+"
+" When writing a buffer (no delay).
+call neomake#configure#automake('w')
+
+let g:neomake_info_sign = {'text': '⦿', 'texthl': 'NeomakeInfoSign'}
+
+"=================================================a
+"= NEOSNIPPETS
+"==================================================
+"
+imap <C-s>     <Plug>(neosnippet_expand_or_jump)
+smap <C-s>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-s>     <Plug>(neosnippet_expand_target)
+
+"=================================================a
+"= TAGBAR
+"==================================================
+"
+nmap <F7> :TagbarToggle<CR>
+
+"=================================================a
+"= VIM-GO
+"==================================================
+"
+nmap gt :GoToggleBreakpoint<CR>
+nmap <leader>gd :GoDebug<CR>
+
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
