@@ -13,6 +13,8 @@ set autowrite		" Automatically save before commands like :next and :make
 set hidden             " Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 
+let maplocalleader=','
+
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -41,7 +43,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'gabesoft/vim-ags'
 Plug 'jgdavey/tslime.vim'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'matze/vim-move'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
@@ -55,15 +56,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'ervandew/supertab'
 
 " ==== OTHER TOOLS
-Plug 'ervandew/supertab'
 Plug 'yegappan/mru'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'kchmck/vim-coffee-script'
-Plug 'jceb/vim-orgmode'
 Plug 'majutsushi/tagbar'
 
 " ==== Trying out
@@ -73,6 +73,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+" both reuired for codequery
+Plug 'Shougo/unite.vim'
+Plug 'devjoe/vim-codequery'
 
 " ==== ELIXIR
 Plug 'slashmili/alchemist.vim'
@@ -100,6 +103,7 @@ Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 filetype plugin indent on
@@ -382,8 +386,8 @@ augroup END
 "
 
 let g:lightline = {
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ 'active': {
       \   'left': [ [ 'mode', 'readonly' ],
       \             [ 'bufnum', 'gitbranch', 'filename', 'modified' ] ]
@@ -402,9 +406,9 @@ let g:lightline = {
 
 if has("gui_vimr")
   "let g:lightline.colorscheme = 'zenburn'
-  let g:lightline.colorscheme = 'nord'
+  let g:lightline.colorscheme = 'Dracula'
 else
-  let g:lightline.colorscheme = 'nord'
+  let g:lightline.colorscheme = 'OldHope'
 endif
 
 function! LightlineReadonly()
@@ -476,7 +480,8 @@ command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
   "
   let g:LanguageClient_autoStop = 0
   let g:LanguageClient_serverCommands = {
-      \ 'go': ['go-langserver']
+      \ 'go': ['go-langserver'],
+      \ 'ruby': ['solargraph', 'stdio']
       \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -496,6 +501,7 @@ set signcolumn=yes
 call neomake#configure#automake('w')
 
 let g:neomake_info_sign = {'text': '⦿', 'texthl': 'NeomakeInfoSign'}
+let g:neomake_javascript_enabled_makers = ['eslint']
 
 "=================================================a
 "= NEOSNIPPETS
@@ -524,3 +530,32 @@ let g:go_highlight_functions = 1
 let g:go_highlight_function_arguments = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_types = 1
+let g:go_highlight_fields = 0
+
+"=================================================a
+" SHORTCUTS
+"==================================================
+
+" ==== FZF
+nmap <leader>f :Files<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>t :Tags<CR>
+
+" ==== MUR
+nmap <leader>m :MRU<CR>
+"=================================================a
+" STT SHIT
+"==================================================
+"
+
+"vmap <leader>t dy :call Send_to_Tmux("$ ".@d."\n")<CR>
+"
+
+"=================================================a
+" CSCOPE
+"==================================================
+"
+set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+
+nnoremap <Leader>fc :cscope find c <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
+nnoremap <Leader>fs :cscope find s <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
