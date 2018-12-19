@@ -69,10 +69,10 @@ Plug 'majutsushi/tagbar'
 " ==== Trying out
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'jalvesaq/vimcmdline'
-Plug 'pbogut/fzf-mru.vim'
-Plug 'makerj/vim-pdf'
-Plug 'kshenoy/vim-signature'
-Plug 'chrisbra/Colorizer'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " ==== ELIXIR
 Plug 'slashmili/alchemist.vim'
