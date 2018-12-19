@@ -56,10 +56,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'ervandew/supertab'
 
 " ==== OTHER TOOLS
-Plug 'yegappan/mru'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ntpeters/vim-better-whitespace'
@@ -67,20 +67,17 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'majutsushi/tagbar'
 
 " ==== Trying out
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-" both reuired for codequery
-Plug 'Shougo/unite.vim'
-Plug 'devjoe/vim-codequery'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'jalvesaq/vimcmdline'
+Plug 'pbogut/fzf-mru.vim'
+Plug 'makerj/vim-pdf'
+Plug 'kshenoy/vim-signature'
+Plug 'chrisbra/Colorizer'
 
 " ==== ELIXIR
 Plug 'slashmili/alchemist.vim'
 
-" ==== RUBY
+" ==== RUBY/RAILS
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'thoughtbot/vim-rspec'
@@ -90,6 +87,8 @@ Plug 'fatih/vim-go'
 Plug 'jodosha/vim-godebug'
 
 " ==== COLOR SCHEMES
+Plug 'whatyouhide/vim-gotham'
+Plug 'junegunn/seoul256.vim'
 Plug 'kocakosm/hilal'
 Plug 'arcticicestudio/nord-vim'
 Plug 'kamwitsta/nordisk'
@@ -97,6 +96,7 @@ Plug 'jnurmine/Zenburn'
 Plug 'acepukas/vim-zenburn'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
+Plug 'jdkanani/vim-material-theme'
 
 " ==== NEOVIM
 Plug 'neomake/neomake'
@@ -112,6 +112,7 @@ filetype plugin indent on
 " =  CONVENIENCE
 " ===================================================
 
+nnoremap <leader>fed :e ~/.config/nvim/init.vim<CR>
 nnoremap <C-T> :tabe %<CR>
 nnoremap <leader>jt :%!python<Space>-m<Space>json.tool<CR>
 
@@ -126,6 +127,9 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " ===================================================
 
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('ignore_sources', {
+\ '_': ['tag']
+\})
 
 " ===================================================
 " =  NERDTREE
@@ -135,6 +139,26 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 45
 "let g:NERDTreeHighlightCursorline = 0
 "let g:NERDTreeLimitedSyntax = 1
+
+" NERDTress File highlighting
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ "exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ "exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"endfunction
+
+"call NERDTreeHighlightFile('ex', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('exs', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('rb', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 
 " ===================================================
 " =  VIM RUBY
@@ -165,12 +189,62 @@ set background=dark
 
 set number
 
-set termguicolors
-colorscheme nord
+
+  "" ==== nord customisations
+  ""
+  set termguicolors
+  "colorscheme nord
+  "hi clear Search
+  "hi link Search Float
+  "hi clear VertSplit
+  "hi link VertSplit LineNr
+  "hi clear DiffAdd
+  "hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
+  "hi clear DiffChange
+  "hi DiffChange guibg=#332a2f
+  "hi clear DiffDelete
+  "hi DiffDelete gui=bold guifg=#4a5466
+  "hi clear DiffText
+  "hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
+  "hi clear Folded
+  "hi link Folded LineNr
+  "hi clear agsvFilePath
+  "hi link agsvFilePath Float
+  "hi clear agsvResultPattern
+  "hi link agsvResultPattern Underlined
+  "hi clear ExtraWhitespace
+  "hi link ExtraWhitespace ErrorMsg
+
+" ==== zenburn
+ "colorscheme zenburn
+ "hi clear VertSplit
+ "hi link VertSplit NonText
+ "hi clear LineNr
+ "hi link LineNr NonText
+ "hi clear agsvFilePath
+ "hi link agsvFilePath Float
+ "hi clear agsvResultPattern
+ "hi link agsvResultPattern Underlined
+
+" ==== gruvbox
+let g:gitgutter_override_sign_column_highlight = 1
+
+colorscheme gruvbox
 hi clear Search
-hi link Search Float
+hi clear Folded
+hi clear FoldColumn
+hi clear EndOfBuffer
+hi clear Visual
+hi clear SignColumn
+hi clear LineNr
 hi clear VertSplit
-hi link VertSplit LineNr
+hi link Search Question
+hi link Folded SpecialKey
+hi link FoldColumn SpecialKey
+hi link EndOfBuffer SpecialKey
+hi link LineNr SpecialKey
+hi link VertSplit SpecialKey
+hi link Visual Pmenu
 hi clear DiffAdd
 hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
 hi clear DiffChange
@@ -179,8 +253,8 @@ hi clear DiffDelete
 hi DiffDelete gui=bold guifg=#4a5466
 hi clear DiffText
 hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
-hi clear Folded
-hi link Folded LineNr
+hi clear ExtraWhitespace
+hi link ExtraWhitespace ErrorMsg
 hi clear agsvFilePath
 hi link agsvFilePath Float
 hi clear agsvResultPattern
@@ -193,6 +267,17 @@ hi link agsvResultPattern Underlined
 set nocursorline
 set nocursorcolumn
 
+"augroup CursorLineOnlyInActiveWindow
+  "autocmd!
+  "autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  "autocmd WinLeave * setlocal nocursorline
+"augroup END
+
+"augroup ColorColumnOnlyInActiveWindow
+  "autocmd!
+  "autocmd VimEnter,WinEnter,BufWinEnter * setlocal colorcolumn=90
+  "autocmd WinLeave * setlocal colorcolumn=0
+"augroup END
 " ===================================================
 " =  FOLDING
 " ===================================================
@@ -223,7 +308,7 @@ map ,zz :call FoldSpec()<CR>
 
 " Fold Ruby, showing class and method definitions
 function! FoldDefs()
-let @/='\(module\ \|class\ \|has_many\ \|belongs_to\ \|_filter\ \|helper\ \|belongs_to\ \|def\ \|private\|protected\)'
+let @/='\(module\ \|class\ \|has_many\ \|belongs_to\ \|_filter\ \|helper\ \|belongs_to\ \|def\ \|private\|protected\|defp\)'
 setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zd :call FoldDefs()<CR>
@@ -273,8 +358,10 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 " ==================== Col length ====================
 "
-set textwidth=100
-match DiffText '\%>100v.\+'
+"set textwidth=90
+
+map <LocalLeader>cc :set colorcolumn=90<CR>
+map <LocalLeader>co :set colorcolumn=<CR>
 
 " ==== Easier non-interactive command insertion =====
 nnoremap <space> :
@@ -289,8 +376,6 @@ nmap <right> :tabn<CR>
 "=  BUFFERS
 "===================================================
 
-nmap <up> :bp<CR><Esc><Esc>
-nmap <down> :bn<CR><Esc>
 nmap <leader>q :bp <BAR> bd #<CR>
 
 " =========== Wiki ==========
@@ -310,6 +395,8 @@ map <Leader>c :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+map <LocalLeader>v :VroomRunTestFile<CR>
+map <LocalLeader>vv :VroomRunNearestTest<CR>
 
 let g:rspec_command = 'call Send_to_Tmux("reset && spring rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
@@ -323,11 +410,6 @@ set clipboard=unnamed
 " ===== cursor =============
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-"==================================================
-"=  CTRLP
-"==================================================
-nnoremap <leader>. :CtrlPTag<cr>
 
 "==================================================
 "=  SILVER SEARCHER
@@ -390,7 +472,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ 'active': {
       \   'left': [ [ 'mode', 'readonly' ],
-      \             [ 'bufnum', 'gitbranch', 'filename', 'modified' ] ]
+      \             [ 'bufnum', 'gitbranch', 'relativepath', 'modified' ] ]
       \ },
       \ 'component': {
       \   'lineinfo': ' %3l:%-2v',
@@ -404,12 +486,8 @@ let g:lightline = {
       \ }
 
 
-if has("gui_vimr")
-  "let g:lightline.colorscheme = 'zenburn'
-  let g:lightline.colorscheme = 'Dracula'
-else
-  let g:lightline.colorscheme = 'OldHope'
-endif
+" let g:lightline.colorscheme = 'nord'
+let g:lightline.colorscheme = 'darcula'
 
 function! LightlineReadonly()
   return &readonly ? '' : ''
@@ -470,7 +548,7 @@ command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
   let g:alchemist_iex_term_split = 'vsplit'
 
   function! ElixirTestFile()
-    call Send_to_Tmux("reset && mix test ".expand('%:p')."\n")
+    call Send_to_Tmux("reset && mix test ".expand('%:p')." --trace\n")
   endfunction
   nnoremap <leader>e :call ElixirTestFile()<CR>
 
@@ -480,16 +558,8 @@ command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
   "
   let g:LanguageClient_autoStop = 0
   let g:LanguageClient_serverCommands = {
-      \ 'go': ['go-langserver'],
-      \ 'ruby': ['solargraph', 'stdio']
+      \ 'go': ['go-langserver']
       \ }
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <F6> :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
 set signcolumn=yes
 
@@ -502,6 +572,7 @@ call neomake#configure#automake('w')
 
 let g:neomake_info_sign = {'text': '⦿', 'texthl': 'NeomakeInfoSign'}
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 
 "=================================================a
 "= NEOSNIPPETS
@@ -541,15 +612,10 @@ nmap <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :Tags<CR>
 
-" ==== MUR
-nmap <leader>m :MRU<CR>
-"=================================================a
-" STT SHIT
-"==================================================
-"
+" ==== MRU
+nmap <leader>m :FZFMru<CR>
 
-"vmap <leader>t dy :call Send_to_Tmux("$ ".@d."\n")<CR>
-"
+let g:fzf_mru_relative = 1
 
 "=================================================a
 " CSCOPE
@@ -559,3 +625,18 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 
 nnoremap <Leader>fc :cscope find c <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
 nnoremap <Leader>fs :cscope find s <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
+
+"=================================================a
+" LANGCLIENT
+"==================================================
+"
+"let g:LanguageClient_autoStop = 0
+"let g:LanguageClient_serverCommands = {
+    "\ 'ruby': ['tcp://localhost:7658']
+    "\ }
+
+"autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+
+"nnoremap <silent> <localleader>d :call LanguageClient_textDocument_hover()<CR>
+"
+let g:NERDTreeLimitedSyntax = 1

@@ -89,6 +89,7 @@ alias tmuxconfig="nvim ~/.tmux.conf"
 alias vimconfig="nvim ~/.vimrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias alacrittyconfig="nvim ~/.config/alacritty/alacritty.yml"
+alias taskconfig="nvim ~/.taskrc"
 
 alias gtree="git log --oneline --graph --abbrev-commit"
 
@@ -114,12 +115,20 @@ alias grepm="GREP_COLOR='1;35' grep --color=always"
 alias grepc="GREP_COLOR='1;36' grep --color=always"
 alias grepw="GREP_COLOR='1;37' grep --color=always"
 
+alias gentags="starscope -e ctags -x node_modules -x spec -x tmp"
+alias genscope="starscope -e cscope -x node_modules -x spec -x tmp"
 
-export GOPATH="/Users/denesh/Documents/learning/go"
-#if [[ $TMUX ]]; then
-  #source ~/.bash_profile
-  export PATH="/Users/denesh/.asdf/shims:/Users/denesh/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
-#fi
+alias twork="reset && task project:work list"
+alias ttodo="reset && task project:todo list"
+alias tn="reset && task"
+
+export GOPATH="/Users/denesh/Documents/learning/go/"
+export PATH="/Users/denesh/.asdf/shims:/Users/denesh/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
+
+if [[ $TMUX ]]; then
+  source ~/.bash_profile
+  #export PATH="/Users/denesh/.asdf/shims:/Users/denesh/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
+fi
 
 echo "PATH is $PATH"
 
