@@ -5,12 +5,15 @@
 "set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set wrapscan
-set nowrap
+set wrap
 set linebreak
+set breakindent
 set smartcase		" Do smart case matching
 set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
+set hidden             " Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
+
+let maplocalleader=","
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -43,7 +46,6 @@ Plug 'jgdavey/tslime.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'matze/vim-move'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdcommenter'
@@ -53,39 +55,57 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " ==== OTHER TOOLS
-Plug 'ervandew/supertab'
-Plug 'itchyny/calendar.vim'
+"Plug 'ervandew/supertab'
+Plug 'yegappan/mru'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'kchmck/vim-coffee-script'
+Plug 'jceb/vim-orgmode'
+Plug 'majutsushi/tagbar'
+
+" ==== Trying out
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'junegunn/rainbow_parentheses.vim'
+"Plug 'autozimu/LanguageClient-neovim', {
+    "\ 'branch': 'next',
+    "\ 'do': 'bash install.sh',
+    "\ }
+
+" ==== ELIXIR
+Plug 'slashmili/alchemist.vim'
 
 " ==== RUBY
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'thoughtbot/vim-rspec'
 
+" ==== GO
+"Plug 'fatih/vim-go'
+"Plug 'jodosha/vim-godebug'
+
+" ==== MUSIC
+Plug 'supercollider/scvim'
+Plug 'munshkr/vim-tidal'
+
 " ==== COLOR SCHEMES
-Plug 'dwkmatt/Monrovia'
-Plug 'whatyouhide/vim-gotham'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'kocakosm/hilal'
 Plug 'arcticicestudio/nord-vim'
 Plug 'kamwitsta/nordisk'
-Plug 'tomasr/molokai'
 Plug 'jnurmine/Zenburn'
 Plug 'acepukas/vim-zenburn'
-Plug 'kristijanhusak/vim-hybrid-material'
-
+Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-solarized8'
 
 " ==== NEOVIM
-Plug 'junegunn/fzf'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/echodoc.vim'
-
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 call plug#end()
 filetype plugin indent on
@@ -115,6 +135,8 @@ let g:deoplete#enable_at_startup = 1
 
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 45
+"let g:NERDTreeHighlightCursorline = 0
+"let g:NERDTreeLimitedSyntax = 1
 
 " ===================================================
 " =  VIM RUBY
@@ -145,45 +167,26 @@ set background=dark
 
 set number
 
-"hi LineNr guibg=000 guifg=001
-if has("gui_vimr")
-  set termguicolors
-  colorscheme nord
-  hi clear Search
-  hi clear VertSplit
-  hi clear DiffAdd
-  hi clear DiffChange
-  hi clear DiffDelete
-  hi clear DiffText
-  hi clear Underlined
-  hi link Underlined Todo
-  hi link Search Float
-  hi link VertSplit LineNr
-  hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
-  hi DiffDelete gui=bold guifg=#4a5466
-  hi DiffChange guibg=#332a2f
-  hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
-else
-  set termguicolors
-  colorscheme nord
-  "hi clear Visual
-  hi clear Search
-  "hi clear String
-  "hi clear Substitute
-  "hi clear DiffText
-  "hi clear Title
-  "hi link Search Float
-  "hi link DiffText Visual
-  "hi link Visual StatusLine
-  "hi link String GitGutterChangeDefault
-  "hi link Title MoreMsg
-  "hi IncSearch ctermbg=000 ctermfg=005
-  "hi DiffAdd ctermfg=4
-  "
-  hi link Search Float
-  hi clear VertSplit
-  hi link VertSplit LineNr
-endif
+set termguicolors
+colorscheme solarized8
+hi clear Search
+hi link Search Float
+hi clear VertSplit
+hi link VertSplit LineNr
+"hi clear DiffAdd
+"hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
+"hi clear DiffChange
+"hi DiffChange guibg=#332a2f
+"hi clear DiffDelete
+"hi DiffDelete gui=bold guifg=#4a5466
+"hi clear DiffText
+"hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
+"hi clear Folded
+"hi link Folded LineNr
+"hi clear agsvFilePath
+"hi link agsvFilePath Float
+"hi clear agsvResultPattern
+"hi link agsvResultPattern Underlined
 
 "==================================================
 "= CURSOR
@@ -215,7 +218,7 @@ set nocursorcolumn
 "
 " Fold spec files, displaying "describe ..." and "it ..." lines
 function! FoldSpec()
-let @/='\(describe.*do$\|it.*do$\|context.*do$\)'
+let @/='\(describe.*do$\|it.*do$\|context.*do$\|scenario.*do$\)'
 setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zz :call FoldSpec()<CR>
@@ -272,7 +275,7 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 " ==================== Col length ====================
 "
-set textwidth=100
+"set textwidth=90
 match DiffText '\%>100v.\+'
 
 " ==== Easier non-interactive command insertion =====
@@ -309,8 +312,8 @@ map <Leader>c :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
- 
-let g:rspec_command = 'call Send_to_Tmux("spring rspec {spec}\n")'
+
+let g:rspec_command = 'call Send_to_Tmux("reset && spring rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
 
 map <Leader>rp :call Send_to_Tmux("spring rake parallel:spec\n")<CR>
@@ -344,7 +347,7 @@ if executable('ag')
 
   let g:ags_agcontext = 5
 
-  let g:ags_winheight = '20'
+  le g:ags_winheight = '20'
 endif
 
 " bind F to grep word under cursor
@@ -388,22 +391,34 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
-      \   'left': [ [ 'mode' ],
-      \             [ 'gitbranch', 'bufnum', 'filename', 'modified' ] ]
+      \   'left': [ [ 'mode', 'readonly' ],
+      \             [ 'bufnum', 'gitbranch', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
       \ },
       \ 'component_function': {
+		  \   'readonly': 'LightlineReadonly',
       \   'filetype': 'MyFiletype',
       \   'fileformat': 'MyFileformat',
-      \   'gitbranch': 'fugitive#head'
+		  \   'gitbranch': 'LightlineFugitive'
       \ }
       \ }
 
-if has("gui_vimr")
-  "let g:lightline.colorscheme = 'zenburn'
-  let g:lightline.colorscheme = 'nord'
-else
-  let g:lightline.colorscheme = 'mg'
-endif
+
+let g:lightline.colorscheme = 'solarized'
+
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? ' '.branch : ''
+  endif
+  return ''
+endfunction
 
 function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
@@ -428,31 +443,98 @@ function! s:lightline_colorschemes(...) abort
 endfunction
 
 command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
-      \ call s:set_lightline_colorscheme(<q-args>)
+        \ call s:set_lightline_colorscheme(<q-args>)
 
-"==================================================
-"= Move
+  "==================================================
+  "= Move
+  "==================================================
+  "
+  let g:move_key_modifier = 'S'
+
+  "==================================================
+  "= VROOM
+  "==================================================
+  "
+  let g:vroom_use_bundle_exec=0
+  let g:vroom_use_terminal=1
+  let g:vroom_use_spring=1
+
+  "==================================================
+  "= ALCHEMIST/ELIXIR
+  "==================================================
+
+  let g:alchemist_iex_term_size = 150
+  let g:alchemist_iex_term_split = 'vsplit'
+
+  function! ElixirTestFile()
+    call Send_to_Tmux("reset && mix test ".expand('%:p')."\n")
+  endfunction
+  nnoremap <leader>e :call ElixirTestFile()<CR>
+
+  "=================================================a
+  "= LSP
+  "==================================================
+  "
+"let g:LanguageClient_autoStop = 0
+  "let g:LanguageClient_serverCommands = {
+      "\ 'go': ['/Users/denesh/Documents/learning/go/bin/go-langserver']
+      "\ }
+
+"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+"nnoremap <F6> :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+"autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+
+"set signcolumn=yes
+
+"=================================================a
+"= NEOMAKE
 "==================================================
 "
-let g:move_key_modifier = 'S'
+" When writing a buffer (no delay).
+call neomake#configure#automake('w')
 
-"==================================================
-"= SYNTASTIC
+let g:neomake_info_sign = {'text': '⦿', 'texthl': 'NeomakeInfoSign'}
+
+"=================================================a
+"= NEOSNIPPETS
 "==================================================
 "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+imap <C-s>     <Plug>(neosnippet_expand_or_jump)
+smap <C-s>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-s>     <Plug>(neosnippet_expand_target)
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-"==================================================
-"= VROOM
+"=================================================a
+"= TAGBAR
 "==================================================
 "
-let g:vroom_use_bundle_exec=0
-let g:vroom_use_terminal=1
-let g:vroom_use_spring=1
+nmap <F7> :TagbarToggle<CR>
+
+"=================================================a
+"= VIM-GO
+"==================================================
+"
+"nmap gt :GoToggleBreakpoint<CR>
+"nmap <leader>gd :GoDebug<CR>
+
+"let g:go_highlight_extra_types = 1
+"let g:go_highlight_operators = 1
+"let g:go_highlight_functions = 1
+"let g:go_highlight_function_arguments = 1
+"let g:go_highlight_function_calls = 1
+"let g:go_highlight_types = 1
+
+"let g:go_fmt_autosave=0
+
+"=================================================a
+"= VIM-GO
+"==================================================
+
+
+"=================================================a
+"= RAINBOW ()
+"==================================================
+"
+let g:rainbow_active = 1
