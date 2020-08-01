@@ -103,6 +103,9 @@ alias mps="mix phoenix.server"
 
 alias nv="nvim"
 
+alias tn="reset && task next"
+alias tt="reset && task +today list"
+
 # grep stuff
 alias aag='reset && ag --pager less --color-match 31 --color-line-number 31 -C'
 alias grepgr="GREP_COLOR='1;30' grep --color=always"
@@ -114,6 +117,7 @@ alias grepm="GREP_COLOR='1;35' grep --color=always"
 alias grepc="GREP_COLOR='1;36' grep --color=always"
 alias grepw="GREP_COLOR='1;37' grep --color=always"
 
+alias ttodo="reset && task +todo list"
 
 export GOPATH="/Users/denesh/Documents/learning/go"
 #if [[ $TMUX ]]; then
