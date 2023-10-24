@@ -54,7 +54,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ervandew/supertab'
@@ -85,7 +85,6 @@ Plug 'thoughtbot/vim-rspec'
 "Plug 'jodosha/vim-godebug'
 
 " ==== MUSIC
-Plug 'supercollider/scvim'
 Plug 'munshkr/vim-tidal'
 
 " ==== COLOR SCHEMES
@@ -99,6 +98,7 @@ Plug 'acepukas/vim-zenburn'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 Plug 'jdkanani/vim-material-theme'
+Plug 'Mofiqul/dracula.nvim'
 
 " ==== NEOVIM
 Plug 'neomake/neomake'
@@ -106,6 +106,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 filetype plugin indent on
@@ -148,20 +149,6 @@ let g:NERDTreeWinSize = 45
  "exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 "endfunction
 
-"call NERDTreeHighlightFile('ex', 'green', 'none', 'green', '#151515')
-"call NERDTreeHighlightFile('exs', 'green', 'none', 'green', '#151515')
-"call NERDTreeHighlightFile('rb', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-
 " ===================================================
 " =  VIM RUBY
 " ===================================================
@@ -192,11 +179,10 @@ set background=dark
 set number
 
 set termguicolors
-colorscheme solarized8
+colorscheme solarized8_high
 hi clear Search
 hi clear Folded
 hi clear FoldColumn
-hi clear EndOfBuffer
 hi clear Visual
 hi clear SignColumn
 hi clear LineNr
@@ -204,7 +190,6 @@ hi clear VertSplit
 hi link Search Question
 hi link Folded SpecialKey
 hi link FoldColumn SpecialKey
-hi link EndOfBuffer SpecialKey
 hi link LineNr SpecialKey
 hi link VertSplit SpecialKey
 hi link Visual Pmenu
@@ -362,10 +347,10 @@ map <Leader>a :call RunAllSpecs()<CR>
 map <LocalLeader>v :VroomRunTestFile<CR>
 map <LocalLeader>vv :VroomRunNearestTest<CR>
 
-let g:rspec_command = 'call Send_to_Tmux("reset && spring rspec {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("reset && rspec {spec}\n")'
 let g:rspec_runner = "os_x_iterm2"
 
-map <Leader>rp :call Send_to_Tmux("spring rake parallel:spec\n")<CR>
+map <Leader>rp :call Send_to_Tmux("rspec\n")<CR>
 
 " ===== clipboard options ==
 
@@ -493,7 +478,7 @@ command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
   "= Move
   "==================================================
   "
-  let g:move_key_modifier = 'S'
+  " let g:move_key_modifier = 'S'
 
   "==================================================
   "= VROOM
@@ -603,10 +588,10 @@ let g:fzf_mru_relative = 1
 " CSCOPE
 "==================================================
 "
-set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+"set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 
-nnoremap <Leader>fc :cscope find c <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
-nnoremap <Leader>fs :cscope find s <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
+"nnoremap <Leader>fc :cscope find c <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
+"nnoremap <Leader>fs :cscope find s <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>
 
 "=================================================a
 " LANGCLIENT
@@ -622,3 +607,5 @@ nnoremap <Leader>fs :cscope find s <C-R>=expand("<cword>")<CR><CR>:botright cwin
 "nnoremap <silent> <localleader>d :call LanguageClient_textDocument_hover()<CR>
 "
 let g:NERDTreeLimitedSyntax = 1
+
+let g:coc_disable_startup_warning = 1
