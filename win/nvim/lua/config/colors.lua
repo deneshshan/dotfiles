@@ -4,7 +4,6 @@ vim.cmd([[
   hi link Visual Pmenu
 ]])
 
-
 -- Fugitive
 vim.cmd([[
   hi clear DiffAdd
