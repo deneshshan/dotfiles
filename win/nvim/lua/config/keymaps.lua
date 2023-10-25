@@ -15,6 +15,11 @@ vim.keymap.set("n", "<Space>", ":", {})
 -- Reload configuration without restart nvim
 vim.keymap.set("n", "<leader>r", ":so %<CR>", {})
 
+-- Tabs
+vim.keymap.set("n", "<Left>", ":tabp<CR>", {})
+vim.keymap.set("n", "<Right>", ":tabn<CR>", {})
+vim.keymap.set("n", "<C-t>", ":tabe %<CR>", {})
+
 -- Telescope
 -- <leader> is a space now
 local builtin = require("telescope.builtin")
