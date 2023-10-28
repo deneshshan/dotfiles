@@ -20,6 +20,9 @@ vim.keymap.set("n", "<Left>", ":tabp<CR>", {})
 vim.keymap.set("n", "<Right>", ":tabn<CR>", {})
 vim.keymap.set("n", "<C-t>", ":tabe %<CR>", {})
 
+-- JSON
+vim.keymap.set("n", "<leader>jt", ":%!python<Space>-m<Space>json.tool<CR>", {})
+
 -- Telescope
 -- <leader> is a space now
 local builtin = require("telescope.builtin")

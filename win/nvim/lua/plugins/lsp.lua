@@ -10,6 +10,9 @@ return {
 			},
 			{ 'hrsh7th/nvim-cmp' },
 			{ 'L3MON4D3/LuaSnip' },
+      { 'rasulomaroff/cmp-bufname' },
+      { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' }
 		},
 		config = function()
 			local lsp = require('lsp-zero').preset({})
@@ -39,9 +42,10 @@ return {
 				},
 
 				sources = {
-					{
-						name = "nvim_lsp"
-					},
+					{ name = "nvim_lsp" },
+          { name = "buffname" },
+          { name = 'nvim_lsp_document_symbol' },
+          { name = 'nvim_lsp_signature_help' },
 					{
 						name = "buffer",
 						option = {
@@ -59,6 +63,8 @@ return {
 					}
 				}
 			})
+
+      vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 		end
 	}
 }

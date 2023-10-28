@@ -1,7 +1,7 @@
 vim.cmd([[
   hi Search gui=bold guifg=#c4b341
   hi clear Visual
-  hi link Visual Pmenu
+  hi link Visual Error
 ]])
 
 -- Fugitive
