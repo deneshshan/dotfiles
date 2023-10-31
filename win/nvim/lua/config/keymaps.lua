@@ -17,8 +17,8 @@ vim.keymap.set("n", "<Tab>", "/", {})
 vim.keymap.set("n", "<leader>r", ":so %<CR>", {})
 
 -- Tabs
-vim.keymap.set("n", "<Left>", ":tabp<CR>", {})
-vim.keymap.set("n", "<Right>", ":tabn<CR>", {})
+-- vim.keymap.set("n", "<Left>", ":tabp<CR>", {})
+-- vim.keymap.set("n", "<Right>", ":tabn<CR>", {})
 vim.keymap.set("n", "<C-t>", ":tabe %<CR>", {})
 
 -- JSON
