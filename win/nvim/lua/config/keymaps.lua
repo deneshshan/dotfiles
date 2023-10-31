@@ -11,6 +11,7 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 
 vim.keymap.set("n", "<Space>", ":", {})
+vim.keymap.set("n", "<Tab>", "/", {})
 
 -- Reload configuration without restart nvim
 vim.keymap.set("n", "<leader>r", ":so %<CR>", {})
@@ -32,7 +33,6 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
 -- NvimTree
-local api = require('nvim-tree.api')
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", {})        -- open/close
 vim.keymap.set("n", "<leader>nr", ":NvimTreeRefresh<CR>", {})  -- refresh
 vim.keymap.set("n", "<leader>nf", ":NvimTreeFindFile<CR>", {}) -- search file
