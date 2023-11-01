@@ -72,8 +72,6 @@ return {
         sources = {
           { name = "nvim_lsp" },
           { name = "buffname" },
-          { name = 'nvim_lsp_document_symbol' },
-          { name = 'nvim_lsp_signature_help' },
           {
             name = "buffer",
             option = {
