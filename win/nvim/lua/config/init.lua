@@ -37,11 +37,11 @@ if ok then
 end
 
 require("lazy").setup({
-  root = vim.fn.stdpath("data") .. "/lazy",                 -- directory where plugins will be installed
+  root = vim.fn.stdpath("data") .. "/lazy",                -- directory where plugins will be installed
   spec = spec,
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
   defaults = {
-    lazy = false,                                           -- should plugins be lazy-loaded?
+    lazy = false,                                          -- should plugins be lazy-loaded?
     version = nil
     -- version = "*", -- enable this to try installing the latest stable versions of plugins
   },
@@ -49,7 +49,7 @@ require("lazy").setup({
     -- install missing plugins on startup
     missing = true,
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "solarized", "rose-pine", "habamax" }
+    colorscheme = { "solarized" }
   },
   checker = {
     -- automatically check for plugin updates
