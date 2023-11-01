@@ -11,7 +11,7 @@ vim.cmd([[
   hi clear DiffChange
   hi DiffChange guibg=#332a2f
   hi clear DiffDelete
-  hi DiffDelete gui=bold guibg=#4a5466
+  hi DiffDelete gui=bold guibg=#332a2f
   hi clear DiffText
   hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
 ]])

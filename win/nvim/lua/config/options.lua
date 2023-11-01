@@ -14,7 +14,6 @@ local cmd = vim.cmd
 local opt = vim.opt
 -- Global variables
 local g = vim.g
-local s = vim.s
 local indent = 4
 
 cmd([[
@@ -98,7 +97,7 @@ opt.termguicolors = true -- enable 24-bit RGB colors
 -- persistent undo
 -- Don"t forget to create folder $HOME/.local/share/nvim/undo
 local undodir = vim.fn.stdpath("data") .. "/undo"
-opt.undofile = true -- enable persistent undo
+opt.undofile = false -- enable persistent undo
 opt.undodir = undodir
 opt.undolevels = 1000
 opt.undoreload = 10000
