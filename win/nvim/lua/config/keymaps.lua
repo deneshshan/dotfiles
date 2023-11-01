@@ -14,6 +14,8 @@ vim.keymap.set("n", "<Space>", ":", {})
 vim.keymap.set("n", "<Tab>", "/", {})
 
 -- Tabs
+vim.keymap.set("n", "<up>", "<cmd>tabn<cr>", {})
+vim.keymap.set("n", "<down>", "<cmd>tabp<cr>", {})
 vim.keymap.set("n", "<C-t>", ":tabe %<CR>", {})
 
 -- JSON
