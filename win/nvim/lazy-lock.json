@@ -4,6 +4,7 @@
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-bufname": { "branch": "main", "commit": "5a5273813058a6fb9c39f74e94ef1969337e52f8" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
+  "garbage-day.nvim": { "branch": "main", "commit": "cb1cac3309525bcbcc9942eaa06bc5f258271432" },
   "gitsigns.nvim": { "branch": "main", "commit": "af0f583cd35286dd6f0e3ed52622728703237e50" },
   "hop.nvim": { "branch": "master", "commit": "275dcbc84e8167c7d64b4584770d837f3ce21562" },
   "lazy.nvim": { "branch": "main", "commit": "16603c6917435d8446f7357cb61095138a417085" },
