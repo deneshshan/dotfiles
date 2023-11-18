@@ -13,10 +13,13 @@
 vim.keymap.set("n", "<Space>", ":", {})
 vim.keymap.set("n", "<Tab>", "/", {})
 
--- Tabs
-vim.keymap.set("n", "<up>", "<cmd>tabn<cr>", {})
-vim.keymap.set("n", "<down>", "<cmd>tabp<cr>", {})
+-- Tabs/buffers
+vim.keymap.set("n", "<right>", "<cmd>tabn<cr>", {})
+vim.keymap.set("n", "<left>", "<cmd>tabp<cr>", {})
+vim.keymap.set("n", "<up>", "<cmd>bp<cr>", {})
+vim.keymap.set("n", "<down>", "<cmd>bn<cr>", {})
 vim.keymap.set("n", "<C-t>", ":tabe %<CR>", {})
+vim.keymap.set("n", "<leader>q", "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", {})
 
 -- JSON
 vim.keymap.set("n", "<leader>jt", ":%!python<Space>-m<Space>json.tool<CR>", {})
