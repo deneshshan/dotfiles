@@ -77,12 +77,14 @@ return {
             option = {
               -- Avoid accidentally running on big files
               get_bufnrs = function()
-                local buf = vim.api.nvim_get_current_buf()
-                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-                if byte_size > 1024 * 1024 then -- 1 Megabyte max
-                  return {}
-                end
-                return { buf }
+                -- local buf = vim.api.nvim_get_current_buf()
+                -- local buf = vim.api.nvim_list_bufs()
+                -- local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                -- if byte_size > 1024 * 1024 then -- 1 Megabyte max
+                --   return {}
+                -- end
+                -- return { buf }
+                return vim.api.nvim_list_bufs()
               end
             }
 
