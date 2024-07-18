@@ -249,21 +249,21 @@ set nocursorcolumn
 "
 " Fold spec files, displaying "describe ..." and "it ..." lines
 function! FoldSpec()
-let @/='\(describe.*do$\|it.*do$\|context.*do$\|scenario.*do$\)'
-setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
+    let @/='\(describe.*do$\|it.*do$\|context.*do$\|scenario.*do$\)'
+    setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zz :call FoldSpec()<CR>
 
 " Fold Ruby, showing class and method definitions
 function! FoldDefs()
-let @/='\(module\ \|class\ \|has_many\ \|belongs_to\ \|_filter\ \|helper\ \|belongs_to\ \|def\ \|private\|protected\|defp\)'
-setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
+    let @/='\(module\ \|class\ \|has_many\ \|belongs_to\ \|_filter\ \|helper\ \|belongs_to\ \|def\ \|private\|protected\|defp\)'
+    setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zd :call FoldDefs()<CR>
 " Fold Cucumber
 function! FoldCucumber()
-let @/='\(Given\ \|When\ \)'
-setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
+    let @/='\(Given\ \|When\ \)'
+    setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 endfunction
 map ,zs :call FoldCucumber()<CR>
 
