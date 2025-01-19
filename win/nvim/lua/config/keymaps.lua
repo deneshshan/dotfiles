@@ -36,3 +36,6 @@ vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", {})        -- open/close
 vim.keymap.set("n", "<leader>nr", ":NvimTreeRefresh<CR>", {})  -- refresh
 vim.keymap.set("n", "<leader>nf", ":NvimTreeFindFile<CR>", {}) -- search file
+
+--Diff
+vim.keymap.set("n", "<leader>dt", ":diffthis<CR>", {})
