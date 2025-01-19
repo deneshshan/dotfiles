@@ -52,8 +52,6 @@ return {
       })
 
       -- lspconfig.rust_analyzer.setup({})
-      lspconfig.ruby_lsp.setup({})
-      lspconfig.sorbet.setup({})
       lspconfig.rubocop.setup({
         cmd = { 'bundle', 'exec', 'rubocop', '--lsp' }
       })
