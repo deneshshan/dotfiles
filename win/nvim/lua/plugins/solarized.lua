@@ -3,27 +3,21 @@ return {
     'maxmx03/solarized.nvim',
     lazy = false,
     priority = 1000,
-    opts = {
-      colors = {
-        fg = '#fff'
-      }
-    },
-    init = function()
-      vim.o.background = 'dark' -- or 'light'
-
+    ---@type solarized.config
+    opts = {},
+    config = function(_, opts)
+      vim.o.termguicolors = true
+      vim.o.background = 'dark'
+      require('solarized').setup(opts)
       vim.cmd.colorscheme 'solarized'
-    end,
-    config = function()
-      -- require('solarized').setup {
-      --   highlights = function(colors, colorhelper)
-      --     local lighten = colorhelper.lighten
 
-      --     return {
-      --       Function = { fg = lighten(colors.blue, 40) },
-      --       Normal = { fg = colors.fg }
-      --     }
-      --   end
-      -- }
+      vim.cmd([[
+        hi clear WinSeparator
+        hi WinSeparator gui=bold guifg=#073642
+        hi clear Type
+        hi Type guifg=#6c71c4
+        hi Parameter guifg=#859900
+      ]])
     end,
-  },
+  }
 }
