@@ -11,6 +11,18 @@ return {
       vim.cmd([[
         vmap <leader>gp :'<,'>diffput<CR>
       ]])
+
+      -- colours
+      vim.cmd([[
+        hi clear DiffAdd
+        hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
+        hi clear DiffChange
+        hi DiffChange guibg=#332a2f
+        hi clear DiffDelete
+        hi DiffDelete gui=bold guibg=#332a2f
+        hi clear DiffText
+        hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
+      ]])
     end,
   }
 }
