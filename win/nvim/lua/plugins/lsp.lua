@@ -51,12 +51,12 @@ return {
         end
       })
 
-      lspconfig.rust_analyzer.setup({})
-      lspconfig.ruby_ls.setup({})
-      lspconfig.sorbet.setup({})
+      -- lspconfig.rust_analyzer.setup({})
       lspconfig.rubocop.setup({
         cmd = { 'bundle', 'exec', 'rubocop', '--lsp' }
       })
+      lspconfig.ts_ls.setup({})
+      -- lspconfig.ruby_lsp.setup {}
 
       local cmp = require('cmp')
       cmp.setup({
@@ -87,12 +87,14 @@ return {
                 return vim.api.nvim_list_bufs()
               end
             }
-
           }
         }
       })
 
       vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
+        { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "gr", function() require('telescope.builtin').lsp_references(), { noremap = true, silent = true })
     end
   }
 }

@@ -106,8 +106,12 @@ alias zshconfig="nvim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmuxconfig="nvim ~/.tmux.conf"
-alias vimconfig="nvim ~/.vimrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
+alias be="bundle exec"
+alias hist="history | grep"
+alias rubotest="bundle exec rubocop && bundle exec rails test"
+# alias gentags=
+
 
 eval `dircolors ~/.dircolors`
 

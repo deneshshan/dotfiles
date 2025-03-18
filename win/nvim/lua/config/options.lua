@@ -118,4 +118,4 @@ end
 
 -- Colorscheme
 -- By default, use rose-pine
-cmd.colorscheme("solarized")
+-- cmd.colorscheme("gruvbox")

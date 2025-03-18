@@ -1,23 +1,5 @@
 vim.cmd([[
   hi Search gui=bold guifg=#c4b341
   hi clear Visual
-  hi link Visual Error
-]])
-
--- Fugitive
-vim.cmd([[
-  hi clear DiffAdd
-  hi DiffAdd gui=bold guifg=#709080 guibg=#313b36
-  hi clear DiffChange
-  hi DiffChange guibg=#332a2f
-  hi clear DiffDelete
-  hi DiffDelete gui=bold guibg=#332a2f
-  hi clear DiffText
-  hi DiffText gui=bold guifg=#ecbcbc guibg=#41363c
-]])
-
--- Matchup
-vim.cmd([[
-  hi clear MatchParen
-  hi MatchParen gui=bold guifg=#fdf6e3 guibg=#073642
+  hi Visual gui=bold guifg=#c4b341
 ]])
