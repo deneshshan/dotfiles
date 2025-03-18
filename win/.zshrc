@@ -112,7 +112,4 @@ alias hist="history | grep"
 alias rubotest="bundle exec rubocop && bundle exec rails test"
 # alias gentags=
 
-
-eval `dircolors ~/.dircolors`
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2, bold"
