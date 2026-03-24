@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/denesh/.oh-my-zsh"
+export ZSH="/Users/deneshshan/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="rkj-repos"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,8 +70,6 @@ ZSH_THEME="rkj-repos"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git docker docker-compose zsh-completions zsh-autosuggestions asdf)
 
-autoload -U compinit && compinit
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -87,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -113,6 +112,14 @@ alias rubotest="bundle exec rubocop && bundle exec rails test"
 # alias gentags=
 
 
-eval `dircolors ~/.dircolors`
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:/opt/homebrew/opt/postgresql@17/bin:/Users/deneshshan/.local/bin:/Applications/SuperCollider.app/Contents/MacOS/:$PATH"
+export PATH="$/opt/homebrew/opt/postgresql@17/bin:/Users/deneshshan/.local/bin:/Applications/SuperCollider.app/Contents/MacOS/:$PATH"
+# eval `dircolors ~/.dircolors`
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2, bold"
+
+# append completions to fpath
+# fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit

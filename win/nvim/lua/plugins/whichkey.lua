@@ -8,9 +8,7 @@ return {
       vim.keymap.set("n", "<Leader>k", "<Cmd>WhichKey<Cr>", {})
     end,
     opts = {
-      window = {
-        border = "double"
-      },
+      notify = false,
     },
   }
 }

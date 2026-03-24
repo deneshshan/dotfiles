@@ -55,8 +55,9 @@ return {
       lspconfig.rubocop.setup({
         cmd = { 'bundle', 'exec', 'rubocop', '--lsp' }
       })
-      lspconfig.ts_ls.setup({})
+      -- lspconfig.ts_ls.setup({})
       -- lspconfig.ruby_lsp.setup {}
+      lspconfig.rust_analyzer.setup {}
 
       local cmp = require('cmp')
       cmp.setup({

@@ -23,5 +23,6 @@ return { -- File explore
     init = function(_, _)
       vim.keymap.set("n", "<Leader>nl", ":NvimTreeResize 100<CR>")
       vim.keymap.set("n", "<Leader>ns", ":NvimTreeResize 30<CR>")
+      vim.keymap.set("n", "<Leader>nf", ":NvimTreeFocus<CR>")
     end
   } }
