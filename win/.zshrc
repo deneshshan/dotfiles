@@ -109,15 +109,12 @@ alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias be="bundle exec"
 alias hist="history | grep"
 alias rubotest="bundle exec rubocop && bundle exec rails test"
-# alias gentags=
 
-
-export ASDF_DATA_DIR="$HOME/.asdf"
-export PATH="$ASDF_DATA_DIR/shims:/opt/homebrew/opt/postgresql@17/bin:/Users/deneshshan/.local/bin:/Applications/SuperCollider.app/Contents/MacOS/:$PATH"
-export PATH="$/opt/homebrew/opt/postgresql@17/bin:/Users/deneshshan/.local/bin:/Applications/SuperCollider.app/Contents/MacOS/:$PATH"
-# eval `dircolors ~/.dircolors`
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2, bold"
+
+eval "$(mise activate zsh)"
 
 # append completions to fpath
 # fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
