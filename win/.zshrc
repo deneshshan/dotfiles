@@ -86,6 +86,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 export EDITOR='nvim'
+export LESS='-R'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -95,20 +96,25 @@ export EDITOR='nvim'
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nv="nvim"
 
-alias ll="ls -al"
+# General aliases
+alias nv="nvim"
+alias ll="ls -alh"
 alias zshconfig="nvim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmuxconfig="nvim ~/.tmux.conf"
-alias nvimconfig="nvim ~/.config/nvim/init.vim"
+alias nvimconfig="nvim ~/.config/nvim"
 alias be="bundle exec"
 alias hist="history | grep"
-alias rubotest="bundle exec rubocop && bundle exec rails test"
+alias gitloggraph="git log --oneline --graph --all"
+alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
+alias longlines="grep -rn '.\{121,\}' packs/ --include='*.rb' -l"
+alias ag='ag --color-match="31;40" --color'
+# wawa specific
+alias wiki="nvim ~/Documents/wiki"
+alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
+alias rubotest="bin/rubocop && bin/rspec_parallel"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
@@ -120,3 +126,8 @@ eval "$(mise activate zsh)"
 # fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/deneshshan/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
