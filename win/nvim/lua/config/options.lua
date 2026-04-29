@@ -119,3 +119,8 @@ end
 -- Colorscheme
 -- By default, use rose-pine
 -- cmd.colorscheme("gruvbox")
+
+-- diagnostics
+vim.diagnostic.config({
+  virtual_text = true,
+})
