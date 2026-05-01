@@ -18,9 +18,15 @@ return {
         lsp.default_keymaps({ buffer = bufnr })
       end)
 
-      local lspconfig = require('lspconfig')
-
-      lspconfig.lua_ls.setup({
+      vim.lsp.enable('lua_ls')
+      vim.lsp.config('lua_ls', {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        },
         on_init = function(client)
           local path = client.workspace_folders[1].name
           if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
@@ -51,13 +57,13 @@ return {
         end
       })
 
-      -- lspconfig.rust_analyzer.setup({})
-      lspconfig.rubocop.setup({
-        cmd = { 'bundle', 'exec', 'rubocop', '--lsp' }
+      vim.lsp.enable('rubocop')
+      vim.lsp.config('rubocop', {
+        cmd = { 'bin/rubocop', '--lsp' }
       })
-      -- lspconfig.ts_ls.setup({})
-      -- lspconfig.ruby_lsp.setup {}
-      lspconfig.rust_analyzer.setup {}
+      -- vim.lsp.enable('ts_ls')
+      -- vim.lsp.enable('ruby_lsp')
+      -- vim.lsp.enable('rust_analyzer')
 
       local cmp = require('cmp')
       cmp.setup({
