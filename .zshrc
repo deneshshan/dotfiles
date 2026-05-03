@@ -116,7 +116,13 @@ alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev
 alias rubotest="bin/rubocop && bin/rspec_parallel"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
 # Personal laptop specific
-alias tidal="ghci -ghci-script ~/.cabal/share/aarch64-osx-ghc-9.12.2-ea3d/tidal-1.10.1/BootTidal.hs"
+if command -v ghci &>/dev/null && [ -n "$(ls ~/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null)" ]; then
+  alias tidal="ghci -ghci-script $(ls ~/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null | tail -1)"
+fi
+
+if command -v todoist &>/dev/null; then
+  alias t="todoist"
+fi
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
