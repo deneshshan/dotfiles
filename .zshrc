@@ -122,6 +122,9 @@ fi
 
 if command -v todoist &>/dev/null; then
   alias t="todoist"
+  alias tfl="todoist l --filter"
+else
+  echo "\033[38;5;12mtodoist is not installed\033[0m"
 fi
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
