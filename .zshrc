@@ -130,6 +130,14 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2,bold"
 
 eval "$(mise activate zsh)"
 
+# Dotfiles reminder
+if [ -n "$(git -C ~/Documents/github/dotfiles status --porcelain 2>/dev/null)" ]; then
+  echo "\033[38;5;9mYour dotfiles have changed. Please commit them.\033[0m"
+fi
+if [ -n "$(git -C ~/Documents/github/dotfiles fetch --dry-run 2>&1)" ]; then
+  echo "\033[38;5;9mYour dotfiles have upstream changes. Please pull them.\033[0m"
+fi
+
 # Docker CLI completions
 fpath=(/Users/deneshshan/.docker/completions $fpath)
 autoload -Uz compinit && compinit
