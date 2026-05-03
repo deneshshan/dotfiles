@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose zsh-completions zsh-autosuggestions asdf)
+plugins=(git docker docker-compose zsh-completions zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,26 +108,22 @@ alias nvimconfig="nvim ~/.config/nvim"
 alias be="bundle exec"
 alias hist="history | grep"
 alias gitloggraph="git log --oneline --graph --all"
-alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
 alias longlines="grep -rn '.\{121,\}' packs/ --include='*.rb' -l"
 alias ag='ag --color-match="31;40" --color'
 # wawa specific
 alias wiki="nvim ~/Documents/wiki"
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
+alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
+# Personal laptop specific
+alias tidal="ghci -ghci-script ~/.cabal/share/aarch64-osx-ghc-9.12.2-ea3d/tidal-1.10.1/BootTidal.hs"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2, bold"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2,bold"
 
 eval "$(mise activate zsh)"
 
-# append completions to fpath
-# fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-# initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+# Docker CLI completions
 fpath=(/Users/deneshshan/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+autoload -Uz compinit && compinit
