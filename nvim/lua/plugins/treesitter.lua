@@ -16,7 +16,7 @@ return { -- Treesitter interface
     lazy = false,
     opts = {
       ensure_installed = { "go", "dockerfile", "json", "yaml", "markdown", "html", "scss", "css", "vim",
-        "ruby", "lua" },
+        "ruby", "lua", "haskell" },
       highlight = {
         enable = true,
       },

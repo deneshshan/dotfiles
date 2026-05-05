@@ -145,3 +145,8 @@ fi
 # Docker CLI completions
 fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit && compinit
+
+# SuperCollider
+if command -v sclang &>/dev/null; then
+  alias sc='open -a SuperCollider $HOME/Music/SuperCollider/startup.scd'
+fi

@@ -56,6 +56,12 @@ autocmd("Filetype", {
   command = "set colorcolumn=80"
 })
 
+-- Treat .tidal files as Haskell for treesitter highlighting
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.tidal",
+  command = "set filetype=haskell"
+})
+
 autocmd("Filetype", {
   pattern = { "gitcommit", "markdown", "text" },
   callback = function()
