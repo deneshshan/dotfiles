@@ -116,6 +116,11 @@ alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev
 alias rubotest="bin/rubocop && bin/rspec_parallel"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
 # Personal laptop specific
+# SuperCollider/tidal stuff
+if [[ -x "/Applications/SuperCollider.app" ]]; then
+  alias sc='open -a SuperCollider $HOME/Music/SuperCollider/startup.scd'
+fi
+[[ -x "$HOME/.ghcup/bin/ghci" ]] && export PATH="$HOME/.ghcup/bin:$PATH"
 if command -v ghci &>/dev/null && [ -n "$(ls $HOME/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null)" ]; then
   alias tidal="ghci -ghci-script $(ls $HOME/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null | tail -1)"
   alias dirtopen='cd $HOME/Library/Application\ Support/SuperCollider/downloaded-quarks/Dirt-Samples'
@@ -145,8 +150,3 @@ fi
 # Docker CLI completions
 fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit && compinit
-
-# SuperCollider
-if command -v sclang &>/dev/null; then
-  alias sc='open -a SuperCollider $HOME/Music/SuperCollider/startup.scd'
-fi
