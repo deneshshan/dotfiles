@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/deneshshan/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -100,24 +100,25 @@ export LESS='-R'
 # General aliases
 alias nv="nvim"
 alias ll="ls -alh"
-alias zshconfig="nvim ~/.zshrc"
-alias zshreload="source ~/.zshrc"
-alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias tmuxconfig="nvim ~/.tmux.conf"
-alias nvimconfig="nvim ~/.config/nvim"
+alias zshconfig="nvim $HOME/.zshrc"
+alias zshreload="source $HOME/.zshrc"
+alias ohmyzsh="nvim $HOME/.oh-my-zsh"
+alias tmuxconfig="nvim $HOME/.tmux.conf"
+alias nvimconfig="nvim $HOME/.config/nvim"
 alias be="bundle exec"
 alias hist="history | grep"
 alias gitloggraph="git log --oneline --graph --all"
 alias longlines="grep -rn '.\{121,\}' packs/ --include='*.rb' -l"
 alias ag='ag --color-match="31;40" --color'
 # wawa specific
-alias wiki="nvim ~/Documents/wiki"
+alias wiki="nvim $HOME/Documents/wiki"
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
 # Personal laptop specific
-if command -v ghci &>/dev/null && [ -n "$(ls ~/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null)" ]; then
-  alias tidal="ghci -ghci-script $(ls ~/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null | tail -1)"
+if command -v ghci &>/dev/null && [ -n "$(ls $HOME/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null)" ]; then
+  alias tidal="ghci -ghci-script $(ls $HOME/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null | tail -1)"
+  alias dirtopen='cd $HOME/Library/Application\ Support/SuperCollider/downloaded-quarks/Dirt-Samples'
 fi
 
 if command -v todoist &>/dev/null; then
@@ -134,13 +135,13 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2,bold"
 eval "$(mise activate zsh)"
 
 # Dotfiles reminder
-if [ -n "$(git -C ~/Documents/github/dotfiles status --porcelain 2>/dev/null)" ]; then
+if [ -n "$(git -C $HOME/Documents/github/dotfiles status --porcelain 2>/dev/null)" ]; then
   echo "\033[38;5;9mYour dotfiles have changed. Please commit them.\033[0m"
 fi
-if [ -n "$(git -C ~/Documents/github/dotfiles fetch --dry-run 2>&1)" ]; then
+if [ -n "$(git -C $HOME/Documents/github/dotfiles fetch --dry-run 2>&1)" ]; then
   echo "\033[38;5;9mYour dotfiles have upstream changes. Please pull them.\033[0m"
 fi
 
 # Docker CLI completions
-fpath=(/Users/deneshshan/.docker/completions $fpath)
+fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit && compinit
