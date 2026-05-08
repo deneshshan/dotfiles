@@ -98,7 +98,7 @@ export LESS='-R'
 #
 
 # General aliases
-alias nv="nvim"
+# alias nv="nvim"
 alias ll="ls -alh"
 alias zshconfig="nvim $HOME/.zshrc"
 alias zshreload="source $HOME/.zshrc"
@@ -110,6 +110,23 @@ alias hist="history | grep"
 alias gitloggraph="git log --oneline --graph --all"
 alias longlines="grep -rn '.\{121,\}' packs/ --include='*.rb' -l"
 alias ag='ag --color-match="31;40" --color'
+# open neovim a at a certain line or column:
+# nv packs/finance/app/services/finance/transaction_service.rb           # plain — opens at top
+# nv packs/finance/app/services/finance/transaction_service.rb:175       # opens at line 175
+# nv packs/finance/app/services/finance/transaction_service.rb:175:12    # also opens at 175 (col stripped)
+unalias nv 2>/dev/null   # oh-my-zsh's nanoc plugin defines `alias nv='nanoc view'` — drop it
+nv() {
+    local arg="$1"
+    if [[ "$arg" == *:[0-9]* ]]; then
+        local file="${arg%%:*}"
+        local line="${arg#*:}"
+        line="${line%%:*}"   # strip trailing :col if rubocop/rspec output
+        command nvim "+$line" "$file"
+    else
+        command nvim "$@"
+    fi
+}
+
 # wawa specific
 alias wiki="nvim $HOME/Documents/wiki"
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
