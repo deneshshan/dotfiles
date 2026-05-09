@@ -146,6 +146,7 @@ fi
 if command -v todoist &>/dev/null; then
   alias t="todoist"
   alias tfw='todoist l -p -f "#wawa"'
+  alias tfi='todoist l -p -f "#Inbox"'
   alias taw='todoist a -N "wawa"'
 else
   echo "\033[38;5;12mtodoist is not installed\033[0m"
