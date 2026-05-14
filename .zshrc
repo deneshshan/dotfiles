@@ -132,7 +132,7 @@ nv() {
 alias wiki="nvim $HOME/Documents/wiki"
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
-alias changedspecs="git diff --name-only | grep _spec.rb | xargs bundle exec rspec"
+alias changedspecs="git diff --name-only | grep _spec.rb | xargs bin/rspec"
 # Personal laptop specific
 # SuperCollider/tidal stuff
 if [[ -x "/Applications/SuperCollider.app" ]]; then
