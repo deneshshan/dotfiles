@@ -1,9 +1,6 @@
 [general]
 import = ["rose-pine.toml"]
 
-[colors.primary]
-foreground = "#9ccfd8"  # ANSI 34 (blue) from rose-pine
-
 [colors.cursor]
 cursor = "#FF5555"
 text = "#181818"
