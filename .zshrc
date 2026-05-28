@@ -98,7 +98,6 @@ export LESS='-R'
 #
 
 # General aliases
-# alias nv="nvim"
 alias ll="ls -alh"
 alias zshconfig="nvim $HOME/.zshrc"
 alias zshreload="source $HOME/.zshrc"
@@ -111,6 +110,7 @@ alias hist="history | grep"
 alias gitloggraph="git log --oneline --graph --all"
 alias longlines="grep -rn '.\{121,\}' packs/ --include='*.rb' -l"
 alias ag='ag --color-match="31;40" --color'
+
 # open neovim a at a certain line or column:
 # nv packs/finance/app/services/finance/transaction_service.rb           # plain — opens at top
 # nv packs/finance/app/services/finance/transaction_service.rb:175       # opens at line 175
@@ -127,12 +127,21 @@ nv() {
         command nvim "$@"
     fi
 }
+# Wiki location: set $WIKI_DIR per machine (e.g. in ~/.zshenv). The `wiki`
+
+# alias is only registered when it's set.
+if [[ -n "$WIKI_DIR" ]]; then
+  alias wiki='nvim "$WIKI_DIR"'
+else
+  echo "\033[38;5;9mwarning: \$WIKI_DIR not set — 'wiki' alias not registered. Set it in ~/.zshenv (e.g. export WIKI_DIR=\"\$HOME/Documents/wiki\").\033[0m"
+  echo
+fi
 
 # wawa specific
-alias wiki="nvim $HOME/Documents/wiki"
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bin/rspec"
+
 # Personal laptop specific
 # SuperCollider/tidal stuff
 if [[ -x "/Applications/SuperCollider.app" ]]; then
