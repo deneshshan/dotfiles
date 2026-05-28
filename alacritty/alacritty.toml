@@ -1,6 +1,9 @@
 [general]
 import = ["rose-pine.toml"]
 
+[colors.primary]
+foreground = "#bccfd8"
+
 [colors.cursor]
 cursor = "#FF5555"
 text = "#181818"
@@ -14,3 +17,7 @@ unfocused_hollow = true
 [font.normal]
 family = "JetBrainsMono Nerd Font Mono"
 style = "Medium"
+
+[window]
+decorations = "Buttonless"
+padding = { x = 10, y = 10 }
