@@ -6,12 +6,13 @@ alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev
 alias rubotest="bin/rubocop && bin/rspec_parallel"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bin/rspec"
 
-# `dev` bootstraps three tmux sessions if they don't already exist and
+# `dev` bootstraps tmux sessions if they don't already exist and
 # attaches to `code`:
 #
 #   code    two windows in the project root: claude, nvim
 #   server  docker / bin/rails s / bin/sidekiq, each in its own window
 #   review  two Claude sessions for PR code reviews
+#   wiki    single window rooted at $WIKI_DIR (skipped if unset)
 #
 # Idempotent — opening a second terminal won't duplicate windows. Skip
 # the bootstrap by setting NO_TMUX=1.
@@ -36,6 +37,10 @@ dev() {
     tmux new-window  -t review:   -c "$project" -n nvim-review
   fi
 
+  if [[ -n "$WIKI_DIR" ]] && ! tmux has-session -t wiki 2>/dev/null; then
+    tmux new-session -d -s wiki -c "$WIKI_DIR"
+  fi
+
   tmux attach -t code
 }
 
@@ -48,3 +53,4 @@ fi
 alias tcode="tmux attach -t code"
 alias tserv="tmux attach -t server"
 alias trev="tmux attach -t review"
+alias twiki="tmux attach -t wiki"
