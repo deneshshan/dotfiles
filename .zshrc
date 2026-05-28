@@ -127,40 +127,22 @@ nv() {
         command nvim "$@"
     fi
 }
-# Wiki location: set $WIKI_DIR per machine (e.g. in ~/.zshenv). The `wiki`
 
-# alias is only registered when it's set.
-if [[ -n "$WIKI_DIR" ]]; then
-  alias wiki='nvim "$WIKI_DIR"'
-else
-  echo "\033[38;5;9mwarning: \$WIKI_DIR not set — 'wiki' alias not registered. Set it in ~/.zshenv (e.g. export WIKI_DIR=\"\$HOME/Documents/wiki\").\033[0m"
-  echo
-fi
-
-# wawa specific
-alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
-alias rubotest="bin/rubocop && bin/rspec_parallel"
-alias changedspecs="git diff --name-only | grep _spec.rb | xargs bin/rspec"
-
-# Personal laptop specific
-# SuperCollider/tidal stuff
-if [[ -x "/Applications/SuperCollider.app" ]]; then
-  alias sc='open -a SuperCollider $HOME/Music/SuperCollider/startup.scd'
-fi
-[[ -x "$HOME/.ghcup/bin/ghci" ]] && export PATH="$HOME/.ghcup/bin:$PATH"
-if command -v ghci &>/dev/null && [ -n "$(ls $HOME/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null)" ]; then
-  alias tidal="ghci -ghci-script $(ls $HOME/.cabal/share/*/tidal-*/BootTidal.hs 2>/dev/null | tail -1)"
-  alias dirtopen='cd $HOME/Library/Application\ Support/SuperCollider/downloaded-quarks/Dirt-Samples'
-fi
-
-if command -v todoist &>/dev/null; then
-  alias t="todoist --color"
-  alias tfw='todoist --color l -p -f "#wawa"'
-  alias tfi='todoist --color l -p -f "#Inbox"'
-  alias taw='todoist --color a -N "wawa"'
-else
-  echo "\033[38;5;12mtodoist is not installed\033[0m"
-fi
+# Per-app fragments under ~/.config/zsh/. Each fragment guards itself with
+# a check for its relevant binary, app, env var, or repo path, so the file
+# can be checked in unconditionally and self-activates only on machines
+# where the guard passes. Sourced in lexical order; name fragments after
+# the app (e.g. supercollider.zsh, tidal.zsh, todoist.zsh, wawa.zsh,
+# wiki.zsh).
+#
+# New machine setup: symlink the directory so fragments are picked up —
+#   ln -s ~/Documents/github/dotfiles/zsh ~/.config/zsh
+# The (N) qualifier below makes a missing ~/.config/zsh a silent no-op, so
+# if fragments aren't running it's almost always because this symlink is
+# missing.
+for fragment in "$HOME/.config/zsh"/*.zsh(N); do
+  source "$fragment"
+done
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
