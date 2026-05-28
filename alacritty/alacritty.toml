@@ -2,7 +2,7 @@
 import = ["rose-pine.toml"]
 
 [colors.primary]
-foreground = "#bccfd8"
+foreground = "#9ccfd8"
 
 [colors.cursor]
 cursor = "#FF5555"
