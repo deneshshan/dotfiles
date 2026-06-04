@@ -48,7 +48,7 @@ vim.keymap.set("n", "<leader>o", ":!tmp/scripts/format.sh<Space>%<CR>:e<CR>")
 
 -- Copying/Pasting
 vim.keymap.set('n', '<leader>yp', function()
-  local path = vim.fn.expand('%')
+  local path = vim.fn.expand('%:p')
   local line = vim.fn.line('.')
   vim.fn.setreg('+', path .. ':' .. line)
 end)
