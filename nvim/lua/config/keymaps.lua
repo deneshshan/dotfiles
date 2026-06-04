@@ -52,3 +52,30 @@ vim.keymap.set('n', '<leader>yp', function()
   local line = vim.fn.line('.')
   vim.fn.setreg('+', path .. ':' .. line)
 end)
+
+-- Open current file in Obsidian
+local function open_in_obsidian()
+  local vault_root = vim.env.WIKI_DIR
+  if not vault_root or vault_root == '' then
+    vim.notify('WIKI_DIR is not set', vim.log.levels.ERROR)
+    return
+  end
+
+  local file = vim.fn.expand('%:p')
+  local prefix = vault_root .. '/'
+  if file:sub(1, #prefix) ~= prefix then
+    vim.notify('Not in vault: ' .. vault_root, vim.log.levels.ERROR)
+    return
+  end
+
+  local vault_name = vim.fn.fnamemodify(vault_root, ':t')
+  local rel = file:sub(#prefix + 1)
+  local encoded = rel:gsub('[^A-Za-z0-9/._-]', function(c)
+    return string.format('%%%02X', string.byte(c))
+  end)
+  local uri = string.format('obsidian://open?vault=%s&file=%s', vault_name, encoded)
+  vim.fn.system({ 'open', uri })
+end
+
+vim.api.nvim_create_user_command('Obsidian', open_in_obsidian, {})
+vim.keymap.set('n', '<leader>ob', open_in_obsidian, { desc = 'Open current file in Obsidian' })
