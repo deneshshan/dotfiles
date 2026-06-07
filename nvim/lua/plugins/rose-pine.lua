@@ -4,6 +4,9 @@ return {
     name = "rose-pine",
     config = function()
       vim.o.termguicolors = true
+      require("rose-pine").setup({
+        styles = { transparency = true },
+      })
       vim.cmd("colorscheme rose-pine")
 
       vim.api.nvim_set_hl(0, "@variable.ruby", { link = "@type" })
