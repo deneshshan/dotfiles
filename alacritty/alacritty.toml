@@ -20,6 +20,6 @@ style = "Medium"
 
 [window]
 decorations = "Buttonless"
-# opacity = 0.8
-# blur = true
+opacity = 0.8
+blur = true
 padding = { x = 10, y = 10 }
