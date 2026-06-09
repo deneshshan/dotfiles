@@ -54,3 +54,7 @@ alias tcode="tmux attach -t code"
 alias tserv="tmux attach -t server"
 alias trev="tmux attach -t review"
 alias twiki="tmux attach -t wiki"
+
+if [[ -n "$WORK_DIR" ]]; then
+    alias work='cd "$WORK_DIR"'
+fi
