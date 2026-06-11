@@ -63,7 +63,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 autocmd("Filetype", {
-  pattern = { "gitcommit", "markdown", "text" },
+  pattern = { "gitcommit", "text" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
