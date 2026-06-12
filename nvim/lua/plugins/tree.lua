@@ -19,7 +19,17 @@ return { -- File explore
       lazy = true,
       opt = true
     },
-    config = true,
+    opts = {
+      filesystem_watchers = {
+        -- This list REPLACES nvim-tree's defaults, so keep the useful ones.
+        -- Excludes big gitignored Rails dirs so Shift+I (show git-ignored)
+        -- doesn't spin up thousands of fs_event watchers over tmp/.
+        ignore_dirs = {
+          "/.git", "/node_modules", "/target", "/build",
+          "/tmp", "/log", "/storage", "/vendor",
+        },
+      },
+    },
     init = function(_, _)
       vim.keymap.set("n", "<Leader>nl", ":NvimTreeResize 100<CR>")
       vim.keymap.set("n", "<Leader>ns", ":NvimTreeResize 30<CR>")
