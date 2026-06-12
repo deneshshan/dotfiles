@@ -5,7 +5,7 @@ return {
     config = function()
       vim.o.termguicolors = true
       require("rose-pine").setup({
-        styles = { transparency = true },
+        styles = { transparency = false },
       })
       vim.cmd("colorscheme rose-pine")
 
