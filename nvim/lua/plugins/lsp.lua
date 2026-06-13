@@ -29,7 +29,9 @@ return {
         },
         on_init = function(client)
           local path = client.workspace_folders[1].name
-          if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+          local has_luarc = vim.loop.fs_stat(path .. '/.luarc.json')
+            or vim.loop.fs_stat(path .. '/.luarc.jsonc')
+          if not has_luarc then
             client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
               Lua = {
                 runtime = {
@@ -61,9 +63,9 @@ return {
       vim.lsp.config('rubocop', {
         cmd = { 'bin/rubocop', '--lsp' }
       })
-      -- vim.lsp.enable('ts_ls')
+      vim.lsp.enable('ts_ls')
       -- vim.lsp.enable('ruby_lsp')
-      -- vim.lsp.enable('rust_analyzer')
+      vim.lsp.enable('rust_analyzer')
 
       local cmp = require('cmp')
       cmp.setup({
@@ -86,7 +88,9 @@ return {
               get_bufnrs = function()
                 -- local buf = vim.api.nvim_get_current_buf()
                 -- local buf = vim.api.nvim_list_bufs()
-                -- local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                -- local byte_size = vim.api.nvim_buf_get_offset(
+                --   buf, vim.api.nvim_buf_line_count(buf)
+                -- )
                 -- if byte_size > 1024 * 1024 then -- 1 Megabyte max
                 --   return {}
                 -- end
@@ -98,10 +102,14 @@ return {
         }
       })
 
-      vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
+      vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>",
         { noremap = true, silent = true })
-      -- vim.api.nvim_set_keymap("n", "gr", function() require('telescope.builtin').lsp_references(), { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "gr",
+        "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
+        { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "gr", function()
+      --   require('telescope.builtin').lsp_references(), { noremap = true, silent = true }
+      -- end)
     end
   }
 }

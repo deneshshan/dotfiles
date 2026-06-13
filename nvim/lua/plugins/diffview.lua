@@ -2,9 +2,13 @@ return {
   {
     "sindrets/diffview.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory", "DiffviewToggleFiles", "DiffviewRefresh" },
+    cmd = {
+      "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory",
+      "DiffviewToggleFiles", "DiffviewRefresh"
+    },
     keys = {
-      { "<leader>eh", "<Cmd>DiffviewFileHistory %<CR>", desc = "Diffview: history of current file" },
+      { "<leader>eh", "<Cmd>DiffviewFileHistory %<CR>",
+        desc = "Diffview: history of current file" },
       { "<leader>eH", "<Cmd>DiffviewFileHistory<CR>",   desc = "Diffview: history of whole repo" },
       { "<leader>ed", "<Cmd>DiffviewOpen<CR>",          desc = "Diffview: open working diff" },
     },

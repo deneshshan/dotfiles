@@ -1,14 +1,4 @@
---
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
--- File: config/keymaps.lua
--- Description: Key mapping configs
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+-- Based on: https://github.com/ntk148v/neovim-config
 
 vim.keymap.set("n", "<Space>", ":", {})
 vim.keymap.set("n", "<Tab>", "/", {})
@@ -29,7 +19,9 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fG", function()
-  builtin.live_grep({ glob_pattern = { "!**/spec/**", "!**/test/**", "!**/seeds/**", "!**/docs/**" } })
+  builtin.live_grep({
+    glob_pattern = { "!**/spec/**", "!**/test/**", "!**/seeds/**", "!**/docs/**" }
+  })
 end, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})

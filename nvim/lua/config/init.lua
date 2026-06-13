@@ -1,14 +1,4 @@
---
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
--- File: config/init.lua
--- Description: Main configurations
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+-- Based on: https://github.com/ntk148v/neovim-config
 -- Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -37,9 +27,9 @@ if ok then
 end
 
 require("lazy").setup({
-  root = vim.fn.stdpath("data") .. "/lazy",                 -- directory where plugins will be installed
+  root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
   spec = spec,
-  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile after update.
   defaults = {
     lazy = false,                                           -- should plugins be lazy-loaded?
     version = nil
@@ -75,7 +65,9 @@ require("lazy").setup({
   state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
 })
 
-local modules = { "config.autocmds", "config.options", "config.keymaps", "config.custom", "config.colors" }
+local modules = {
+  "config.autocmds", "config.options", "config.keymaps", "config.custom", "config.colors"
+}
 
 for _, mod in ipairs(modules) do
   local ok, err = pcall(require, mod)
