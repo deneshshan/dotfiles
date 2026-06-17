@@ -47,21 +47,26 @@ end)
 
 -- Open current file in Obsidian
 local function open_in_obsidian()
-  local vault_root = vim.env.WIKI_DIR
-  if not vault_root or vault_root == '' then
-    vim.notify('WIKI_DIR is not set', vim.log.levels.ERROR)
-    return
-  end
-
   local file = vim.fn.expand('%:p')
-  local prefix = vault_root .. '/'
-  if file:sub(1, #prefix) ~= prefix then
-    vim.notify('Not in vault: ' .. vault_root, vim.log.levels.ERROR)
+  if file == '' then
+    vim.notify('No file to open', vim.log.levels.ERROR)
     return
   end
 
+  -- A `.obsidian` directory at the root marks an Obsidian vault. Walk up to find it.
+  local found = vim.fs.find('.obsidian', {
+    path = vim.fs.dirname(file),
+    upward = true,
+    type = 'directory',
+  })[1]
+  if not found then
+    vim.notify('Not in an Obsidian vault', vim.log.levels.ERROR)
+    return
+  end
+
+  local vault_root = vim.fs.dirname(found)
   local vault_name = vim.fn.fnamemodify(vault_root, ':t')
-  local rel = file:sub(#prefix + 1)
+  local rel = file:sub(#vault_root + 2)
   local encoded = rel:gsub('[^A-Za-z0-9/._-]', function(c)
     return string.format('%%%02X', string.byte(c))
   end)
