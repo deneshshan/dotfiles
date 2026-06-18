@@ -4,7 +4,7 @@
 
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
-alias rubotestfile="bin/rubocop && bin/rspec_parallel; grep -hoE '[^[:space:]]+_spec\.rb' tmp/rspec/failures-*.txt 2>/dev/null | sort -u > failed_specs.txt"
+alias rubotestfile="bin/rubocop && bin/rspec_parallel; grep -hoE '[^[:space:]]+_spec\.rb' /dev/null tmp/rspec/failures-*.txt(N) 2>/dev/null | sort -u > tmp/failed_specs.txt"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bin/rspec"
 
 # `dev` bootstraps tmux sessions if they don't already exist and
