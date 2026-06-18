@@ -1,3 +1,9 @@
+-- Disable netrw before any runtime/plugin files load (must be before lazy.setup
+-- in config/init.lua), otherwise netrw registers its FileExplorer autocmds and
+-- then loaded_netrw blocks the autoload function -> E117 on opening a directory.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 if vim.fn.has('nvim-0.8') == 0 then
     error('Need Neovim 0.8+ in order to use this config')
 end

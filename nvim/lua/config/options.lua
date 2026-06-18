@@ -98,8 +98,9 @@ opt.foldlevel = 99
 
 -- Disable builtin plugins
 local disabled_built_ins = {
-  "2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat", "netrw", "netrwPlugin",
-  "netrwSettings", "netrwFileHandlers", "matchit", "tar", "tarPlugin", "rrhelper",
+  -- netrw is disabled at the very top of init.lua (must happen before lazy.setup)
+  "2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat",
+  "matchit", "tar", "tarPlugin", "rrhelper",
   "spellfile_plugin", "vimball", "vimballPlugin", "zip", "zipPlugin", "tutor", "rplugin",
   "synmenu", "optwin", "compiler", "bugreport", "ftplugin"
 }
