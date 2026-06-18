@@ -1,14 +1,5 @@
---
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
--- File: plugins/tree.lua
--- Description: nvim-tree config
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+-- Config adapted from Kien Nguyen-Tuan's neovim config:
+-- https://github.com/ntk148v/neovim-config
 -- disable netrw at the very start of your init.lua (strongly advised)
 return { -- File explore
   -- nvim-tree.lua - A file explorer tree for neovim written in lua

@@ -1,14 +1,5 @@
---
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
--- File: plugins/gitsigns.lua
--- Description: Gitsigns configuration
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+-- Config adapted from Kien Nguyen-Tuan's neovim config:
+-- https://github.com/ntk148v/neovim-config
 return { {
   -- Git integration for buffers
   "lewis6991/gitsigns.nvim",

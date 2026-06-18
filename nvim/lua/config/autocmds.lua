@@ -1,14 +1,5 @@
---
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
--- File: config/autocmds.lua
--- Description: Autocommand functions
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+-- Config adapted from Kien Nguyen-Tuan's neovim config:
+-- https://github.com/ntk148v/neovim-config
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
