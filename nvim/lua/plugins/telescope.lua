@@ -8,6 +8,22 @@ return { -- Telescope
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make"
     } },
+    keys = {
+      { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Telescope find files" },
+      { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Telescope live grep" },
+      {
+        "<leader>fG",
+        function()
+          require("telescope.builtin").live_grep({
+            glob_pattern = { "!**/spec/**", "!**/test/**", "!**/seeds/**", "!**/docs/**" }
+          })
+        end,
+        desc = "Telescope live grep (exclude tests/docs)"
+      },
+      { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Telescope buffers" },
+      { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Telescope help tags" },
+      { "<leader>fs", function() require("telescope.builtin").grep_string() end, desc = "Telescope grep string" },
+    },
     opts = {
       defaults = {
         layout_strategy = "horizontal",

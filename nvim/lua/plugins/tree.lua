@@ -10,6 +10,20 @@ return { -- File explore
       lazy = true,
       opt = true
     },
+    keys = {
+      { "<C-n>",      "<cmd>NvimTreeToggle<cr>",     desc = "NvimTree toggle" },
+      { "<leader>nr", "<cmd>NvimTreeRefresh<cr>",    desc = "NvimTree refresh" },
+      { "<leader>nl", "<cmd>NvimTreeResize 100<cr>", desc = "NvimTree resize wide" },
+      { "<leader>ns", "<cmd>NvimTreeResize 30<cr>",  desc = "NvimTree resize narrow" },
+      { "<leader>nf", "<cmd>NvimTreeFindFile<cr>",   desc = "NvimTree focus" },
+      {
+        "<leader>nc",
+        function()
+          require("nvim-tree.api").tree.close_in_all_tabs()
+        end,
+        desc = "Close NvimTree in all tabs"
+      },
+    },
     opts = {
       filesystem_watchers = {
         -- This list REPLACES nvim-tree's defaults, so keep the useful ones.
@@ -21,12 +35,4 @@ return { -- File explore
         },
       },
     },
-    init = function(_, _)
-      vim.keymap.set("n", "<Leader>nl", ":NvimTreeResize 100<CR>")
-      vim.keymap.set("n", "<Leader>ns", ":NvimTreeResize 30<CR>")
-      vim.keymap.set("n", "<Leader>nf", ":NvimTreeFocus<CR>")
-      vim.keymap.set("n", "<Leader>nc", function()
-        require("nvim-tree.api").tree.close_in_all_tabs()
-      end, { desc = "Close NvimTree in all tabs" })
-    end
   } }
