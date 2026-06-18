@@ -66,6 +66,15 @@ return {
       vim.lsp.enable('ts_ls')
       -- vim.lsp.enable('ruby_lsp')
       vim.lsp.enable('rust_analyzer')
+      vim.lsp.config('rust_analyzer', {
+        settings = {
+          ['rust-analyzer'] = {
+            check = {
+              command = 'clippy',
+            },
+          },
+        },
+      })
 
       local cmp = require('cmp')
       cmp.setup({
