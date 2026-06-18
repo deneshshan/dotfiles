@@ -4,6 +4,7 @@
 
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
+alias rubotestfile="bin/rubocop && bin/rspec_parallel; grep -hoE '[^[:space:]]+_spec\.rb' tmp/rspec/failures-*.txt 2>/dev/null | sort -u > failed_specs.txt"
 alias changedspecs="git diff --name-only | grep _spec.rb | xargs bin/rspec"
 
 # `dev` bootstraps tmux sessions if they don't already exist and
@@ -50,10 +51,10 @@ if [[ -z "$TMUX" ]] && [[ $- == *i* ]] && [[ -z "$NO_TMUX" ]]; then
   dev
 fi
 
-alias tcode="tmux attach -t code"
-alias tserv="tmux attach -t server"
-alias trev="tmux attach -t review"
-alias twiki="tmux attach -t wiki"
+alias tc="tmux attach -t code"
+alias ts="tmux attach -t server"
+alias tre="tmux attach -t review"
+alias tw="tmux attach -t wiki"
 
 if [[ -n "$WORK_DIR" ]]; then
     alias work='cd "$WORK_DIR"'
