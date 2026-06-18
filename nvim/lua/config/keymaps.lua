@@ -75,4 +75,3 @@ local function open_in_obsidian()
 end
 
 vim.api.nvim_create_user_command('Obsidian', open_in_obsidian, {})
-vim.keymap.set('n', '<leader>ob', open_in_obsidian, { desc = 'Open current file in Obsidian' })
