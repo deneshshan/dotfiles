@@ -45,12 +45,6 @@ dev() {
   tmux attach -t code
 }
 
-# Auto-bootstrap on interactive shell start unless we're already inside
-# tmux or NO_TMUX is set.
-if [[ -z "$TMUX" ]] && [[ $- == *i* ]] && [[ -z "$NO_TMUX" ]]; then
-  dev
-fi
-
 alias tc="tmux attach -t code"
 alias ts="tmux attach -t server"
 alias tre="tmux attach -t review"
