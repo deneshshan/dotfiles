@@ -3,7 +3,7 @@
 # shell start.
 
 if [[ -n "$WIKI_DIR" ]]; then
-  alias wiki='nvim "$WIKI_DIR"'
+  alias wiki='(cd "$WIKI_DIR" && nvim .)'
 else
   echo "\033[38;5;9mwarning: \$WIKI_DIR not set — 'wiki' alias not registered. Set it in ~/.zshenv (e.g. export WIKI_DIR=\"\$HOME/Documents/wiki\").\033[0m"
   echo
