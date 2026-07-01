@@ -28,14 +28,20 @@ dev() {
   fi
 
   if ! tmux has-session -t code2 2>/dev/null; then
-    tmux new-session -d -s code -c "$project" -n claude2
-    tmux new-window  -t code:   -c "$project" -n nvim2
+    tmux new-session -d -s code2 -c "$project" -n claude2
+    tmux new-window  -t code2:   -c "$project" -n nvim2
   fi
 
   if ! tmux has-session -t server 2>/dev/null; then
     tmux new-session -d -s server  -c "$project" -n docker
     tmux new-window  -t server:    -c "$project" -n server
     tmux new-window  -t server:    -c "$project" -n sidekiq
+  fi
+
+  if ! tmux has-session -t server2 2>/dev/null; then
+    tmux new-session -d -s server2  -c "$project" -n docker2
+    tmux new-window  -t server2:    -c "$project" -n server2
+    tmux new-window  -t server2:    -c "$project" -n sidekiq2
   fi
 
   if ! tmux has-session -t review 2>/dev/null; then
@@ -53,6 +59,7 @@ dev() {
 alias tc="tmux attach -t code"
 alias tc2="tmux attach -t code2"
 alias ts="tmux attach -t server"
+alias ts2="tmux attach -t server2"
 alias tre="tmux attach -t review"
 alias tw="tmux attach -t wiki"
 
