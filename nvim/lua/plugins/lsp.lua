@@ -30,7 +30,7 @@ return {
         on_init = function(client)
           local path = client.workspace_folders[1].name
           local has_luarc = vim.loop.fs_stat(path .. '/.luarc.json')
-            or vim.loop.fs_stat(path .. '/.luarc.jsonc')
+              or vim.loop.fs_stat(path .. '/.luarc.jsonc')
           if not has_luarc then
             client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
               Lua = {
