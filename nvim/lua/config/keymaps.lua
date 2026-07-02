@@ -58,12 +58,13 @@ end
 
 vim.api.nvim_create_user_command('Obsidian', open_in_obsidian, {})
 
--- Render the current file with mdcat in a new terminal tab. Colours are preserved
+-- Render the current file with mdcat in a new terminal window. Colours are preserved
 -- (nvim's terminal renders the ANSI), you keep full nvim navigation, and yanking
 -- grabs clean text with no escape codes. Margins are baked into the output: mdcat
--- wraps narrower than the tab (right margin) and sed indents the left. Run via
+-- wraps narrower than the window (right margin) and sed indents the left. Run via
 -- jobstart with an argv list so the shell pipe isn't parsed by the :terminal command.
-local function markdown_view()
+-- opencmd is the command used to open the window (e.g. 'tabnew', 'vnew').
+local function markdown_view(opencmd)
   local file = vim.fn.expand('%:p')
   if file == '' then
     vim.notify('No file to render', vim.log.levels.ERROR)
@@ -75,7 +76,7 @@ local function markdown_view()
   end
 
   local margin = 3
-  vim.cmd('tabnew')
+  vim.cmd(opencmd or 'tabnew')
   local win = vim.api.nvim_get_current_win()
   vim.wo[win].number = false
   vim.wo[win].relativenumber = false
@@ -89,4 +90,5 @@ local function markdown_view()
   vim.cmd('stopinsert')
 end
 
-vim.api.nvim_create_user_command('Mdv', markdown_view, {})
+vim.api.nvim_create_user_command('Mdv', function() markdown_view('vnew') end, {})
+vim.api.nvim_create_user_command('Mdt', function() markdown_view('tabnew') end, {})
