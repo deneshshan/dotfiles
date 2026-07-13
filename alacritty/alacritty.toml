@@ -19,8 +19,9 @@ family = "JetBrainsMono Nerd Font Mono"
 style = "Medium"
 
 [window]
-decorations = "Buttonless"
+# Full, Buttonless
+decorations = "Full"
 # opacity = 0.8
 # blur = true
 padding = { x = 10, y = 10 }
-startup_mode = "Fullscreen"
+# startup_mode = "Fullscreen"
