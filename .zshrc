@@ -125,6 +125,17 @@ nv() {
     fi
 }
 
+# Open all files for a particular git commit SHA in separate tabs in nvim.
+# You can just then use diffview to walk the history of those files.
+nvctab() {
+    local arg="$1"
+    if [[ -n "$arg" ]]; then
+      nvim -p $(git diff-tree --no-commit-id --name-only -r $arg)
+    else
+      echo "\033[38;5;12mSHA not present\033[0m"
+    fi
+}
+
 # Per-app fragments under ~/.config/zsh/. Each fragment guards itself with
 # a check for its relevant binary, app, env var, or repo path, so the file
 # can be checked in unconditionally and self-activates only on machines
