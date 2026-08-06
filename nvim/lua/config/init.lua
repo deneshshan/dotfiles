@@ -27,7 +27,7 @@ if ok then
 end
 
 require("lazy").setup({
-  root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
+  root = vim.fn.stdpath("data") .. "/lazy",                 -- directory where plugins will be installed
   spec = spec,
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile after update.
   defaults = {
@@ -79,5 +79,5 @@ end
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby", "javascript" },
-  callback = function() vim.opt_local.colorcolumn = "120" end,
+  callback = function() vim.opt_local.colorcolumn = "100" end,
 })
