@@ -68,3 +68,7 @@ alias tw="tmux attach -t wiki"
 if [[ -n "$WORK_DIR" ]]; then
     alias work='cd "$WORK_DIR"'
 fi
+
+if [[ -n "$WORK_DIR_2" ]]; then
+    alias work2='cd "$WORK_DIR_2"'
+fi
