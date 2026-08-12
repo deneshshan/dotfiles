@@ -5,7 +5,8 @@
 alias fsl="lsof -ti :7433 | xargs kill -9 && PROCFILE=Procfile.dev.local bin/dev"
 alias rubotest="bin/rubocop && bin/rspec_parallel"
 alias tofile=" grep -hoE '[^[:space:]]+_spec\.rb' /dev/null tmp/rspec/failures-*.txt(N) 2>/dev/null | sort -u > tmp/failed_specs.txt"
-alias rubotestfile="rubotest; tofile"
+alias tofile2="grep -hE '\| failed ' /dev/null spec/examples.txt(N) 2>/dev/null | grep -oE '^[^[:space:]]+_spec\.rb' | sort -u > tmp/failed_specs.txt"
+alias rubotestfile="rubotest; tofile2"
 alias changedspecs="git diff --name-only main...HEAD -- '*_spec.rb' | xargs bin/rspec"
 alias fwp="cd ~/Documents/work/finance-wip &&  nvim ."
 
