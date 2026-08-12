@@ -91,4 +91,5 @@ local function markdown_view(opencmd)
 end
 
 vim.api.nvim_create_user_command('Mdv', function() markdown_view('vnew') end, {})
+vim.api.nvim_create_user_command('Mds', function() markdown_view('new') end, {})
 vim.api.nvim_create_user_command('Mdt', function() markdown_view('tabnew') end, {})
