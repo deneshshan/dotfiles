@@ -159,11 +159,18 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#268bd2,bold"
 eval "$(mise activate zsh)"
 
 # Dotfiles reminder
-if [ -n "$(git -C $HOME/Documents/github/dotfiles status --porcelain 2>/dev/null)" ]; then
-  echo "\033[38;5;9mYour dotfiles have changed. Please commit them.\033[0m"
-fi
-if [ -n "$(git -C $HOME/Documents/github/dotfiles fetch --dry-run 2>&1)" ]; then
-  echo "\033[38;5;9mYour dotfiles have upstream changes. Please pull them.\033[0m"
+if [[ -n "$DOTFILES_DIR" ]]; then
+  if [ -n "$(git -C $DOTFILES_DIR status --porcelain 2>/dev/null)" ]; then
+    echo "\033[38;5;9mYour dotfiles have changed. Please commit them.\033[0m"
+  fi
+  if [ -n "$(git -C $DOTFILES_DIR fetch --dry-run 2>&1)" ]; then
+    echo "\033[38;5;9mYour dotfiles have upstream changes. Please pull them.\033[0m"
+  fi
+
+  alias dotf='cd "$DOTFILES_DIR" &&  nvim .'
+else
+  echo "\033[38;5;9mwarning: \$DOTFILES_DIR not set — 'wiki' alias not registered. Set it in ~/.zshenv.\033[0m"
+  echo
 fi
 
 # Docker CLI completions
