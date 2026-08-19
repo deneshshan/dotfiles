@@ -9,6 +9,7 @@ alias tofile2="grep -hE '\| failed ' /dev/null spec/examples.txt(N) 2>/dev/null 
 alias rubotestfile="rubotest; tofile2"
 alias changedspecs="git diff --name-only main...HEAD -- '*_spec.rb' | xargs bin/rspec"
 alias fwp="cd ~/Documents/work/finance-wip &&  nvim ."
+alias claudemem="cd ~/.claude/projects/"
 
 # `dev` bootstraps tmux sessions if they don't already exist and
 # attaches to `code`:
@@ -72,4 +73,8 @@ fi
 
 if [[ -n "$WORK_DIR_2" ]]; then
     alias work2='cd "$WORK_DIR_2"'
+fi
+
+if [[ -n "$WORK_DIR_REVIEW" ]]; then
+    alias workr='cd "$WORK_DIR_REVIEW"'
 fi
