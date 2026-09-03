@@ -7,10 +7,13 @@ return {
       "DiffviewToggleFiles", "DiffviewRefresh"
     },
     keys = {
-      { "<leader>eh", "<Cmd>DiffviewFileHistory %<CR>",
-        desc = "Diffview: history of current file" },
-      { "<leader>eH", "<Cmd>DiffviewFileHistory<CR>",   desc = "Diffview: history of whole repo" },
-      { "<leader>ed", "<Cmd>DiffviewOpen<CR>",          desc = "Diffview: open working diff" },
+      {
+        "<leader>eh",
+        "<Cmd>DiffviewFileHistory %<CR>",
+        desc = "Diffview: history of current file"
+      },
+      { "<leader>eH", "<Cmd>DiffviewFileHistory<CR>", desc = "Diffview: history of whole repo" },
+      { "<leader>ed", "<Cmd>DiffviewOpen<CR>",        desc = "Diffview: open working diff" }
     },
     opts = function()
       local actions = require("diffview.actions")
