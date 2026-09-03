@@ -8,8 +8,14 @@ alias tofile=" grep -hoE '[^[:space:]]+_spec\.rb' /dev/null tmp/rspec/failures-*
 alias tofile2="grep -hE '\| failed ' /dev/null spec/examples.txt(N) 2>/dev/null | grep -oE '^[^[:space:]]+_spec\.rb' | sort -u > tmp/failed_specs.txt"
 alias rubotestfile="rubotest; tofile2"
 alias changedspecs="git diff --name-only main...HEAD -- '*_spec.rb' | xargs bin/rspec"
-alias fwp="cd ~/Documents/work/finance-wip &&  nvim ."
 alias claudemem="cd ~/.claude/projects/"
+
+if [[ -n "$VAULT_DIR" ]]; then
+    alias fwp='cd "$VAULT_DIR" &&  nvim .'
+else
+    echo "\033[38;5;9mwarning: \$VAULT_DIR not set — 'wiki' alias not registered. Set it in ~/.zshenv (e.g. export WIKI_DIR=\"\$HOME/Documents/wiki\").\033[0m"
+  echo
+fi
 
 # `dev` bootstraps tmux sessions if they don't already exist and
 # attaches to `code`:
