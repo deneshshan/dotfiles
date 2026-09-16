@@ -93,3 +93,24 @@ end
 vim.api.nvim_create_user_command('Mdv', function() markdown_view('vnew') end, {})
 vim.api.nvim_create_user_command('Mds', function() markdown_view('new') end, {})
 vim.api.nvim_create_user_command('Mdt', function() markdown_view('tabnew') end, {})
+
+-- Regenerate Ruby ctags in the current working directory (async).
+vim.api.nvim_create_user_command('RegenTags', function()
+  if vim.fn.executable('ctags') == 0 then
+    vim.notify('ctags is not installed', vim.log.levels.ERROR)
+    return
+  end
+
+  vim.notify('RegenTags: regenerating ctags...', vim.log.levels.INFO)
+  vim.fn.jobstart(
+    { 'ctags', '-R', '--languages=ruby', '--exclude=.git', '--exclude=node_modules', '--exclude=tmp', '.' },
+    {
+      on_exit = function(_, code)
+        if code == 0 then
+          vim.notify('RegenTags: tags regenerated', vim.log.levels.INFO)
+        else
+          vim.notify(('RegenTags: ctags exited with code %d'):format(code), vim.log.levels.ERROR)
+        end
+      end,
+    })
+end, {})
