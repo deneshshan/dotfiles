@@ -92,7 +92,7 @@ end
 
 vim.api.nvim_create_user_command('Mdv', function() markdown_view('vnew') end, {})
 vim.api.nvim_create_user_command('Mds', function() markdown_view('new') end, {})
-vim.api.nvim_create_user_command('Mdt', function() markdown_view('tabnew') end, {})
+vim.api.nvim_create_user_command('Md', function() markdown_view('tabnew') end, {})
 
 -- Regenerate Ruby ctags in the current working directory (async).
 vim.api.nvim_create_user_command('RegenTags', function()
