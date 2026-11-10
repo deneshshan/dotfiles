@@ -10,6 +10,13 @@ alias rubotestfile="rubotest; tofile2"
 alias changedspecs="git diff --name-only main...HEAD -- '*_spec.rb' | xargs bin/rspec"
 alias claudemem="cd ~/.claude/projects/"
 
+# granted/assume — AWS SSO role assumption; alias active when granted is installed.
+if command -v granted &>/dev/null; then
+  alias assume="source $(brew --prefix)/bin/assume"
+else
+  echo "\033[38;5;12mgranted not installed — see 'Setup AWS CLI with SSO' in Notion\033[0m"
+fi
+
 if [[ -n "$VAULT_DIR" ]]; then
     alias fwp='cd "$VAULT_DIR" &&  nvim .'
 else
