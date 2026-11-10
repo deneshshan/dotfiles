@@ -24,70 +24,39 @@ else
   echo
 fi
 
-# `dev` bootstraps tmux sessions if they don't already exist and
-# attaches to `code`:
-#
-#   code    two windows in the project root: claude, nvim
-#   server  docker / bin/rails s / bin/sidekiq, each in its own window
-#   review  two Claude sessions for PR code reviews
-#   wiki    single window rooted at $WIKI_DIR (skipped if unset)
-#
-# Idempotent — opening a second terminal won't duplicate windows. Skip
-# the bootstrap by setting NO_TMUX=1.
-dev() {
-  [[ -n "$TMUX" ]] && return  # already inside tmux
-
-  local project="$HOME/Documents/work"
-
-  if ! tmux has-session -t code 2>/dev/null; then
-    tmux new-session -d -s code -c "$project" -n claude
-    tmux new-window  -t code:   -c "$project" -n nvim
+_tattach() {
+  if [[ -n $TMUX ]]; then
+    tmux switch-client -t "=$1"
+  else
+    tmux attach -t "=$1"
   fi
-
-  if ! tmux has-session -t code2 2>/dev/null; then
-    tmux new-session -d -s code2 -c "$project" -n claude2
-    tmux new-window  -t code2:   -c "$project" -n nvim2
-  fi
-
-  if ! tmux has-session -t server 2>/dev/null; then
-    tmux new-session -d -s server  -c "$project" -n docker
-    tmux new-window  -t server:    -c "$project" -n server
-    tmux new-window  -t server:    -c "$project" -n sidekiq
-  fi
-
-  if ! tmux has-session -t server2 2>/dev/null; then
-    tmux new-session -d -s server2  -c "$project" -n docker2
-    tmux new-window  -t server2:    -c "$project" -n server2
-    tmux new-window  -t server2:    -c "$project" -n sidekiq2
-  fi
-
-  if ! tmux has-session -t review 2>/dev/null; then
-    tmux new-session -d -s review -c "$project" -n claude-review
-    tmux new-window  -t review:   -c "$project" -n nvim-review
-  fi
-
-  if [[ -n "$WIKI_DIR" ]] && ! tmux has-session -t wiki 2>/dev/null; then
-    tmux new-session -d -s wiki -c "$WIKI_DIR"
-  fi
-
-  tmux attach -t code
 }
 
-alias tc="tmux attach -t code"
-alias tc2="tmux attach -t code2"
+# tn: new tmux session codeN (next free N) rooted at $PWD with claude / nvim /
+# terms windows, plus a tcN alias to get back to it.
+tn() {
+  local n=1
+  while tmux has-session -t "=code$n" 2>/dev/null; do (( n++ )); done
+
+  tmux new-session -d -s "code$n" -c "$PWD" -n claude
+  tmux new-window  -t "=code$n:" -c "$PWD" -n nvim
+  tmux new-window  -t "=code$n:" -c "$PWD" -n terms
+
+  alias tc$n="_tattach code$n"
+  _tattach "code$n"
+}
+
+# Aliases only live in the shell that defined them, so new shells pick up
+# tcN for every codeN session already running.
+for session in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
+  [[ $session == code<-> ]] && alias tc${session#code}="_tattach $session"
+done
+unset session
+
 alias ts="tmux attach -t server"
 alias ts2="tmux attach -t server2"
-alias tre="tmux attach -t review"
 alias tw="tmux attach -t wiki"
 
 if [[ -n "$WORK_DIR" ]]; then
     alias work='cd "$WORK_DIR"'
-fi
-
-if [[ -n "$WORK_DIR_2" ]]; then
-    alias work2='cd "$WORK_DIR_2"'
-fi
-
-if [[ -n "$WORK_DIR_REVIEW" ]]; then
-    alias workr='cd "$WORK_DIR_REVIEW"'
 fi
